@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waxis — Plataforma de Inteligência Comercial e Atendimento com IA</title>
+  <meta name="description" content="Centralize WhatsApp, Instagram e Facebook. A Waxis pontua cada lead com IA (BrAIn), prospecta clientes novos e dispara campanhas multicanal.">
+  <link rel="icon" type="image/png" href="assets/img/logos/favicon.png">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Waxis — Gestão Inteligente de Atendimento com IA">
+  <meta property="og:description" content="Atenda, prospecte e venda com inteligência artificial de verdade. Centralize suas conversas e escale suas vendas.">
+  <meta property="og:image" content="assets/img/logos/og-image.png">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            waxis: {
+              navy: '#000068',
+              purple: '#6800E0',
+              'purple-light': '#8B3DFF',
+              cyan: '#00F0FF',
+              dark: '#0B0B2B',
+              muted: '#4C4C6A',
+              bg: '#FFFFFF',
+              subtle: '#F7F6FF'
+            }
+          },
+          fontFamily: {
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            tech: ['Space Grotesk', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- GSAP & Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-white text-waxis-dark font-body antialiased selection:bg-waxis-purple selection:text-white ai-grid-pattern">
+
+  <!-- 6.1 HEADER GLASSMORPHIC -->
+  <header class="fixed top-0 left-0 w-full z-50 glass-header transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo Waxis -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="assets/img/logos/logo-waxis.png" alt="Waxis Logo" class="h-8 w-auto">
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-waxis-muted">
+        <a href="#plataforma" class="hover:text-waxis-purple transition-colors">Plataforma IA</a>
+        <a href="#recursos" class="hover:text-waxis-purple transition-colors">Recursos</a>
+        <a href="#prospeccao" class="hover:text-waxis-purple transition-colors">Prospecção</a>
+        <a href="#planos" class="hover:text-waxis-purple transition-colors">Planos</a>
+        <a href="contato.html" class="hover:text-waxis-purple transition-colors">Contato</a>
+      </nav>
+
+      <!-- Botões de Ação -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="https://app.waxis.com.br/login" class="text-sm font-semibold text-waxis-dark hover:text-waxis-purple transition-colors px-4 py-2">
+          Entrar
+        </a>
+        <a href="contato.html" class="btn-primary-ai text-sm font-semibold px-6 py-2.5 rounded-full inline-flex items-center gap-2">
+          <span>Teste grátis 7 dias</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 6.2 HERO CINEMATOGRÁFICO DE IA -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 mesh-gradient-light overflow-hidden hero-section">
+    <!-- Glow de IA & Elementos Flutuantes -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] glow-ai-purple pointer-events-none"></div>
+    <div class="absolute top-1/3 left-1/3 w-[400px] h-[400px] glow-ai-cyan pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      
+      <!-- Badge de IA -->
+      <div class="hero-badge inline-flex items-center gap-2.5 px-5 py-2 rounded-full badge-ai text-xs uppercase tracking-wider mb-8 shadow-sm">
+        <span class="w-2.5 h-2.5 rounded-full bg-waxis-purple animate-ping"></span>
+        <span class="font-tech text-waxis-purple">ENGINE DE INTELIGÊNCIA ARTIFICIAL V2.4</span>
+      </div>
+
+      <!-- Título Principal com Gradiente IA -->
+      <h1 class="hero-title text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-waxis-dark max-w-5xl mx-auto leading-[1.1] mb-6">
+        Atenda, prospecte e venda com <span class="text-ai-gradient">inteligência artificial</span> de verdade.
+      </h1>
+
+      <!-- Subtítulo -->
+      <p class="hero-subtitle text-lg sm:text-xl text-waxis-muted max-w-3xl mx-auto font-normal leading-relaxed mb-10">
+        A Waxis centraliza WhatsApp, Instagram e Facebook, calcula LeadScore com o motor de IA <strong>BrAIn</strong>, prospecta novos clientes e dispara campanhas ativas.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="contato.html" class="btn-primary-ai text-base font-semibold px-9 py-4 rounded-full w-full sm:w-auto shadow-xl">
+          Começar teste grátis
+        </a>
+        <a href="#plataforma" class="px-8 py-4 rounded-full border border-waxis-purple/30 text-waxis-dark font-semibold hover:bg-waxis-purple/5 transition-all w-full sm:w-auto flex items-center justify-center gap-2">
+          <span>Ver a plataforma em ação</span>
+          <svg class="w-4 h-4 text-waxis-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+      </div>
+
+      <!-- Revelação do Produto (Print BrAIn com Moldura de Navegador e HUD IA) -->
+      <div class="hero-mockup max-w-5xl mx-auto relative">
+        <div class="browser-frame">
+          <div class="browser-header justify-between">
+            <div class="flex items-center gap-2">
+              <span class="browser-dot browser-dot-red"></span>
+              <span class="browser-dot browser-dot-yellow"></span>
+              <span class="browser-dot browser-dot-green"></span>
+              <span class="ml-4 text-xs font-mono text-gray-400 bg-white/80 px-4 py-1 rounded-md border border-gray-200/60">app.waxis.com.br/brain-ai</span>
+            </div>
+            <div class="text-xs font-tech text-waxis-purple bg-purple-100/70 px-3 py-1 rounded-full font-bold">
+              AI MONITOR ACTIVE
+            </div>
+          </div>
+          <div class="relative bg-gray-950">
+            <img src="assets/img/prints/03-brain-inteligencia-comercial.png" alt="Waxis BrAIn — Inteligência Comercial" class="w-full h-auto object-cover">
+          </div>
+        </div>
+
+        <!-- Tag Flutuante de IA -->
+        <div class="absolute -top-6 -left-6 md:-left-10 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl border border-waxis-purple/30 shadow-2xl hidden sm:flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-waxis-purple/10 text-waxis-purple flex items-center justify-center font-bold text-xl">🧠</div>
+          <div class="text-left">
+            <p class="text-xs font-bold text-waxis-dark font-tech">BrAIn Predictive Analytics</p>
+            <p class="text-[11px] text-waxis-muted">Previsão de Fechamento: 94.2%</p>
+          </div>
+        </div>
+
+        <!-- Selo API Oficial Meta -->
+        <div class="absolute -bottom-6 right-6 md:right-10 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl border border-waxis-purple/30 shadow-2xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold text-sm">✓</div>
+          <div class="text-left">
+            <p class="text-xs font-bold text-waxis-dark">Parceira Oficial Meta API</p>
+            <p class="text-[11px] text-waxis-muted">Sem risco de bloqueio · 99.9% Uptime</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.3 MARQUEE TECNOLOGIAS IA -->
+  <section class="py-12 bg-waxis-subtle border-y border-waxis-purple/15 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 text-center mb-6">
+      <p class="text-xs font-bold uppercase tracking-widest text-waxis-muted font-tech">
+        ECOSSISTEMA INTEGRADO ÀS MAIORES IAs DO MUNDO
+      </p>
+    </div>
+    <div class="flex items-center justify-center gap-12 md:gap-20 opacity-80 transition-all duration-500">
+      <span class="font-extrabold text-xl tracking-tight text-waxis-navy font-tech">META API</span>
+      <span class="font-extrabold text-xl tracking-tight text-waxis-navy font-tech">WHATSAPP</span>
+      <span class="font-extrabold text-xl tracking-tight text-waxis-navy font-tech">OPENAI</span>
+      <span class="font-extrabold text-xl tracking-tight text-waxis-navy font-tech">ELEVENLABS</span>
+      <span class="font-extrabold text-xl tracking-tight text-waxis-navy font-tech">GOOGLE CLOUD</span>
+    </div>
+  </section>
+
+  <!-- 6.4 CENTERPIECE: "DO CAOS À OPERAÇÃO INTELIGENTE" -->
+  <section class="relative min-h-screen py-24 bg-white centerpiece-section flex flex-col justify-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      
+      <!-- Estado 1 -->
+      <div class="centerpiece-state-1 max-w-3xl mx-auto">
+        <span class="px-4 py-1.5 rounded-full bg-red-100 text-red-600 text-xs font-bold uppercase tracking-wider font-tech">Operação Tradicional</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-waxis-dark mt-4 mb-6">
+          Mensagens espalhadas em vários celulares, atendimento lento e leads perdidos.
+        </h2>
+      </div>
+
+      <!-- Estado 2 (Transformação Waxis) -->
+      <div class="centerpiece-state-2 max-w-4xl mx-auto">
+        <span class="px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider font-tech">Com Inteligência Waxis</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-waxis-dark mt-4 mb-8">
+          Tudo centralizado. Cada lead pontuado por IA e previsibilidade no funil.
+        </h2>
+
+        <!-- Print Dashboard -->
+        <div class="centerpiece-dashboard browser-frame shadow-2xl">
+          <div class="browser-header">
+            <span class="browser-dot browser-dot-red"></span>
+            <span class="browser-dot browser-dot-yellow"></span>
+            <span class="browser-dot browser-dot-green"></span>
+            <span class="ml-4 text-xs font-mono text-gray-400">app.waxis.com.br/dashboard</span>
+          </div>
+          <img src="assets/img/prints/02-dashboard-inicio.png" alt="Waxis Dashboard" class="w-full h-auto">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.5 CANAIS OMNICHANNEL DE IA -->
+  <section class="py-24 bg-waxis-subtle border-y border-waxis-purple/15 omnichannel-section relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-waxis-dark mb-4">
+        Todos os canais integrados em uma central de inteligência.
+      </h2>
+      <p class="text-lg text-waxis-muted max-w-2xl mx-auto mb-16">
+        Centralize interações e execute automações de voz, texto e mensagem sem perder contexto.
+      </p>
+
+      <div class="flex items-center justify-center gap-6 sm:gap-10 flex-wrap">
+        <div class="omnichannel-channel-left glass-card-ai p-6 rounded-2xl text-center w-36 shadow-lg">
+          <div class="text-3xl mb-2">💬</div>
+          <p class="font-bold text-sm text-waxis-dark">WhatsApp</p>
+        </div>
+        <div class="omnichannel-channel-left glass-card-ai p-6 rounded-2xl text-center w-36 shadow-lg">
+          <div class="text-3xl mb-2">📸</div>
+          <p class="font-bold text-sm text-waxis-dark">Instagram</p>
+        </div>
+        <div class="omnichannel-channel-left glass-card-ai p-6 rounded-2xl text-center w-36 shadow-lg">
+          <div class="text-3xl mb-2">👤</div>
+          <p class="font-bold text-sm text-waxis-dark">Facebook</p>
+        </div>
+
+        <!-- WAXIS LOGO CENTER -->
+        <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-waxis-purple via-waxis-purple-light to-waxis-cyan text-white flex items-center justify-center shadow-2xl shadow-waxis-purple/50 transform scale-110">
+          <img src="assets/img/logos/icon-x.png" alt="Waxis X Icon" class="w-10 h-10">
+        </div>
+
+        <div class="omnichannel-channel-right glass-card-ai p-6 rounded-2xl text-center w-36 shadow-lg">
+          <div class="text-3xl mb-2">📱</div>
+          <p class="font-bold text-sm text-waxis-dark">SMS</p>
+        </div>
+        <div class="omnichannel-channel-right glass-card-ai p-6 rounded-2xl text-center w-36 shadow-lg">
+          <div class="text-3xl mb-2">✉️</div>
+          <p class="font-bold text-sm text-waxis-dark">E-mail</p>
+        </div>
+        <div class="omnichannel-channel-right glass-card-ai p-6 rounded-2xl text-center w-36 shadow-lg border-2 border-waxis-cyan">
+          <div class="text-3xl mb-2">🎙️</div>
+          <p class="font-bold text-sm text-waxis-dark">Voz por IA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.6 TOUR DA PLATAFORMA (SCROLLYTELLING) -->
+  <section id="plataforma" class="py-32 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-20">
+        <span class="badge-ai px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">Tour de Funcionalidades</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-waxis-dark mt-4">
+          Conheça a plataforma construída com IA no DNA.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Passos (Esquerda) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <div class="tour-step p-6 rounded-2xl border-2 transition-all cursor-pointer">
+            <span class="text-xs font-bold text-waxis-purple font-tech uppercase tracking-wider">01. ENGINE IA COMERCIAL</span>
+            <h3 class="text-xl font-bold text-waxis-dark mt-1 mb-2">BrAIn — A IA que analisa a conversa</h3>
+            <p class="text-sm text-waxis-muted leading-relaxed">
+              Calcula LeadScore, monitora nível de risco de perda do cliente, mede SLA de resposta e estima probabilidade de fechamento.
+            </p>
+          </div>
+
+          <div class="tour-step p-6 rounded-2xl border-2 transition-all cursor-pointer">
+            <span class="text-xs font-bold text-waxis-purple font-tech uppercase tracking-wider">02. PIPELINE DE VENDAS</span>
+            <h3 class="text-xl font-bold text-waxis-dark mt-1 mb-2">Funil Kanban Comercial</h3>
+            <p class="text-sm text-waxis-muted leading-relaxed">
+              Gestão visual de oportunidades, movimentação de cards por etapa e previsão de faturamento do mês.
+            </p>
+          </div>
+
+          <div class="tour-step p-6 rounded-2xl border-2 transition-all cursor-pointer">
+            <span class="text-xs font-bold text-waxis-purple font-tech uppercase tracking-wider">03. PROSPECÇÃO INTELIGENTE</span>
+            <h3 class="text-xl font-bold text-waxis-dark mt-1 mb-2">Prospecção Ativa B2B</h3>
+            <p class="text-sm text-waxis-muted leading-relaxed">
+              Localize novas empresas via Google Meu Negócio e base de CNPJ/CNAE para alimentar seu funil automaticamente.
+            </p>
+          </div>
+
+          <div class="tour-step p-6 rounded-2xl border-2 transition-all cursor-pointer">
+            <span class="text-xs font-bold text-waxis-purple font-tech uppercase tracking-wider">04. ESCALA MULTICANAL</span>
+            <h3 class="text-xl font-bold text-waxis-dark mt-1 mb-2">Disparo de Voz IA & Mensagens</h3>
+            <p class="text-sm text-waxis-muted leading-relaxed">
+              Transmissões por WhatsApp, SMS, E-mail e Voz IA — o robô liga, conversa com o lead seguindo o roteiro e gera o relatório.
+            </p>
+          </div>
+
+          <div class="tour-step p-6 rounded-2xl border-2 transition-all cursor-pointer">
+            <span class="text-xs font-bold text-waxis-purple font-tech uppercase tracking-wider">05. PILOTO AUTOMÁTICO</span>
+            <h3 class="text-xl font-bold text-waxis-dark mt-1 mb-2">Automações & Workflows</h3>
+            <p class="text-sm text-waxis-muted leading-relaxed">
+              Gatilhos de atendimento, triagem inicial e respostas inteligentes funcionando 24 horas por dia.
+            </p>
+          </div>
+
+          <div class="tour-step p-6 rounded-2xl border-2 transition-all cursor-pointer">
+            <span class="text-xs font-bold text-waxis-purple font-tech uppercase tracking-wider">06. ECOSSISTEMA</span>
+            <h3 class="text-xl font-bold text-waxis-dark mt-1 mb-2">Ecossistema Completo de Apps</h3>
+            <p class="text-sm text-waxis-muted leading-relaxed">
+              Documentos com assinatura digital, propostas, cobranças, formulários e agendamentos sem ferramentas externas.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Display Prints (Direita) -->
+        <div class="lg:col-span-7 sticky top-28">
+          <div class="browser-frame shadow-2xl bg-gray-950">
+            <div class="browser-header">
+              <span class="browser-dot browser-dot-red"></span>
+              <span class="browser-dot browser-dot-yellow"></span>
+              <span class="browser-dot browser-dot-green"></span>
+              <span class="ml-4 text-xs font-mono text-gray-400">app.waxis.com.br/plataforma</span>
+            </div>
+
+            <div class="relative min-h-[420px] overflow-hidden">
+              <img src="assets/img/prints/03-brain-inteligencia-comercial.png" alt="BrAIn" class="tour-print-img w-full h-auto">
+              <img src="assets/img/prints/04-kanban-funil-comercial.png" alt="Kanban" class="tour-print-img w-full h-auto hidden">
+              <img src="assets/img/prints/07-prospeccao.png" alt="Prospecção" class="tour-print-img w-full h-auto hidden">
+              <img src="assets/img/prints/05-campanhas-multicanal.png" alt="Campanhas" class="tour-print-img w-full h-auto hidden">
+              <img src="assets/img/prints/06-automacoes.png" alt="Automações" class="tour-print-img w-full h-auto hidden">
+              <img src="assets/img/prints/08-ecossistema-de-apps.png" alt="Ecossistema Apps" class="tour-print-img w-full h-auto hidden">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.8 BENTO GRID (POR QUE WAXIS) -->
+  <section id="recursos" class="py-24 bg-waxis-subtle bento-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-waxis-dark">
+          Tecnologia projetada para maximizar resultados.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bento-card md:col-span-2 glass-card-ai p-8 rounded-3xl">
+          <span class="w-12 h-12 rounded-2xl bg-waxis-purple/10 text-waxis-purple flex items-center justify-center text-2xl font-bold mb-4">🧠</span>
+          <h3 class="text-2xl font-bold text-waxis-dark mb-3">Inteligência Comercial Avançada</h3>
+          <p class="text-waxis-muted leading-relaxed">
+            Nossa IA compreende objeções, lê o sentimento das mensagens e sinaliza oportunidades prioritárias para a equipe de vendas.
+          </p>
+        </div>
+
+        <div class="bento-card glass-card-ai p-8 rounded-3xl">
+          <span class="w-12 h-12 rounded-2xl bg-waxis-purple/10 text-waxis-purple flex items-center justify-center text-2xl font-bold mb-4">🛡️</span>
+          <h3 class="text-xl font-bold text-waxis-dark mb-2">Proteção de Dados & Ativos</h3>
+          <p class="text-waxis-muted text-sm leading-relaxed">
+            Centralização completa dos dados da empresa. O histórico de atendimentos é 100% preservado.
+          </p>
+        </div>
+
+        <div class="bento-card glass-card-ai p-8 rounded-3xl">
+          <span class="w-12 h-12 rounded-2xl bg-waxis-purple/10 text-waxis-purple flex items-center justify-center text-2xl font-bold mb-4">🌐</span>
+          <h3 class="text-xl font-bold text-waxis-dark mb-2">Cloud Native + App</h3>
+          <p class="text-waxis-muted text-sm leading-relaxed">
+            Plataforma ultrarrápida acessível via web browser e aplicativos mobile dedicados.
+          </p>
+        </div>
+
+        <div class="bento-card md:col-span-2 glass-card-ai p-8 rounded-3xl">
+          <span class="w-12 h-12 rounded-2xl bg-waxis-purple/10 text-waxis-purple flex items-center justify-center text-2xl font-bold mb-4">⚡</span>
+          <h3 class="text-2xl font-bold text-waxis-dark mb-3">API Oficial Meta Integrada</h3>
+          <p class="text-waxis-muted leading-relaxed">
+            Conexão direta aos servidores oficiais do WhatsApp, assegurando máxima estabilidade para operações de alto volume.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.10 INTEGRAÇÕES -->
+  <section class="py-24 bg-white integrations-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="badge-ai px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Conectividade</span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-waxis-dark mt-4 mb-6">
+        51 integrações prontas com o seu ecossistema.
+      </h2>
+      <p class="text-lg text-waxis-muted max-w-2xl mx-auto mb-12">
+        Integração simples com meios de pagamento como Asaas, Mercado Pago, Stripe, ferramentas de voz e Webhooks.
+      </p>
+
+      <div class="integrations-print max-w-4xl mx-auto browser-frame shadow-2xl">
+        <img src="assets/img/prints/09-integracoes.png" alt="Waxis Integrações" class="w-full h-auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.11 PLANOS -->
+  <section id="planos" class="py-24 bg-waxis-subtle">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-waxis-dark">
+          Planos projetados para escalar seu negócio.
+        </h2>
+        <p class="text-waxis-muted mt-4">Todos os planos incluem 7 dias de teste grátis sem cartão de crédito.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        
+        <div class="glass-card-ai p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-waxis-dark mb-2">Essencial</h3>
+            <p class="text-sm text-waxis-muted mb-6">Para equipes que buscam centralização e controle inicial.</p>
+            <ul class="space-y-3 text-sm text-waxis-dark mb-8">
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Atendimento centralizado</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> CRM Kanban de Vendas</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Automações de mensagens</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> App Mobile incluso</li>
+            </ul>
+          </div>
+          <a href="contato.html" class="w-full py-3 text-center border border-waxis-purple/30 rounded-xl text-waxis-purple font-semibold hover:bg-waxis-purple/5 transition-all">
+            Agendar demonstração
+          </a>
+        </div>
+
+        <div class="glass-card-ai p-8 rounded-3xl border-2 border-waxis-purple relative flex flex-col justify-between shadow-2xl scale-105 bg-white">
+          <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-waxis-purple to-waxis-purple-light text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider font-tech shadow-md">
+            RECOMENDADO PARA ESCALA
+          </span>
+          <div>
+            <h3 class="text-xl font-bold text-waxis-dark mb-2">Profissional</h3>
+            <p class="text-sm text-waxis-muted mb-6">Para operações comerciais que desejam inteligência e prospecção.</p>
+            <ul class="space-y-3 text-sm text-waxis-dark mb-8">
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Tudo do plano Essencial</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> <strong>BrAIn (Engine IA Comercial)</strong></li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Prospecção Ativa B2B</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Disparo Multicanal & Voz IA</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> API e Integrações liberadas</li>
+            </ul>
+          </div>
+          <a href="contato.html" class="btn-primary-ai w-full py-3.5 text-center rounded-xl font-semibold">
+            Agendar demonstração
+          </a>
+        </div>
+
+        <div class="glass-card-ai p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-waxis-dark mb-2">Enterprise</h3>
+            <p class="text-sm text-waxis-muted mb-6">Para grandes operações com alta exigência de volume.</p>
+            <ul class="space-y-3 text-sm text-waxis-dark mb-8">
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Atendentes Ilimitados</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Modelos de Voz IA dedicados</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Suporte e Gerente VIP</li>
+              <li class="flex items-center gap-2"><span class="text-waxis-purple font-bold">✓</span> Onboarding customizado</li>
+            </ul>
+          </div>
+          <a href="contato.html" class="w-full py-3 text-center border border-waxis-purple/30 rounded-xl text-waxis-purple font-semibold hover:bg-waxis-purple/5 transition-all">
+            Falar com especialista
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.13 FAQ -->
+  <section class="py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-extrabold text-waxis-dark">Perguntas Frequentes</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div class="faq-item border border-gray-200 rounded-2xl p-6">
+          <button class="faq-btn w-full flex items-center justify-between text-left font-bold text-lg text-waxis-dark">
+            <span>Preciso instalar algo no computador?</span>
+            <span class="faq-icon transition-transform">↓</span>
+          </button>
+          <div class="faq-content hidden mt-4 text-waxis-muted text-sm leading-relaxed">
+            Não! A Waxis é 100% em nuvem. Acesse através do seu navegador ou do app oficial mobile.
+          </div>
+        </div>
+
+        <div class="faq-item border border-gray-200 rounded-2xl p-6">
+          <button class="faq-btn w-full flex items-center justify-between text-left font-bold text-lg text-waxis-dark">
+            <span>O que é o motor de IA BrAIn?</span>
+            <span class="faq-icon transition-transform">↓</span>
+          </button>
+          <div class="faq-content hidden mt-4 text-waxis-muted text-sm leading-relaxed">
+            O BrAIn é a inteligência comercial da Waxis. Ele analisa as conversas em tempo real, gera uma pontuação de lead (LeadScore), estima a chance de fechamento e alerta o time de vendas sobre objeções.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.14 CTA FINAL -->
+  <section class="py-24 bg-gradient-to-br from-waxis-navy via-waxis-purple to-waxis-dark text-white relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+      <h2 class="text-4xl sm:text-6xl font-extrabold mb-6">
+        Pronto para vender com inteligência artificial?
+      </h2>
+      <p class="text-lg text-purple-200 max-w-2xl mx-auto mb-10">
+        Experimente grátis por 7 dias ou solicite uma demonstração completa com a nossa equipe.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="contato.html" class="bg-white text-waxis-purple font-bold px-9 py-4 rounded-full hover:bg-purple-50 transition-all shadow-xl">
+          Start Teste Grátis
+        </a>
+        <a href="contato.html" class="border border-white/30 text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition-all">
+          Agendar Demonstração
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.15 FOOTER -->
+  <footer class="bg-waxis-dark text-white py-16 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div>
+        <img src="assets/img/logos/logo-waxis-branco.png" alt="Waxis Logo" class="h-8 mb-4">
+        <p class="text-sm text-gray-400">Plataforma de Atendimento Inteligente, CRM e Automação com Inteligência Artificial.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-sm mb-4">Plataforma</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="#plataforma" class="hover:text-white">BrAIn IA Engine</a></li>
+          <li><a href="#plataforma" class="hover:text-white">Kanban & CRM</a></li>
+          <li><a href="#prospeccao" class="hover:text-white">Prospecção B2B</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-sm mb-4">Empresa</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="contato.html" class="hover:text-white">Contato</a></li>
+          <li><a href="privacidade.html" class="hover:text-white">Privacidade</a></li>
+          <li><a href="termos.html" class="hover:text-white">Termos de Uso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-sm mb-4">Meta Partner</h4>
+        <p class="text-xs text-gray-400 leading-relaxed">Conexão via API Oficial WhatsApp Business com infraestrutura de nuvem segura e homologada.</p>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500 mt-12 pt-8 border-t border-white/5">
+      © Waxis Tecnologia. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* WAXIS — Estilos Globais e Animações Cinematográficas com Estética de IA Futura */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-tech: 'Space Grotesk', monospace;
+  --color-primary: #000068;
+  --color-purple: #6800E0;
+  --color-purple-light: #8B3DFF;
+  --color-cyan: #00F0FF;
+  --color-bg-light: #FFFFFF;
+  --color-bg-subtle: #F7F6FF;
+  --color-text-dark: #0B0B2B;
+  --color-text-muted: #4C4C6A;
+}
+
+html {
+  scroll-behavior: auto;
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background-color: var(--color-bg-light);
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Efeito de Malha Neural e Grid Tecnológico */
+.ai-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(104, 0, 224, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(104, 0, 224, 0.04) 1px, transparent 1px);
+}
+
+/* Glow Neomórfico & Halos de IA */
+.glow-ai-cyan {
+  background: radial-gradient(circle at center, rgba(0, 240, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.glow-ai-purple {
+  background: radial-gradient(circle at center, rgba(139, 61, 255, 0.2) 0%, rgba(255, 255, 255, 0) 75%);
+}
+
+.mesh-gradient-light {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(104, 0, 224, 0.08) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(0, 240, 255, 0.07) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(139, 61, 255, 0.06) 0px, transparent 50%);
+}
+
+/* Texto Gradiente Holográfico IA */
+.text-ai-gradient {
+  background: linear-gradient(135deg, #000068 0%, #6800E0 40%, #8B3DFF 70%, #00C2FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism Tecnológico */
+.glass-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(104, 0, 224, 0.12);
+}
+
+.glass-card-ai {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(104, 0, 224, 0.12);
+  box-shadow: 0 20px 50px -15px rgba(104, 0, 224, 0.08);
+}
+
+.glass-card-ai:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 61, 255, 0.4);
+  box-shadow: 0 30px 60px -12px rgba(104, 0, 224, 0.18), 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+/* Moldura de Navegador com Iluminação IA */
+.browser-frame {
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(104, 0, 224, 0.18);
+  box-shadow: 0 25px 70px -15px rgba(104, 0, 224, 0.2), 0 0 30px rgba(139, 61, 255, 0.1);
+  overflow: hidden;
+}
+
+.browser-header {
+  height: 42px;
+  background: #F4F3FA;
+  border-bottom: 1px solid rgba(104, 0, 224, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+}
+
+.browser-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.browser-dot-red { background: #FF5F56; }
+.browser-dot-yellow { background: #FFBD2E; }
+.browser-dot-green { background: #27C93F; }
+
+/* Botões com Glow Futurista */
+.btn-primary-ai {
+  background: linear-gradient(135deg, #6800E0 0%, #8B3DFF 50%, #00C2FF 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 30px -5px rgba(104, 0, 224, 0.45);
+  transition: all 0.3s ease;
+}
+.btn-primary-ai:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 15px 40px -5px rgba(139, 61, 255, 0.65), 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+/* Badge de IA Pulsante */
+.badge-ai {
+  background: rgba(104, 0, 224, 0.08);
+  color: #6800E0;
+  border: 1px solid rgba(139, 61, 255, 0.25);
+  font-family: var(--font-tech);
+}
