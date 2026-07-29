@@ -1,6 +1,6 @@
-/* WAXIS — Estilos Globais, Animações e Efeitos Interativos de IA */
+/* WAXIS — Estilos Globais Otimizados e Leves */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
 
 :root {
   --font-heading: 'Plus Jakarta Sans', sans-serif;
@@ -17,7 +17,7 @@
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   font-family: var(--font-body);
   color: var(--color-text-dark);
   background-color: var(--color-bg-light);
@@ -26,90 +26,59 @@ html {
 
 body {
   overflow-x: hidden;
-  position: relative;
 }
 
-/* Canvas Interativo de Constelação/Rede Neural (Teia no Mouse) */
-#neural-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Efeito de Malha Neural e Grid Tecnológico */
+/* Grids e Backgrounds Ultra Leves */
 .ai-grid-pattern {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(104, 0, 224, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(104, 0, 224, 0.04) 1px, transparent 1px);
-}
-
-/* Glow Neomórfico & Halos de IA */
-.glow-ai-cyan {
-  background: radial-gradient(circle at center, rgba(0, 240, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
-}
-
-.glow-ai-purple {
-  background: radial-gradient(circle at center, rgba(139, 61, 255, 0.2) 0%, rgba(255, 255, 255, 0) 75%);
+    linear-gradient(to right, rgba(104, 0, 224, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(104, 0, 224, 0.03) 1px, transparent 1px);
 }
 
 .mesh-gradient-light {
   background-color: #ffffff;
-  background-image: 
-    radial-gradient(at 10% 10%, rgba(104, 0, 224, 0.08) 0px, transparent 50%),
-    radial-gradient(at 90% 10%, rgba(0, 240, 255, 0.07) 0px, transparent 50%),
-    radial-gradient(at 50% 90%, rgba(139, 61, 255, 0.06) 0px, transparent 50%);
+  background-image: radial-gradient(circle at 50% 0%, rgba(104, 0, 224, 0.06) 0%, transparent 60%);
 }
 
-/* Texto Gradiente Holográfico IA */
-.text-ai-gradient {
-  background: linear-gradient(135deg, #000068 0%, #6800E0 40%, #8B3DFF 70%, #00C2FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Glassmorphism Tecnológico */
+/* Glassmorphic Performático */
 .glass-header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(104, 0, 224, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(104, 0, 224, 0.08);
 }
 
 .glass-card-ai {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(104, 0, 224, 0.12);
-  box-shadow: 0 20px 50px -15px rgba(104, 0, 224, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(104, 0, 224, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 104, 0.05);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform;
 }
 
 .glass-card-ai:hover {
-  transform: translateY(-4px);
-  border-color: rgba(139, 61, 255, 0.4);
-  box-shadow: 0 30px 60px -12px rgba(104, 0, 224, 0.18), 0 0 20px rgba(0, 240, 255, 0.15);
+  transform: translateY(-3px);
+  border-color: rgba(139, 61, 255, 0.3);
+  box-shadow: 0 15px 35px -10px rgba(104, 0, 224, 0.12);
 }
 
-/* Moldura de Navegador com Iluminação IA */
+/* Moldura de Navegador Leve */
 .browser-frame {
-  border-radius: 20px;
+  border-radius: 16px;
   background: #ffffff;
-  border: 1px solid rgba(104, 0, 224, 0.18);
-  box-shadow: 0 25px 70px -15px rgba(104, 0, 224, 0.2), 0 0 30px rgba(139, 61, 255, 0.1);
+  border: 1px solid rgba(104, 0, 224, 0.15);
+  box-shadow: 0 20px 40px -10px rgba(11, 11, 43, 0.1);
   overflow: hidden;
 }
 
 .browser-header {
-  height: 42px;
+  height: 38px;
   background: #F4F3FA;
-  border-bottom: 1px solid rgba(104, 0, 224, 0.1);
+  border-bottom: 1px solid rgba(104, 0, 224, 0.08);
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 14px;
   gap: 8px;
 }
 
@@ -122,22 +91,28 @@ body {
 .browser-dot-yellow { background: #FFBD2E; }
 .browser-dot-green { background: #27C93F; }
 
-/* Botões com Glow Futurista */
+/* Botões */
 .btn-primary-ai {
-  background: linear-gradient(135deg, #6800E0 0%, #8B3DFF 50%, #00C2FF 100%);
+  background: linear-gradient(135deg, #6800E0 0%, #8B3DFF 100%);
   color: #ffffff;
-  box-shadow: 0 10px 30px -5px rgba(104, 0, 224, 0.45);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px -4px rgba(104, 0, 224, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform;
 }
 .btn-primary-ai:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 15px 40px -5px rgba(139, 61, 255, 0.65), 0 0 20px rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -4px rgba(104, 0, 224, 0.5);
 }
 
-/* Badge de IA Pulsante */
 .badge-ai {
   background: rgba(104, 0, 224, 0.08);
   color: #6800E0;
-  border: 1px solid rgba(139, 61, 255, 0.25);
+  border: 1px solid rgba(139, 61, 255, 0.2);
   font-family: var(--font-tech);
+}
+
+.text-ai-gradient {
+  background: linear-gradient(135deg, #000068 0%, #6800E0 50%, #8B3DFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
