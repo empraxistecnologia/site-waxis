@@ -1,0 +1,13 @@
+{
+  "name": "Waxis — Gestão Inteligente de Atendimento",
+  "short_name": "Waxis",
+  "description": "CRM omnichannel com IA para WhatsApp, Instagram e Facebook.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6800E0",
+  "icons": [
+    { "src": "assets/img/icon-x.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/favicon.png", "sizes": "64x64", "type": "image/png" }
+  ]
+}

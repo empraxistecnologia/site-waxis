@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waxis · CRM, Atendimento e Automação</title>
+<link rel="icon" href="../../02-identidade-visual/Favicon (Navegador).png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===================== TOKENS ===================== */
+:root{
+  --azul:#090F85; --azul-profundo:#060A5C;
+  --roxo:#7600F5; --roxo-claro:#9B4DFF;
+  --meia-noite:#080A2E; --meia-noite-2:#10133F;
+  --off-white:#F7F8FC; --branco:#fff;
+  --tinta:#14173B; --cinza:#5A5F7D; --borda:#E4E6F2;
+  --verde:#0E9F6E; --ambar:#D97706; --vermelho:#DC2626;
+  --display:'Sora',system-ui,sans-serif; --body:'Manrope',system-ui,sans-serif;
+  /* z-index semântico */
+  --z-fundo:0; --z-conteudo:1; --z-header:100; --z-menu:99; --z-toast:90;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--tinta);background:var(--off-white);line-height:1.6;overflow-x:hidden}
+img{max-width:100%}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+:focus-visible{outline:2px solid var(--roxo-claro);outline-offset:2px}
+
+/* ===================== HEADER ===================== */
+.header{position:fixed;top:0;left:0;right:0;z-index:var(--z-header);transition:background .3s,box-shadow .3s;padding:14px 0}
+.header .container{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo-claro,.logo-escuro{height:28px;display:block}
+.logo-claro{display:none}
+.header.solida{background:rgba(255,255,255,.94);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--borda)}
+.header.solida .logo-escuro{display:none}
+.header.solida .logo-claro{display:block}
+.nav{display:flex;gap:4px}
+.nav a{font-size:14px;font-weight:600;color:rgba(255,255,255,.78);text-decoration:none;padding:9px 14px;border-radius:8px;transition:color .15s,background .15s}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.header.solida .nav a{color:var(--cinza)}
+.header.solida .nav a:hover{color:var(--azul);background:rgba(9,15,133,.05)}
+.header-acoes{display:flex;align-items:center;gap:10px}
+.link-entrar{font-size:14px;font-weight:600;color:rgba(255,255,255,.82);text-decoration:none;padding:8px 12px}
+.link-entrar:hover{color:#fff}
+.header.solida .link-entrar{color:var(--azul)}
+.btn{font-family:var(--body);font-weight:700;font-size:14px;border-radius:10px;padding:12px 22px;border:1.5px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:transform .15s,background .15s,box-shadow .15s,border-color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn .seta{transition:transform .2s}
+.btn:hover .seta{transform:translateX(4px)}
+.btn-roxo{background:var(--roxo);color:#fff}
+.btn-roxo:hover{background:#6500d4;box-shadow:0 10px 26px rgba(118,0,245,.28)}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-azul:hover{background:var(--azul-profundo)}
+.btn-contorno-claro{color:#fff;border-color:rgba(255,255,255,.35);background:transparent}
+.btn-contorno-claro:hover{border-color:#fff}
+.btn-contorno{color:var(--azul);border-color:rgba(9,15,133,.35);background:transparent}
+.btn-contorno:hover{border-color:var(--azul)}
+.hamburguer{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburguer img{height:24px;display:block}
+.hamburguer .ham-claro{display:none}
+.header.solida .ham-escuro{display:none}
+.header.solida .ham-claro{display:block}
+.menu-mobile{display:none;position:fixed;top:62px;left:12px;right:12px;z-index:var(--z-menu);background:var(--branco);border:1px solid var(--borda);border-radius:14px;box-shadow:0 20px 60px rgba(9,15,133,.18);padding:10px;flex-direction:column}
+.menu-mobile.aberto{display:flex}
+.menu-mobile a{padding:13px 16px;font-weight:600;color:var(--tinta);text-decoration:none;border-radius:10px}
+.menu-mobile a:hover{background:rgba(9,15,133,.05);color:var(--azul)}
+.menu-mobile .btn{justify-content:center;margin-top:8px}
+
+/* ===================== HERO ===================== */
+.hero{position:relative;min-height:100svh;background:var(--meia-noite);color:#fff;display:flex;align-items:center;overflow:hidden;padding:130px 0 90px}
+.hero-grade{position:absolute;inset:0;z-index:var(--z-fundo);
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 30%,#000 30%,transparent 78%);
+  mask-image:radial-gradient(ellipse 90% 80% at 50% 30%,#000 30%,transparent 78%)}
+.feixes{position:absolute;inset:0;width:100%;height:100%;z-index:var(--z-fundo)}
+.brilho-cursor{position:absolute;width:640px;height:640px;border-radius:50%;pointer-events:none;z-index:var(--z-fundo);
+  background:radial-gradient(circle,rgba(118,0,245,.13),transparent 62%);transform:translate(-50%,-50%);left:68%;top:38%}
+.hero .container{position:relative;z-index:var(--z-conteudo);display:grid;grid-template-columns:1fr 1.08fr;gap:56px;align-items:center}
+.selo-hero{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 16px;margin-bottom:24px}
+.selo-hero::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--verde);box-shadow:0 0 10px var(--verde);animation:pulsa 2.4s ease-in-out infinite}
+@keyframes pulsa{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(36px,4.6vw,58px);line-height:1.08;letter-spacing:-.025em;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--roxo-claro)}
+.hero .sub{font-size:clamp(15px,1.5vw,17px);color:rgba(255,255,255,.78);max-width:500px;margin-bottom:30px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:38px}
+.hero-provas{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:13px;color:rgba(255,255,255,.62)}
+.hero-provas span{display:inline-flex;align-items:center;gap:7px}
+.hero-provas i{font-style:normal;color:var(--roxo-claro);font-size:14px}
+
+/* painel vivo do hero */
+.painel{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.11);border-radius:16px;backdrop-filter:blur(6px);overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.5)}
+.painel-top{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.painel-top b{font-family:var(--display);font-size:13px;font-weight:600;color:rgba(255,255,255,.85)}
+.aovivo{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--verde)}
+.aovivo::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--verde);animation:pulsa 1.6s infinite}
+.painel-corpo{display:grid;grid-template-columns:1.15fr .85fr;gap:0;min-height:340px}
+.painel-chat{padding:18px;border-right:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:10px}
+.chat-quem{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px}
+.balao{max-width:88%;font-size:12.5px;padding:9px 13px;border-radius:12px;line-height:1.45}
+.balao.entrada{background:rgba(255,255,255,.08);color:rgba(255,255,255,.92);border-bottom-left-radius:4px;align-self:flex-start}
+.balao.saida{background:var(--roxo);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.balao.saida small{display:block;font-size:10px;opacity:.75;margin-top:4px}
+.digitando{display:none;gap:4px;padding:11px 15px;background:rgba(255,255,255,.08);border-radius:12px;border-bottom-left-radius:4px;align-self:flex-start}
+.digitando.on{display:inline-flex}
+.digitando i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.65);animation:pula 1.2s infinite}
+.digitando i:nth-child(2){animation-delay:.15s}.digitando i:nth-child(3){animation-delay:.3s}
+@keyframes pula{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+.surge{opacity:0;transform:translateY(8px);transition:opacity .4s ease-out,transform .4s ease-out}
+.surge.on{opacity:1;transform:none}
+.painel-lado{display:flex;flex-direction:column}
+.mini-funil{padding:16px 16px 12px;flex:1}
+.mini-funil .rotulo,.painel-kpis .rotulo{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px}
+.funil-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.funil-col{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px;min-height:118px;position:relative}
+.funil-col h5{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:8px}
+.lead-card{background:var(--meia-noite-2);border:1px solid rgba(155,77,255,.35);border-radius:8px;padding:8px 10px;font-size:11px;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.lead-card b{display:block;font-size:11.5px;color:#fff}
+.lead-card span{color:rgba(255,255,255,.55);font-size:10px}
+.lead-card.move{transform:translateX(calc(100% + 10px))}
+.painel-kpis{padding:14px 16px;border-top:1px solid rgba(255,255,255,.08)}
+.kpis-linha{display:flex;gap:18px}
+.kpis-linha div b{font-family:var(--display);font-size:16px;color:#fff;display:block}
+.kpis-linha div span{font-size:10.5px;color:rgba(255,255,255,.5)}
+.kpi-pulso.on b{animation:kpi-flash .8s ease-out}
+@keyframes kpi-flash{0%{color:var(--roxo-claro)}100%{color:#fff}}
+.toast{position:absolute;right:14px;bottom:60px;background:rgba(14,159,110,.14);border:1px solid rgba(14,159,110,.45);color:#7ee3bd;font-size:11.5px;font-weight:600;border-radius:9px;padding:9px 13px;display:flex;gap:7px;align-items:center;z-index:var(--z-toast)}
+.painel-envelope{position:relative}
+/* trilha do ecossistema: módulos acendendo em cadeia */
+.trilha{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:11px 16px;border-top:1px solid rgba(255,255,255,.08);font-size:10.5px}
+.tno{font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.5);transition:color .35s,border-color .35s,background .35s,box-shadow .35s}
+.tno.on{color:#fff;border-color:rgba(155,77,255,.55);background:rgba(118,0,245,.15);box-shadow:0 0 14px rgba(118,0,245,.3)}
+.tsep{color:rgba(255,255,255,.22)}
+
+/* ===================== SEÇÕES BASE ===================== */
+.secao{padding:100px 0;position:relative;overflow:hidden}
+.secao>.container{position:relative;z-index:var(--z-conteudo)}
+.secao-escura{background:var(--meia-noite);color:#fff}
+.secao-branca{background:var(--branco)}
+.cabeca{max-width:660px;margin-bottom:56px}
+.cabeca h2{font-family:var(--display);font-size:clamp(27px,3.2vw,38px);font-weight:700;letter-spacing:-.02em;line-height:1.16;margin-bottom:14px}
+.cabeca p{color:var(--cinza);font-size:16px}
+.secao-escura .cabeca p{color:rgba(255,255,255,.72)}
+.revela{opacity:0;transform:translateY(16px);transition:opacity .55s ease-out,transform .55s ease-out}
+.revela.visivel{opacity:1;transform:none}
+
+/* ===================== PROBLEMA ===================== */
+.problema .container{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.problema .hora{font-family:var(--display);font-size:15px;font-weight:700;color:var(--roxo);margin-bottom:14px}
+.problema h2{font-family:var(--display);font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.12;margin-bottom:22px}
+.problema .relato{font-size:17px;color:var(--cinza);max-width:480px;margin-bottom:18px}
+.problema .virada{font-size:17px;color:var(--tinta);font-weight:600;max-width:480px}
+.problema .virada b{color:var(--roxo)}
+.tel{background:var(--branco);border:1px solid var(--borda);border-radius:20px;padding:20px;box-shadow:0 24px 70px rgba(9,15,133,.1);max-width:400px;margin-left:auto}
+.tel-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--cinza);padding-bottom:14px;border-bottom:1px solid var(--borda);margin-bottom:14px}
+.tel-top b{color:var(--tinta);font-size:13px}
+.tel-fluxo{display:flex;flex-direction:column;gap:9px}
+.tel-msg{max-width:85%;font-size:13px;padding:9px 13px;border-radius:12px;background:var(--off-white);border:1px solid var(--borda);align-self:flex-start;border-bottom-left-radius:4px}
+.tel-meta{font-size:11px;color:var(--cinza);align-self:flex-start;padding-left:4px}
+.tel-dia{font-size:11px;font-weight:700;color:var(--cinza);text-align:center;margin:10px 0 4px;letter-spacing:.06em;text-transform:uppercase}
+.tel-fim{align-self:flex-start;font-size:13px;padding:9px 13px;border-radius:12px;border-bottom-left-radius:4px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.22);color:#a33}
+
+/* ===================== FLUXO ===================== */
+.fluxo-envelope{position:relative;max-width:760px;margin:0 auto}
+.fluxo-trilho{position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(255,255,255,.09);transform:translateX(-50%)}
+.fluxo-trilho i{position:absolute;left:0;top:0;width:100%;height:0;background:linear-gradient(180deg,var(--roxo),var(--roxo-claro));transition:height .2s linear}
+.passo{display:grid;grid-template-columns:1fr 72px 1fr;align-items:center;margin-bottom:34px}
+.passo:last-child{margin-bottom:0}
+.passo-no{grid-column:2;justify-self:center;width:46px;height:46px;border-radius:50%;background:var(--meia-noite-2);border:1.5px solid rgba(155,77,255,.4);display:flex;align-items:center;justify-content:center;position:relative;z-index:var(--z-conteudo)}
+.passo-no svg{stroke:var(--roxo-claro)}
+.passo-info h3{font-family:var(--display);font-size:18px;font-weight:700;margin-bottom:4px}
+.passo-info .num{font-family:var(--display);font-size:12px;font-weight:700;color:var(--roxo-claro);display:block;margin-bottom:6px}
+.passo-info p{font-size:14px;color:rgba(255,255,255,.68);max-width:300px}
+.passo:nth-child(odd) .passo-info{grid-column:1;text-align:right;justify-self:end}
+.passo:nth-child(odd) .passo-info p{margin-left:auto}
+.passo:nth-child(even) .passo-info{grid-column:3;grid-row:1}
+
+/* ===================== TELAS ===================== */
+.telas-grade{display:grid;grid-template-columns:280px 1fr;gap:36px;align-items:start}
+.trilho-abas{display:flex;flex-direction:column;gap:6px;position:sticky;top:90px}
+.aba-tela{text-align:left;background:none;border:1px solid transparent;border-radius:12px;padding:14px 16px;cursor:pointer;font-family:var(--body);transition:background .15s,border-color .15s}
+.aba-tela b{display:block;font-family:var(--display);font-size:14.5px;font-weight:700;color:var(--tinta)}
+.aba-tela span{font-size:12.5px;color:var(--cinza)}
+.aba-tela:hover{background:var(--off-white)}
+.aba-tela.ativa{background:var(--off-white);border-color:var(--borda)}
+.aba-tela.ativa b{color:var(--roxo)}
+.app{background:var(--meia-noite);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(9,15,133,.2);color:#fff}
+.app-top{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.app-top i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.15)}
+.app-top span{font-size:12px;color:rgba(255,255,255,.55);margin-left:6px}
+.app-corpo{min-height:400px;padding:18px;transition:opacity .25s}
+.app-corpo.trocando{opacity:0}
+/* kit de mini-UI dentro do app */
+.ui-cols{display:grid;gap:12px}
+.ui-rotulo{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px}
+.ui-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:11px 14px;font-size:12.5px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.ui-item b{font-weight:600;color:#fff}
+.ui-item small{display:block;color:rgba(255,255,255,.5);font-size:11px}
+.pilula{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.p-roxa{background:rgba(155,77,255,.2);color:var(--roxo-claro)}
+.p-verde{background:rgba(14,159,110,.22);color:#3ddc97}
+.p-amarela{background:rgba(217,119,6,.22);color:#f5a94d}
+.p-vermelha{background:rgba(220,38,38,.2);color:#f08c8c}
+.barra{height:5px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;flex:1}
+.barra i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--roxo),var(--roxo-claro))}
+.kpi-tile{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px}
+.kpi-tile b{font-family:var(--display);font-size:20px;display:block}
+.kpi-tile span{font-size:11px;color:rgba(255,255,255,.55)}
+.kan-col{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px}
+.kan-col h5{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:9px;display:flex;justify-content:space-between}
+.kan-card{background:var(--meia-noite-2);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:9px 11px;font-size:11.5px;margin-bottom:8px}
+.kan-card b{display:block;color:#fff;font-size:12px}
+.kan-card span{color:rgba(255,255,255,.5);font-size:10.5px}
+.grafico-area{width:100%;height:auto;display:block}
+.agenda-bloco{border-radius:8px;padding:7px 9px;font-size:10.5px;font-weight:600;margin-bottom:6px;background:rgba(155,77,255,.16);border:1px solid rgba(155,77,255,.3);color:#d9c2ff}
+.agenda-bloco.verde{background:rgba(14,159,110,.14);border-color:rgba(14,159,110,.35);color:#8ce7c3}
+
+/* ===================== MÓDULOS (bento) ===================== */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:18px}
+.tile{background:var(--branco);border:1px solid var(--borda);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
+.tile:hover{border-color:rgba(118,0,245,.35);box-shadow:0 20px 50px rgba(9,15,133,.1);transform:translateY(-3px)}
+.tile h3{font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:6px}
+.tile>p{font-size:13.5px;color:var(--cinza);margin-bottom:18px;max-width:340px}
+.tile-g{grid-column:span 2}
+.tile-alto{grid-row:span 2}
+.mini{border:1px solid var(--borda);background:var(--off-white);border-radius:12px;padding:12px;font-size:12px}
+.mini-chat{display:flex;flex-direction:column;gap:7px}
+.mini-chat span{max-width:80%;padding:7px 11px;border-radius:10px;font-size:11.5px}
+.mini-chat .de{background:var(--branco);border:1px solid var(--borda);align-self:flex-start;border-bottom-left-radius:3px}
+.mini-chat .para{background:var(--azul);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+.mini-kan{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mini-kan h6{font-size:10px;font-weight:700;color:var(--cinza);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.mini-kan i{display:block;font-style:normal;background:var(--branco);border:1px solid var(--borda);border-radius:7px;padding:6px 8px;font-size:10.5px;margin-bottom:6px}
+.regra{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--borda);font-size:12px}
+.regra:last-child{border-bottom:none}
+.chave{width:30px;height:17px;border-radius:999px;background:var(--verde);position:relative;flex:none}
+.chave::after{content:"";position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.chave.off{background:var(--borda)}
+.chave.off::after{right:auto;left:2px}
+.ia-passin{display:flex;gap:8px;align-items:center;font-size:12px;padding:7px 0;color:var(--tinta)}
+.ia-passin i{font-style:normal;color:var(--verde);font-weight:700}
+.spark{display:flex;align-items:flex-end;gap:5px;height:52px;margin-top:6px}
+.spark i{flex:1;background:linear-gradient(180deg,var(--roxo-claro),var(--roxo));border-radius:3px 3px 0 0;opacity:.85}
+.cob{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--borda);font-size:12px}
+.cob:last-child{border-bottom:none}
+.cob b{font-weight:600}
+.pilula-clara{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-radius:999px;padding:3px 9px}
+.pc-verde{background:rgba(14,159,110,.12);color:var(--verde)}
+.pc-ambar{background:rgba(217,119,6,.12);color:var(--ambar)}
+.pc-roxa{background:rgba(118,0,245,.1);color:var(--roxo)}
+
+/* ===================== ECOSSISTEMA ===================== */
+.ecossistema{padding-bottom:70px}
+.ecossistema .cabeca{margin:0 auto;text-align:center}
+.selo-provider{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:7px 16px;font-size:12px;font-weight:700;color:#fff;margin-bottom:18px}
+.selo-provider i{font-style:normal;font-size:16px;line-height:1;color:var(--roxo-claro)}
+.orbita{position:relative;height:clamp(540px,78vh,720px);margin-top:6px}
+#orbitaCanvas{position:absolute;inset:0;width:100%;height:100%}
+.nucleo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#171C5A,var(--meia-noite-2));border:1px solid rgba(155,77,255,.5);display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 0 70px rgba(118,0,245,.35)}
+.nucleo img{height:44px}
+.nucleo::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid rgba(155,77,255,.5);animation:nucleo-pulso 3.2s ease-out infinite}
+@keyframes nucleo-pulso{from{transform:scale(1);opacity:.9}to{transform:scale(1.7);opacity:0}}
+.eco-chip{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:7px;background:rgba(16,19,63,.88);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 13px;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);white-space:nowrap;z-index:2;cursor:default;transition:border-color .2s,box-shadow .2s,color .2s;will-change:transform}
+.eco-chip i{font-style:normal;width:8px;height:8px;border-radius:50%;flex:none}
+.eco-chip.on{border-color:var(--roxo-claro);color:#fff;box-shadow:0 0 22px rgba(118,0,245,.45);z-index:3}
+.eco-chip.estatico{position:static;transform:none!important}
+.rota-dados{text-align:center;font-size:13.5px;color:rgba(255,255,255,.55);min-height:24px;margin:8px 24px 0;transition:color .2s}
+.rota-dados.on{color:var(--roxo-claro);font-weight:600}
+.eco-grupos{display:none;flex-direction:column;gap:24px;margin-top:28px}
+.eco-grupos h4{font-family:var(--display);font-size:13px;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:10px;text-align:center}
+.eco-grupos .lista{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+
+/* ===================== IA ===================== */
+.ia-grade{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+.ia-lista{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.ia-lista li{font-size:15px;color:rgba(255,255,255,.82);padding-left:26px;position:relative}
+.ia-lista li::before{content:"";position:absolute;left:0;top:5px;width:14px;height:14px;background:url("../../02-identidade-visual/Ícone do menu.png") no-repeat center/contain}
+.log{background:var(--meia-noite-2);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.log-top{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.log-top b{font-family:var(--display);font-size:13px;font-weight:600;color:rgba(255,255,255,.85)}
+.log-corpo{padding:20px 22px;min-height:320px;font-size:13.5px}
+.log-item{display:flex;gap:11px;align-items:baseline;padding:8px 0;opacity:0;transform:translateY(6px);transition:opacity .4s ease-out,transform .4s ease-out}
+.log-item.on{opacity:1;transform:none}
+.log-item i{font-style:normal;color:var(--verde);font-weight:700;flex:none}
+.log-item b{color:#fff;font-weight:600}
+.log-item span{color:rgba(255,255,255,.55)}
+.log-fim{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.14);font-size:12.5px;color:var(--roxo-claro);opacity:0;transition:opacity .5s}
+.log-fim.on{opacity:1}
+
+/* ===================== RESULTADOS ===================== */
+.resultado{display:grid;grid-template-columns:1fr 1fr;gap:24px 64px;align-items:baseline;padding:38px 0;border-top:1px solid var(--borda)}
+.resultado:last-of-type{border-bottom:1px solid var(--borda)}
+.resultado h3{font-family:var(--display);font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.02em}
+.resultado p{color:var(--cinza);font-size:15.5px;max-width:460px}
+
+/* ===================== FAQ ===================== */
+.faq-grade{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.faq-contato{margin-top:26px;padding-top:24px;border-top:1px solid var(--borda)}
+.faq-contato p{font-size:14.5px;color:var(--cinza);margin-bottom:14px}
+.faq-item{background:var(--branco);border:1px solid var(--borda);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.faq-item.aberto{border-color:rgba(118,0,245,.35);box-shadow:0 12px 32px rgba(9,15,133,.08)}
+.faq-pergunta{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;cursor:pointer;font-family:var(--body);font-size:15.5px;font-weight:700;color:var(--tinta);padding:19px 22px;text-align:left}
+.faq-pergunta:hover{color:var(--roxo)}
+.faq-pergunta .mais{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--borda);color:var(--roxo);font-size:16px;display:flex;align-items:center;justify-content:center;transition:transform .3s,border-color .2s}
+.faq-item.aberto .mais{transform:rotate(45deg);border-color:var(--roxo)}
+.faq-resposta{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-resposta p{padding:0 22px 20px;font-size:14.5px;color:var(--cinza)}
+
+/* ===================== CTA FINAL ===================== */
+.cta-final{background:var(--meia-noite);color:#fff;position:relative;overflow:hidden;text-align:center;padding:130px 0}
+.cta-final .container{position:relative;z-index:var(--z-conteudo)}
+.simbolo-x{display:block;height:52px;width:auto;margin:0 auto 32px}
+.cta-final h2{font-family:var(--display);font-size:clamp(28px,3.8vw,46px);font-weight:800;letter-spacing:-.025em;line-height:1.12;max-width:700px;margin:0 auto 16px}
+.cta-final h2 em{font-style:normal;color:var(--roxo-claro)}
+.cta-final p{color:rgba(255,255,255,.74);max-width:520px;margin:0 auto 36px}
+.cta-final .hero-ctas{justify-content:center;margin-bottom:0}
+
+/* ===================== RODAPÉ ===================== */
+.rodape{background:#04051C;color:rgba(255,255,255,.55);padding:40px 0;font-size:13.5px}
+.rodape .container{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.rodape img{height:24px;opacity:.9}
+.rodape nav{display:flex;gap:20px}
+.rodape a{color:rgba(255,255,255,.55);text-decoration:none}
+.rodape a:hover{color:#fff}
+
+.cta-mobile{display:none;position:fixed;bottom:14px;left:14px;right:14px;z-index:var(--z-toast)}
+.cta-mobile .btn{width:100%;justify-content:center;box-shadow:0 12px 34px rgba(0,0,0,.35)}
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width:1024px){
+  .nav,.link-entrar,.header .btn-header{display:none}
+  .hamburguer{display:block}
+  .hero .container{grid-template-columns:1fr;gap:52px}
+  .painel-envelope{max-width:600px}
+  .problema .container,.ia-grade,.faq-grade{grid-template-columns:1fr;gap:44px}
+  .tel{margin:0 auto}
+  .telas-grade{grid-template-columns:1fr;gap:20px}
+  .trilho-abas{position:static;flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:6px;scrollbar-width:none}
+  .trilho-abas::-webkit-scrollbar{display:none}
+  .aba-tela{flex:none;border:1px solid var(--borda)}
+  .aba-tela span{display:none}
+  .bento{grid-template-columns:1fr 1fr}
+  .tile-g,.tile-alto{grid-column:auto;grid-row:auto}
+  .resultado{grid-template-columns:1fr;gap:8px}
+  .orbita{height:clamp(460px,60vh,600px)}
+}
+@media (max-width:768px){
+  .orbita,.rota-dados{display:none}
+  .eco-grupos{display:flex}
+}
+@media (max-width:640px){
+  .secao{padding:68px 0}
+  .hero{padding:110px 0 90px}
+  .painel-corpo{grid-template-columns:1fr}
+  .painel-chat{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .passo{grid-template-columns:56px 1fr;margin-bottom:28px}
+  .fluxo-trilho{left:28px}
+  .passo-no{grid-column:1}
+  .passo:nth-child(odd) .passo-info,.passo:nth-child(even) .passo-info{grid-column:2;grid-row:1;text-align:left;justify-self:start}
+  .passo:nth-child(odd) .passo-info p{margin-left:0}
+  .bento{grid-template-columns:1fr}
+  .cta-mobile{display:block}
+  .rodape{padding-bottom:92px}
+  .rodape .container{justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .revela,.surge,.log-item,.log-fim{opacity:1;transform:none}
+  .feixes,.brilho-cursor{display:none}
+  .digitando{display:none!important}
+  .fluxo-trilho i{height:100%!important}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="#" aria-label="Waxis — início">
+      <img class="logo-escuro" src="../../02-identidade-visual/Logo Completo (Login_Emails).png" alt="Waxis">
+      <img class="logo-claro" src="../../02-identidade-visual/Prancheta 1.png" alt="Waxis">
+    </a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#plataforma">Plataforma</a>
+      <a href="#modulos">Módulos</a>
+      <a href="#integracoes">Integrações</a>
+      <a href="#ia">Inteligência</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <div class="header-acoes">
+      <a class="link-entrar" href="#">Entrar</a>
+      <a class="btn btn-roxo btn-header" href="#cta">Agendar demonstração <span class="seta">→</span></a>
+      <button class="hamburguer" aria-label="Abrir menu" onclick="document.getElementById('menuMobile').classList.toggle('aberto')">
+        <img class="ham-escuro" src="../../02-identidade-visual/Ícone do menu.png" alt="">
+        <img class="ham-claro" src="../../02-identidade-visual/Favicon (Navegador).png" alt="">
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="menu-mobile" id="menuMobile" aria-label="Menu móvel">
+  <a href="#plataforma">Plataforma</a><a href="#modulos">Módulos</a><a href="#integracoes">Integrações</a><a href="#ia">Inteligência</a><a href="#duvidas">Dúvidas</a><a href="#">Entrar</a>
+  <a class="btn btn-roxo" href="#cta">Agendar demonstração <span class="seta">→</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grade" aria-hidden="true"></div>
+  <canvas class="feixes" id="feixesHero" aria-hidden="true"></canvas>
+  <div class="brilho-cursor" id="brilho" aria-hidden="true"></div>
+  <div class="container">
+    <div>
+      <span class="selo-hero">Ecossistema operacional para empresas</span>
+      <h1>O cérebro que orquestra a sua <em>empresa inteira.</em></h1>
+      <p class="sub">O Waxis não é mais um sistema: é o ecossistema que sincroniza canais, inteligência artificial, funil, agenda e financeiro em um fluxo único — cada módulo conversando com os outros, em tempo real.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-roxo" href="#cta">Agendar demonstração <span class="seta">→</span></a>
+        <a class="btn btn-contorno-claro" href="#plataforma">Ver a plataforma por dentro</a>
+      </div>
+      <div class="hero-provas">
+        <span><i>∞</i> Meta Tech Provider</span>
+        <span><i>◗</i> Conforme a LGPD</span>
+        <span><i>✦</i> IA supervisionada por humanos</span>
+      </div>
+    </div>
+    <div class="painel-envelope">
+      <div class="painel" id="painelVivo">
+        <div class="painel-top">
+          <b>Waxis · Central de operações</b>
+          <span class="aovivo">AO VIVO</span>
+        </div>
+        <div class="painel-corpo">
+          <div class="painel-chat">
+            <p class="chat-quem">WhatsApp · Marina Lopes</p>
+            <div class="balao entrada">Oi! Vi o anúncio de vocês. Como funciona para equipes?</div>
+            <div class="balao entrada surge" id="vb2">Preciso de algo para 5 usuários, ainda essa semana.</div>
+            <div class="digitando" id="vdig" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="balao saida surge" id="vb3">Consigo te mostrar tudo funcionando em 15 minutos, Marina. Tenho amanhã às 10h ou às 14h — qual prefere?<small>Agente Waxis · com transferência para humano</small></div>
+          </div>
+          <div class="painel-lado">
+            <div class="mini-funil">
+              <p class="rotulo">Funil de vendas</p>
+              <div class="funil-cols">
+                <div class="funil-col">
+                  <h5>Novo</h5>
+                  <div class="lead-card surge" id="vcard"><b>Marina Lopes</b><span>Equipe · 5 usuários</span></div>
+                </div>
+                <div class="funil-col"><h5>Qualificado</h5></div>
+              </div>
+            </div>
+            <div class="painel-kpis">
+              <p class="rotulo">Agora</p>
+              <div class="kpis-linha">
+                <div class="kpi-pulso" id="vkpi"><b id="vtempo">—</b><span>tempo de resposta</span></div>
+                <div><b>0</b><span>na fila</span></div>
+                <div><b>24/7</b><span>cobertura</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="toast surge" id="vtoast">✓ Follow-up agendado · seg, 09h00</div>
+        <div class="trilha" id="trilha" aria-hidden="true">
+          <span class="tno" data-t="0">WhatsApp</span><span class="tsep">→</span>
+          <span class="tno" data-t="1">IA</span><span class="tsep">→</span>
+          <span class="tno" data-t="2">CRM</span><span class="tsep">→</span>
+          <span class="tno" data-t="3">Kanban</span><span class="tsep">→</span>
+          <span class="tno" data-t="4">Financeiro</span><span class="tsep">→</span>
+          <span class="tno" data-t="5">Agenda</span><span class="tsep">→</span>
+          <span class="tno" data-t="6">Automação</span><span class="tsep">→</span>
+          <span class="tno" data-t="7">Relatórios</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="secao problema" id="problema">
+  <div class="container">
+    <div class="revela">
+      <p class="hora">22h07</p>
+      <h2>Um cliente quis comprar. Ninguém viu.</h2>
+      <p class="relato">Ele perguntou o preço, esperou dezessete minutos e foi dormir. Na manhã seguinte, fechou com o concorrente que respondeu às 22h08.</p>
+      <p class="virada">O problema raramente é o produto. É o intervalo entre a pergunta e a resposta — <b>e é exatamente nesse intervalo que o Waxis trabalha.</b></p>
+    </div>
+    <div class="revela">
+      <div class="tel" role="img" aria-label="Conversa perdida: cliente pergunta à noite, sem resposta, compra do concorrente de manhã">
+        <div class="tel-top"><b>Cliente · WhatsApp</b><span>ontem</span></div>
+        <div class="tel-fluxo">
+          <div class="tel-msg">Boa noite! Qual o valor do serviço completo?</div>
+          <p class="tel-meta">22h07 · recebida</p>
+          <div class="tel-msg">Vocês atendem na região central?</div>
+          <p class="tel-meta">22h11 · recebida</p>
+          <p class="tel-dia">Hoje, 08h30</p>
+          <div class="tel-fim">Bom dia! Obrigado, mas já resolvi com outra empresa.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLUXO -->
+<section class="secao secao-escura" id="fluxo">
+  <div class="container">
+    <div class="cabeca revela">
+      <h2>Do primeiro oi ao pós-venda, um único trilho.</h2>
+      <p>Cada conversa entra no mesmo caminho: identificada, qualificada, acompanhada e concluída — sem depender da memória de ninguém.</p>
+    </div>
+    <div class="fluxo-envelope">
+      <div class="fluxo-trilho" aria-hidden="true"><i id="fluxoLinha"></i></div>
+      <div class="passo revela">
+        <div class="passo-info"><span class="num">01</span><h3>A conversa chega</h3><p>WhatsApp, Instagram ou site — todos os canais desembocam na mesma central.</p></div>
+        <div class="passo-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5c-1.5 0-3-.4-4.3-1.1L3 20l1.1-5.2A8.38 8.38 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5z"/></svg></div>
+      </div>
+      <div class="passo revela">
+        <div class="passo-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.7 4.6L18 9l-4.3 1.4L12 15l-1.7-4.6L6 9l4.3-1.4L12 3zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg></div>
+        <div class="passo-info"><span class="num">02</span><h3>A IA assume o primeiro contato</h3><p>Responde com contexto, qualifica o interesse e coleta o essencial — dia ou madrugada.</p></div>
+      </div>
+      <div class="passo revela">
+        <div class="passo-info"><span class="num">03</span><h3>O contato vira registro</h3><p>Nome, canal, interesse e histórico entram no CRM automaticamente, sem digitação.</p></div>
+        <div class="passo-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c.9-3.4 3.9-5.2 7.5-5.2s6.6 1.8 7.5 5.2"/></svg></div>
+      </div>
+      <div class="passo revela">
+        <div class="passo-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="10" rx="1.5"/></svg></div>
+        <div class="passo-info"><span class="num">04</span><h3>A oportunidade entra no funil</h3><p>Cada negócio avança por etapas visíveis no Kanban, com responsável e próxima ação.</p></div>
+      </div>
+      <div class="passo revela">
+        <div class="passo-info"><span class="num">05</span><h3>A automação sustenta o ritmo</h3><p>Follow-ups, lembretes e movimentações acontecem sozinhos, no prazo certo.</p></div>
+        <div class="passo-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+      </div>
+      <div class="passo revela">
+        <div class="passo-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div class="passo-info"><span class="num">06</span><h3>A venda se conclui com rastro</h3><p>Proposta, negociação e fechamento ficam documentados — quem, quando e por quanto.</p></div>
+      </div>
+      <div class="passo revela">
+        <div class="passo-info"><span class="num">07</span><h3>O pós-venda continua no mesmo lugar</h3><p>Cobranças, agendamentos e novas conversas seguem no histórico do mesmo cliente.</p></div>
+        <div class="passo-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v5h-5"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TELAS -->
+<section class="secao secao-branca" id="plataforma">
+  <div class="container">
+    <div class="cabeca revela">
+      <h2>Sem ilustração, sem promessa. A tela.</h2>
+      <p>O que sua equipe vai ver todos os dias, do jeito que funciona: conversas, pipeline, números, agenda e cobranças.</p>
+    </div>
+    <div class="telas-grade revela">
+      <div class="trilho-abas" role="tablist" id="trilhoAbas"></div>
+      <div class="app">
+        <div class="app-top"><i></i><i></i><i></i><span id="appTitulo">Waxis</span></div>
+        <div class="app-corpo" id="appCorpo"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="secao" id="modulos">
+  <div class="container">
+    <div class="cabeca revela">
+      <h2>Cada módulo é completo. Juntos, viram um só ecossistema.</h2>
+      <p>Atendimento, CRM, agenda, financeiro e automação funcionam como aplicativos independentes — e falam a mesma língua, sobre os mesmos dados, o tempo todo.</p>
+    </div>
+    <div class="bento">
+      <div class="tile tile-g revela">
+        <h3>Atendimento omnichannel</h3>
+        <p>Filas, setores e distribuição automática. A conversa certa chega para a pessoa certa, com o histórico junto.</p>
+        <div class="mini mini-chat" aria-hidden="true">
+          <span class="de">Meu pedido saiu para entrega?</span>
+          <span class="para">Saiu às 14h10, Paulo. Chega até as 16h — te aviso por aqui. ✓</span>
+        </div>
+      </div>
+      <div class="tile tile-alto revela">
+        <h3>Inteligência artificial</h3>
+        <p>Agentes com função definida: qualificar, responder, resumir e transferir na hora certa.</p>
+        <div class="mini" aria-hidden="true">
+          <div class="ia-passin"><i>✓</i> Interesse identificado</div>
+          <div class="ia-passin"><i>✓</i> Dados coletados</div>
+          <div class="ia-passin"><i>✓</i> Oportunidade criada</div>
+          <div class="ia-passin"><i>✓</i> Humano acionado</div>
+        </div>
+      </div>
+      <div class="tile revela">
+        <h3>CRM e funil</h3>
+        <p>Oportunidades visíveis, do primeiro contato ao contrato.</p>
+        <div class="mini mini-kan" aria-hidden="true">
+          <div><h6>Proposta</h6><i>Clínica Vida</i><i>Imob Prime</i></div>
+          <div><h6>Fechamento</h6><i>Agência Nova</i></div>
+        </div>
+      </div>
+      <div class="tile revela">
+        <h3>Automações</h3>
+        <p>Regras que cuidam do repetitivo enquanto a equipe vende.</p>
+        <div class="mini" aria-hidden="true">
+          <div class="regra"><span>Boas-vindas a novo lead</span><span class="chave" aria-hidden="true"></span></div>
+          <div class="regra"><span>Sem resposta em 24h → alerta</span><span class="chave" aria-hidden="true"></span></div>
+          <div class="regra"><span>Reengajar lead frio</span><span class="chave off" aria-hidden="true"></span></div>
+        </div>
+      </div>
+      <div class="tile revela">
+        <h3>Agenda e compromissos</h3>
+        <p>Demonstrações, visitas e retornos com lembrete automático.</p>
+        <div class="mini" aria-hidden="true">
+          <div class="agenda-bloco">10h00 · Demonstração — Marina Lopes</div>
+          <div class="agenda-bloco verde">14h30 · Visita técnica — Cond. Aurora</div>
+        </div>
+      </div>
+      <div class="tile tile-g revela">
+        <h3>Indicadores da operação</h3>
+        <p>Resposta, conversão e volume por canal — em tempo real, não em planilha.</p>
+        <div class="mini" aria-hidden="true">
+          <div class="spark"><i style="height:34%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:68%"></i><i style="height:58%"></i><i style="height:82%"></i><i style="height:74%"></i><i style="height:100%"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSSISTEMA -->
+<section class="secao secao-escura ecossistema" id="ecossistema">
+  <div class="container">
+    <div class="cabeca revela">
+      <span class="selo-provider"><i>∞</i> Parceiro oficial · Meta Tech Provider</span>
+      <h2>O Ecossistema Waxis.</h2>
+      <p>Isto não é uma lista de integrações. É um sistema nervoso: inteligência artificial, canais, agenda, cobrança e automação trocando informação em tempo real, com o Waxis orquestrando cada troca.</p>
+    </div>
+    <div class="orbita revela" id="orbita" aria-label="Waxis no centro, conectado a inteligências artificiais, canais, Google Workspace, pagamentos, integrações e automações">
+      <canvas id="orbitaCanvas" aria-hidden="true"></canvas>
+      <div class="nucleo"><img src="../../02-identidade-visual/Ícone do menu.png" alt="Waxis"></div>
+    </div>
+    <p class="rota-dados" id="rotaDados">Passe o mouse sobre um serviço para ver o caminho dos dados.</p>
+    <div class="eco-grupos" aria-label="Serviços conectados ao Waxis, por categoria">
+      <div><h4>Inteligência artificial</h4><div class="lista" id="grupoIa"></div></div>
+      <div><h4>Canais e comunicação</h4><div class="lista" id="grupoCanal"></div></div>
+      <div><h4>Google Workspace</h4><div class="lista" id="grupoGoogle"></div></div>
+      <div><h4>Pagamentos</h4><div class="lista" id="grupoPagamento"></div></div>
+      <div><h4>Integração e automação</h4><div class="lista" id="grupoIntegracao"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- IA -->
+<section class="secao secao-escura" id="ia">
+  <div class="container">
+    <div class="ia-grade">
+      <div class="revela">
+        <div class="cabeca" style="margin-bottom:0">
+          <h2>Uma IA com cargo, não com marketing.</h2>
+          <p>No Waxis, a inteligência artificial tem responsabilidades claras dentro do processo — e um humano sempre no circuito.</p>
+        </div>
+        <ul class="ia-lista">
+          <li>Assume o primeiro atendimento quando a equipe não pode</li>
+          <li>Qualifica o interesse antes de ocupar um vendedor</li>
+          <li>Registra tudo no CRM, sem depender de digitação</li>
+          <li>Transfere para um humano no momento certo, com contexto</li>
+        </ul>
+      </div>
+      <div class="log revela" id="logIa">
+        <div class="log-top"><b>Agente Waxis · registro de execução</b><span class="aovivo">EXECUTANDO</span></div>
+        <div class="log-corpo">
+          <div class="log-item"><i>✓</i><div><b>Lead identificado</b> <span>— Marina Lopes, via WhatsApp</span></div></div>
+          <div class="log-item"><i>✓</i><div><b>Interesse detectado</b> <span>— plano para equipe de 5 usuários</span></div></div>
+          <div class="log-item"><i>✓</i><div><b>Classificação automática</b> <span>— oportunidade de alta prioridade</span></div></div>
+          <div class="log-item"><i>✓</i><div><b>Atendimento iniciado</b> <span>— resposta em 11 segundos</span></div></div>
+          <div class="log-item"><i>✓</i><div><b>Oportunidade criada</b> <span>— funil comercial, etapa "Novo"</span></div></div>
+          <div class="log-item"><i>✓</i><div><b>Responsável definido</b> <span>— Comercial 1 notificado</span></div></div>
+          <div class="log-item"><i>✓</i><div><b>Follow-up agendado</b> <span>— segunda-feira, 09h00</span></div></div>
+          <p class="log-fim" id="logFim">→ Conversa transferida para atendimento humano com resumo completo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section class="secao secao-branca" id="resultados">
+  <div class="container">
+    <div class="cabeca revela">
+      <h2>O que muda quando a operação vira um ecossistema.</h2>
+      <p>Menos funcionalidade pela funcionalidade. Mais consequência no fim do mês.</p>
+    </div>
+    <div class="resultado revela">
+      <h3>Responda em segundos, mesmo às 22h07.</h3>
+      <p>A IA cobre os horários em que sua equipe não está — e a primeira resposta deixa de depender de quem viu a notificação.</p>
+    </div>
+    <div class="resultado revela">
+      <h3>Nenhum lead morre esquecido.</h3>
+      <p>Todo contato vira registro com dono, etapa e próxima ação. O que antes se perdia no celular de alguém agora tem rastro.</p>
+    </div>
+    <div class="resultado revela">
+      <h3>Sua equipe vende, em vez de digitar.</h3>
+      <p>Cadastro, follow-up, lembrete e movimentação de funil acontecem sozinhos. O tempo do vendedor volta para a negociação.</p>
+    </div>
+    <div class="resultado revela">
+      <h3>Decisões com dados, não com impressão.</h3>
+      <p>Tempo de resposta, conversão por etapa e volume por canal ficam visíveis em tempo real — para corrigir a rota na semana, não no trimestre.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DÚVIDAS -->
+<section class="secao" id="duvidas">
+  <div class="container faq-grade">
+    <div class="revela">
+      <div class="cabeca" style="margin-bottom:0">
+        <h2>Perguntas frequentes antes de começar.</h2>
+        <p>Reunimos as dúvidas mais comuns de quem está conhecendo o Waxis. Se a sua não estiver aqui, fale com a gente.</p>
+      </div>
+      <div class="faq-contato">
+        <p>Não encontrou a sua pergunta? Nossa equipe responde rapidinho.</p>
+        <a class="btn btn-contorno" href="#cta">Falar pelo WhatsApp</a>
+      </div>
+    </div>
+    <div class="revela" id="faq">
+      <div class="faq-item">
+        <button class="faq-pergunta">O que é o Waxis?<span class="mais">+</span></button>
+        <div class="faq-resposta"><p>O Waxis é uma plataforma que reúne atendimento, CRM e automação em um só lugar. Sua equipe conversa com os clientes, organiza oportunidades no funil de vendas e automatiza tarefas repetitivas sem precisar trocar de ferramenta.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-pergunta">Quais canais de atendimento posso centralizar?<span class="mais">+</span></button>
+        <div class="faq-resposta"><p>Você concentra as conversas dos seus principais canais digitais, como WhatsApp e Instagram, em uma única central de atendimento. Na demonstração, mostramos os canais disponíveis para o seu cenário.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-pergunta">Quanto custa o Waxis?<span class="mais">+</span></button>
+        <div class="faq-resposta"><p>Os planos variam conforme o tamanho da equipe e os recursos necessários. Agende uma demonstração gratuita e receba uma proposta sob medida para a sua operação, sem compromisso.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-pergunta">Preciso de conhecimento técnico para usar?<span class="mais">+</span></button>
+        <div class="faq-resposta"><p>Não. A plataforma foi pensada para equipes comerciais e de atendimento, com uma interface simples e direta. Além disso, você conta com nosso time durante a implantação e no suporte do dia a dia.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-pergunta">A inteligência artificial substitui minha equipe?<span class="mais">+</span></button>
+        <div class="faq-resposta"><p>Não — ela trabalha junto com a sua equipe. Os agentes de IA qualificam contatos, respondem às dúvidas iniciais e transferem a conversa para um humano no momento certo, com todo o contexto preservado.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-pergunta">Meus dados e os dos meus clientes estão seguros?<span class="mais">+</span></button>
+        <div class="faq-resposta"><p>Sim. O Waxis adota práticas de segurança como criptografia, controle de acesso por perfil e registro de atividades, em conformidade com a LGPD.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-pergunta">Como funciona a demonstração?<span class="mais">+</span></button>
+        <div class="faq-resposta"><p>Você escolhe um horário, nosso time entende a sua operação e apresenta a plataforma aplicada à sua realidade. Ao final, você recebe uma proposta com o plano ideal para o seu momento.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="cta">
+  <canvas class="feixes" id="feixesCta" aria-hidden="true"></canvas>
+  <div class="container">
+    <img class="simbolo-x" src="../../02-identidade-visual/Ícone do menu.png" alt="" aria-hidden="true">
+    <h2>A próxima mensagem pode valer <em>um contrato.</em></h2>
+    <p>Agende uma demonstração de 20 minutos com nosso time e veja a plataforma rodando sobre o cenário real da sua empresa.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-roxo" href="#">Agendar demonstração <span class="seta">→</span></a>
+      <a class="btn btn-contorno-claro" href="#">Falar pelo WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="container">
+    <img src="../../02-identidade-visual/Logo Completo (Login_Emails).png" alt="Waxis">
+    <nav aria-label="Rodapé"><a href="#plataforma">Plataforma</a><a href="#duvidas">Dúvidas</a><a href="#">Privacidade</a></nav>
+    <span>Prévia visual · Fase 3</span>
+  </div>
+</footer>
+
+<div class="cta-mobile"><a class="btn btn-roxo" href="#cta">Agendar demonstração <span class="seta">→</span></a></div>
+
+<script>
+const reduzMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = id => document.getElementById(id);
+
+/* header sólido ao rolar */
+addEventListener('scroll', () => $('header').classList.toggle('solida', scrollY > 40), {passive:true});
+document.querySelectorAll('#menuMobile a').forEach(a =>
+  a.addEventListener('click', () => $('menuMobile').classList.remove('aberto')));
+
+/* revelação ao rolar */
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('visivel'); obs.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.revela').forEach(el => obs.observe(el));
+
+/* ===== fundo: feixes de luz (curvas suaves + pulsos, reage ao mouse) ===== */
+function feixes(cvId){
+  if (reduzMotion) return;
+  const cv = $(cvId); if (!cv) return;
+  const ctx = cv.getContext('2d'), host = cv.parentElement;
+  let W, H, meuY = .5, alvoY = .5;
+  const dpr = devicePixelRatio;
+  function dim(){ W = cv.width = cv.offsetWidth*dpr; H = cv.height = cv.offsetHeight*dpr; }
+  dim(); addEventListener('resize', dim);
+  host.addEventListener('mousemove', e => {
+    const b = host.getBoundingClientRect();
+    alvoY = (e.clientY - b.top) / b.height;
+  });
+  host.addEventListener('mouseleave', () => alvoY = .5);
+  const CURVAS = [
+    {y:.24, amp:.045, vel:.00042, fase:0,   vp:.09,  op:.09},
+    {y:.46, amp:.06,  vel:.00031, fase:2.1, vp:.055, op:.11},
+    {y:.68, amp:.05,  vel:.00037, fase:4.4, vp:.075, op:.08},
+    {y:.86, amp:.035, vel:.00052, fase:1.2, vp:.05,  op:.06}
+  ];
+  let t = 0;
+  function yDe(c, x){
+    return H*(c.y + (meuY-.5)*.05) + Math.sin(x*.0014/dpr + t*c.vel + c.fase)*H*c.amp;
+  }
+  /* nós de sinapse fixos ao longo de cada curva: pulsam como uma rede neural */
+  const NOS = [.12,.34,.58,.79];
+  (function anima(){
+    t += 16; meuY += (alvoY-meuY)*.04;
+    ctx.clearRect(0,0,W,H);
+    for (const c of CURVAS){
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 12*dpr){
+        const y = yDe(c, x);
+        x === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle = `rgba(155,77,255,${c.op})`;
+      ctx.lineWidth = 1.1*dpr; ctx.stroke();
+      const px = ((t*c.vp*dpr) % (W + 360*dpr)) - 180*dpr;
+      const py = yDe(c, px);
+      const g = ctx.createRadialGradient(px,py,0,px,py,64*dpr);
+      g.addColorStop(0,'rgba(155,77,255,.4)'); g.addColorStop(1,'rgba(155,77,255,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(px,py,64*dpr,0,7); ctx.fill();
+      NOS.forEach((f,i) => {
+        const nx = f*W, ny = yDe(c, nx);
+        const pulso = .3 + .7*((Math.sin(t*.0016 + c.fase + i*1.7) + 1)/2);
+        ctx.beginPath(); ctx.arc(nx, ny, 2.4*dpr*pulso, 0, 7);
+        ctx.fillStyle = `rgba(255,255,255,${.22*pulso})`;
+        ctx.fill();
+      });
+    }
+    requestAnimationFrame(anima);
+  })();
+}
+feixes('feixesHero'); feixes('feixesCta');
+
+/* brilho segue o cursor no hero */
+(function(){
+  if (reduzMotion) return;
+  const brilho = $('brilho'), hero = $('hero');
+  let ax = innerWidth*.68, ay = innerHeight*.38, tx = ax, ty = ay;
+  hero.addEventListener('mousemove', e => {
+    const b = hero.getBoundingClientRect();
+    tx = e.clientX - b.left; ty = e.clientY - b.top;
+  });
+  (function segue(){
+    ax += (tx-ax)*.07; ay += (ty-ay)*.07;
+    brilho.style.left = ax+'px'; brilho.style.top = ay+'px';
+    requestAnimationFrame(segue);
+  })();
+})();
+
+/* ===== hero vivo: a operação acontecendo ===== */
+(function(){
+  const ids = ['vb2','vdig','vb3','vcard','vkpi','vtoast'];
+  const tnos = document.querySelectorAll('.tno');
+  if (reduzMotion){
+    ids.forEach(i => $(i).classList.add('on'));
+    $('vdig').classList.remove('on');
+    $('vcard').classList.add('move');
+    $('vtempo').textContent = '11s';
+    tnos.forEach(n => n.classList.add('on'));
+    return;
+  }
+  let timers = [], ativo = false;
+  const tno = i => $('trilha').querySelector(`[data-t="${i}"]`);
+  function cena(){
+    const passos = [
+      [900,  () => { $('vb2').classList.add('on'); tno(0).classList.add('on'); }],
+      [2100, () => { $('vdig').classList.add('on'); tno(1).classList.add('on'); }],
+      [3600, () => { $('vdig').classList.remove('on'); $('vb3').classList.add('on'); }],
+      [5300, () => { $('vcard').classList.add('on'); tno(2).classList.add('on'); }],
+      [6800, () => { $('vcard').classList.add('move'); tno(3).classList.add('on'); }],
+      [8300, () => { $('vkpi').classList.add('on'); $('vtempo').textContent = '11s'; tno(4).classList.add('on'); }],
+      [9800, () => { $('vtoast').classList.add('on'); tno(5).classList.add('on'); }],
+      [11200,() => tno(6).classList.add('on')],
+      [12600,() => tno(7).classList.add('on')],
+      [16500, reinicia]
+    ];
+    passos.forEach(([t,f]) => timers.push(setTimeout(f,t)));
+  }
+  function limpa(){
+    timers.forEach(clearTimeout); timers = [];
+    ids.forEach(i => $(i).classList.remove('on'));
+    $('vcard').classList.remove('move');
+    $('vtempo').textContent = '—';
+    tnos.forEach(n => n.classList.remove('on'));
+  }
+  function reinicia(){ limpa(); if (ativo) cena(); }
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && !ativo){ ativo = true; cena(); }
+    else if (!e.isIntersecting && ativo){ ativo = false; limpa(); }
+  }), {threshold:.3}).observe($('painelVivo'));
+})();
+
+/* ===== trilho do fluxo desenha com o scroll ===== */
+(function(){
+  const linha = $('fluxoLinha'), sec = $('fluxo');
+  if (reduzMotion || !linha) return;
+  addEventListener('scroll', () => {
+    const r = sec.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (innerHeight*.8 - r.top) / r.height));
+    linha.style.height = (p*100)+'%';
+  }, {passive:true});
+})();
+
+/* ===== O Ecossistema Waxis: núcleo + órbitas + rotas de dados ===== */
+(function(){
+  const ECOSSISTEMA = [
+    {nome:'OpenAI',cor:'#10A37F',cat:'ia',ring:0}, {nome:'Claude',cor:'#D97757',cat:'ia',ring:0},
+    {nome:'Gemini',cor:'#669DF6',cat:'ia',ring:0}, {nome:'Grok',cor:'#E5E5E5',cat:'ia',ring:0},
+    {nome:'DeepSeek',cor:'#4D6BFE',cat:'ia',ring:0}, {nome:'Meta AI',cor:'#0668E1',cat:'ia',ring:0},
+    {nome:'WhatsApp',cor:'#25D366',cat:'canal',ring:1}, {nome:'Instagram',cor:'#DD2A7B',cat:'canal',ring:1},
+    {nome:'Facebook',cor:'#1877F2',cat:'canal',ring:1}, {nome:'Telegram',cor:'#229ED9',cat:'canal',ring:1},
+    {nome:'E-mail',cor:'#8A8FA8',cat:'canal',ring:1},
+    {nome:'Google',cor:'#4285F4',cat:'google',ring:1}, {nome:'Google Calendar',cor:'#34A853',cat:'google',ring:1},
+    {nome:'Gmail',cor:'#EA4335',cat:'google',ring:1}, {nome:'Google Drive',cor:'#FBBC04',cat:'google',ring:1},
+    {nome:'Google Meet',cor:'#00897B',cat:'google',ring:1},
+    {nome:'Asaas',cor:'#0030B9',cat:'pagamento',ring:2}, {nome:'Stripe',cor:'#635BFF',cat:'pagamento',ring:2},
+    {nome:'Mercado Pago',cor:'#00B1EA',cat:'pagamento',ring:2},
+    {nome:'Webhooks',cor:'#7600F5',cat:'integracao',ring:2}, {nome:'API REST',cor:'#090F85',cat:'integracao',ring:2},
+    {nome:'ERP',cor:'#8A8FA8',cat:'integracao',ring:2},
+    {nome:'Pixel Meta',cor:'#0668E1',cat:'automacao',ring:2}, {nome:'Google Analytics',cor:'#E8710A',cat:'automacao',ring:2},
+    {nome:'N8N',cor:'#EA4B71',cat:'automacao',ring:2}, {nome:'Make',cor:'#B026FF',cat:'automacao',ring:2},
+    {nome:'Zapier',cor:'#FF4A00',cat:'automacao',ring:2}
+  ];
+  const ROTAS = {
+    ia:         n => `Mensagem → ${n} → Classificação → CRM → Painel`,
+    canal:      n => `${n} → IA → CRM → Kanban → Automação`,
+    google:     n => `CRM → ${n} → Agenda sincronizada → Cliente notificado`,
+    pagamento:  n => `Proposta → ${n} → Cobrança → Financeiro`,
+    integracao: n => `Evento no Waxis → ${n} → Sistema externo → Retorno sincronizado`,
+    automacao:  n => `Ação no Waxis → ${n} → Fluxo externo → Dado de volta ao painel`
+  };
+  const GRUPO_EL = {ia:'grupoIa', canal:'grupoCanal', google:'grupoGoogle', pagamento:'grupoPagamento', integracao:'grupoIntegracao', automacao:'grupoIntegracao'};
+
+  /* lista estática (mobile) — sempre renderizada, visível só abaixo de 768px via CSS */
+  ECOSSISTEMA.forEach(s => {
+    const alvo = $(GRUPO_EL[s.cat]);
+    if (!alvo) return;
+    const el = document.createElement('span');
+    el.className = 'eco-chip estatico';
+    el.innerHTML = `<i style="background:${s.cor}"></i>${s.nome}`;
+    alvo.appendChild(el);
+  });
+
+  const wrap = $('orbita'); if (!wrap) return;
+  const cv = $('orbitaCanvas'), ctx = cv.getContext('2d'), rotaEl = $('rotaDados');
+  const dpr = devicePixelRatio || 1;
+  let W = 0, H = 0, cx = 0, cy = 0, ringR = [0,0,0], ativoChip = null, rodando = false;
+
+  const porRing = [[],[],[]];
+  const chips = ECOSSISTEMA.map(s => ({...s, el:null, x:0, y:0}));
+  chips.forEach(c => porRing[c.ring].push(c));
+  porRing.forEach(lista => lista.forEach((c,i) => { c.baseAngulo = (i/lista.length)*Math.PI*2; }));
+
+  function destacar(c){
+    ativoChip = c;
+    chips.forEach(x => x.el.classList.toggle('on', x===c));
+    rotaEl.textContent = ROTAS[c.cat](c.nome);
+    rotaEl.classList.add('on');
+  }
+  function limparDestaque(){
+    ativoChip = null;
+    chips.forEach(x => x.el.classList.remove('on'));
+    rotaEl.textContent = 'Passe o mouse sobre um serviço para ver o caminho dos dados.';
+    rotaEl.classList.remove('on');
+  }
+  chips.forEach(c => {
+    const el = document.createElement('span');
+    el.className = 'eco-chip'; el.tabIndex = 0;
+    el.innerHTML = `<i style="background:${c.cor}"></i>${c.nome}`;
+    el.addEventListener('mouseenter', () => destacar(c));
+    el.addEventListener('mouseleave', limparDestaque);
+    el.addEventListener('focus', () => destacar(c));
+    el.addEventListener('blur', limparDestaque);
+    wrap.appendChild(el);
+    c.el = el;
+  });
+
+  function medir(){
+    const r = wrap.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W*dpr; cv.height = H*dpr;
+    cv.style.width = W+'px'; cv.style.height = H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const tam = Math.min(W,H);
+    ringR = [tam*.20, tam*.33, tam*.445];
+    cx = W/2; cy = H/2;
+  }
+  medir(); addEventListener('resize', medir);
+
+  const VEL = [0.00016, -0.00011, 0.00008];
+  function posicionar(t){
+    chips.forEach(c => {
+      const ang = c.baseAngulo + t*VEL[c.ring];
+      const x = cx + Math.cos(ang)*ringR[c.ring], y = cy + Math.sin(ang)*ringR[c.ring];
+      c.x = x; c.y = y;
+      c.el.style.transform = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
+    });
+  }
+  function desenhar(t){
+    ctx.clearRect(0,0,W,H);
+    chips.forEach((c,i) => {
+      const ativo = c===ativoChip;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(c.x,c.y);
+      ctx.strokeStyle = ativo ? 'rgba(155,77,255,.85)' : 'rgba(155,77,255,.12)';
+      ctx.lineWidth = ativo ? 1.8 : 1; ctx.stroke();
+      const fase = (t*.00018 + i*.37) % 1;
+      const px = cx + (c.x-cx)*fase, py = cy + (c.y-cy)*fase;
+      ctx.beginPath(); ctx.arc(px,py, ativo?3:1.6, 0, 7);
+      ctx.fillStyle = ativo ? 'rgba(255,255,255,.95)' : 'rgba(155,77,255,.55)';
+      ctx.fill();
+    });
+  }
+
+  if (reduzMotion){
+    medir(); posicionar(0); desenhar(0);
+    return;
+  }
+  function loop(t){
+    if (!rodando) return;
+    posicionar(t); desenhar(t);
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && !rodando){ rodando = true; requestAnimationFrame(loop); }
+    else if (!e.isIntersecting){ rodando = false; }
+  }), {threshold:.15}).observe(wrap);
+})();
+
+/* ===== telas da plataforma ===== */
+const kpis = (a,b,c) => `<div class="ui-cols" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:14px">
+  <div class="kpi-tile"><b>${a[0]}</b><span>${a[1]}</span></div>
+  <div class="kpi-tile"><b>${b[0]}</b><span>${b[1]}</span></div>
+  <div class="kpi-tile"><b>${c[0]}</b><span>${c[1]}</span></div></div>`;
+const TELAS = [
+ {aba:'Conversas', desc:'Central de atendimento', titulo:'Waxis · Conversas', html:`
+  <div class="ui-cols" style="grid-template-columns:1fr 1.4fr">
+    <div>
+      <p class="ui-rotulo">Fila · Comercial</p>
+      <div class="ui-item"><div><b>Marina Lopes</b><small>WhatsApp · agora</small></div><span class="pilula p-roxa">IA</span></div>
+      <div class="ui-item"><div><b>Paulo Cezar</b><small>Instagram · 2 min</small></div><span class="pilula p-amarela">Aguardando</span></div>
+      <div class="ui-item"><div><b>Ju Freitas</b><small>Site · 14 min</small></div><span class="pilula p-verde">Resolvido</span></div>
+    </div>
+    <div>
+      <p class="ui-rotulo">Marina Lopes · WhatsApp</p>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div class="balao entrada" style="opacity:1">Preciso de algo para 5 usuários, ainda essa semana.</div>
+        <div class="balao saida" style="opacity:1">Consigo te mostrar tudo em 15 minutos. Amanhã às 10h ou às 14h?<small>Agente Waxis</small></div>
+        <div class="balao entrada" style="opacity:1">Às 10h fica ótimo!</div>
+        <div class="ui-item" style="margin-top:6px"><span style="color:rgba(255,255,255,.55)">Nota interna: transferir para Comercial 1 após confirmação.</span></div>
+      </div>
+    </div>
+  </div>`},
+ {aba:'Pipeline', desc:'Funil de vendas Kanban', titulo:'Waxis · Funil comercial', html:`
+  <div class="ui-cols" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kan-col"><h5>Novo <span>4</span></h5><div class="kan-card"><b>Marina Lopes</b><span>Equipe · 5 usuários</span></div><div class="kan-card"><b>Studio Áurea</b><span>Instagram</span></div></div>
+    <div class="kan-col"><h5>Qualificado <span>3</span></h5><div class="kan-card"><b>Clínica Vida</b><span>Demo amanhã, 10h</span></div><div class="kan-card"><b>Dr. Tavares</b><span>Follow-up seg</span></div></div>
+    <div class="kan-col"><h5>Proposta <span>2</span></h5><div class="kan-card"><b>Imob Prime</b><span>R$ 2.400/mês</span></div></div>
+    <div class="kan-col"><h5>Fechamento <span>1</span></h5><div class="kan-card"><b>Agência Nova</b><span>Contrato enviado</span></div></div>
+  </div>`},
+ {aba:'Indicadores', desc:'A operação em números', titulo:'Waxis · Indicadores', html:`
+  ${kpis(['46s','tempo médio de resposta'],['18%','conversão do funil'],['132','atendimentos hoje'])}
+  <p class="ui-rotulo">Atendimentos · últimos 7 dias</p>
+  <svg class="grafico-area" viewBox="0 0 560 150" aria-hidden="true">
+    <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(118,0,245,.4)"/><stop offset="1" stop-color="rgba(118,0,245,0)"/></linearGradient></defs>
+    <g stroke="rgba(255,255,255,.07)"><line x1="0" y1="40" x2="560" y2="40"/><line x1="0" y1="85" x2="560" y2="85"/><line x1="0" y1="130" x2="560" y2="130"/></g>
+    <path d="M0 118 L80 104 L160 112 L240 82 L320 90 L400 58 L480 66 L560 34 L560 150 L0 150 Z" fill="url(#ga)"/>
+    <path d="M0 118 L80 104 L160 112 L240 82 L320 90 L400 58 L480 66 L560 34" fill="none" stroke="#9B4DFF" stroke-width="2.5"/>
+    <circle cx="560" cy="34" r="5" fill="#9B4DFF"/>
+  </svg>
+  <p class="ui-rotulo" style="margin-top:14px">Leads por origem</p>
+  <div class="ui-item"><span>WhatsApp</span><span class="barra"><i style="width:72%"></i></span><b>72%</b></div>
+  <div class="ui-item"><span>Instagram</span><span class="barra"><i style="width:19%"></i></span><b>19%</b></div>
+  <div class="ui-item"><span>Site</span><span class="barra"><i style="width:9%"></i></span><b>9%</b></div>`},
+ {aba:'Agenda', desc:'Compromissos e retornos', titulo:'Waxis · Agenda da semana', html:`
+  <div class="ui-cols" style="grid-template-columns:repeat(4,1fr)">
+    <div><p class="ui-rotulo">Seg, 15</p><div class="agenda-bloco">09h00 · Follow-up — Marina Lopes</div><div class="agenda-bloco verde">11h00 · Onboarding — Agência Nova</div></div>
+    <div><p class="ui-rotulo">Ter, 16</p><div class="agenda-bloco">10h00 · Demonstração — Clínica Vida</div></div>
+    <div><p class="ui-rotulo">Qua, 17</p><div class="agenda-bloco verde">14h30 · Visita — Cond. Aurora</div><div class="agenda-bloco">16h00 · Proposta — Imob Prime</div></div>
+    <div><p class="ui-rotulo">Qui, 18</p><div class="agenda-bloco">09h30 · Retorno — Dr. Tavares</div></div>
+  </div>
+  <div class="ui-item" style="margin-top:14px"><span style="color:rgba(255,255,255,.6)">Lembretes automáticos enviados 1h antes de cada compromisso</span><span class="pilula p-verde">Ativo</span></div>`},
+ {aba:'Campanhas', desc:'Disparos e reengajamento', titulo:'Waxis · Campanhas', html:`
+  ${kpis(['3','campanhas ativas'],['1.284','mensagens na fila'],['96%','entregues'])}
+  <div class="ui-item"><div><b>Reativação · clientes 90 dias</b><small>WhatsApp · segmento: inativos</small></div><span class="barra" style="max-width:130px"><i style="width:64%"></i></span><span class="pilula p-verde">Enviando</span></div>
+  <div class="ui-item"><div><b>Convite · demonstração ao vivo</b><small>WhatsApp · leads qualificados</small></div><span class="barra" style="max-width:130px"><i style="width:100%"></i></span><span class="pilula p-verde">Concluída</span></div>
+  <div class="ui-item"><div><b>Aviso · nova condição comercial</b><small>E-mail · base completa</small></div><span class="barra" style="max-width:130px"><i style="width:12%"></i></span><span class="pilula p-amarela">Agendada</span></div>
+  <div class="ui-item"><div><b>Pesquisa · pós-atendimento</b><small>WhatsApp · resolvidos na semana</small></div><span class="barra" style="max-width:130px"><i style="width:0%"></i></span><span class="pilula p-roxa">Rascunho</span></div>`},
+ {aba:'Financeiro', desc:'Cobranças e recebimentos', titulo:'Waxis · Financeiro', html:`
+  ${kpis(['R$ 18.400','a receber no mês'],['R$ 12.150','recebido'],['3','cobranças vencidas'])}
+  <p class="ui-rotulo">Cobranças recentes</p>
+  <div class="ui-item"><div><b>Agência Nova</b><small>Assinatura mensal · via Asaas</small></div><b>R$ 990</b><span class="pilula p-verde">Pago</span></div>
+  <div class="ui-item"><div><b>Clínica Vida</b><small>Implantação · via Mercado Pago</small></div><b>R$ 1.500</b><span class="pilula p-amarela">Pendente</span></div>
+  <div class="ui-item"><div><b>Imob Prime</b><small>Assinatura mensal · via Asaas</small></div><b>R$ 2.400</b><span class="pilula p-vermelha">Vencida · lembrete enviado</span></div>
+  <div class="ui-item"><div><b>Studio Áurea</b><small>Assinatura mensal · via Asaas</small></div><b>R$ 490</b><span class="pilula p-verde">Pago</span></div>`}
+];
+const trilho = $('trilhoAbas');
+TELAS.forEach((t,i) => {
+  const b = document.createElement('button');
+  b.className = 'aba-tela' + (i===0 ? ' ativa' : '');
+  b.setAttribute('role','tab');
+  b.innerHTML = `<b>${t.aba}</b><span>${t.desc}</span>`;
+  b.onclick = () => {
+    document.querySelectorAll('.aba-tela').forEach(x => x.classList.remove('ativa'));
+    b.classList.add('ativa'); mostraTela(i);
+  };
+  trilho.appendChild(b);
+});
+function mostraTela(i){
+  const corpo = $('appCorpo');
+  corpo.classList.add('trocando');
+  setTimeout(() => {
+    $('appTitulo').textContent = TELAS[i].titulo;
+    corpo.innerHTML = TELAS[i].html;
+    corpo.classList.remove('trocando');
+  }, reduzMotion ? 0 : 220);
+}
+$('appTitulo').textContent = TELAS[0].titulo;
+$('appCorpo').innerHTML = TELAS[0].html;
+
+/* ===== registro de execução da IA ===== */
+(function(){
+  const log = $('logIa'); if (!log) return;
+  const itens = log.querySelectorAll('.log-item'), fim = $('logFim');
+  if (reduzMotion){ itens.forEach(i => i.classList.add('on')); fim.classList.add('on'); return; }
+  let timers = [], ativo = false;
+  function roda(){
+    itens.forEach((el,i) => timers.push(setTimeout(() => el.classList.add('on'), 500 + i*750)));
+    timers.push(setTimeout(() => fim.classList.add('on'), 500 + itens.length*750 + 400));
+    timers.push(setTimeout(() => { limpa(); if (ativo) roda(); }, 500 + itens.length*750 + 4800));
+  }
+  function limpa(){
+    timers.forEach(clearTimeout); timers = [];
+    itens.forEach(el => el.classList.remove('on')); fim.classList.remove('on');
+  }
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && !ativo){ ativo = true; roda(); }
+    else if (!e.isIntersecting && ativo){ ativo = false; limpa(); }
+  }), {threshold:.35}).observe(log);
+})();
+
+/* ===== FAQ ===== */
+document.querySelectorAll('.faq-item').forEach(item => {
+  const btn = item.querySelector('.faq-pergunta'), resp = item.querySelector('.faq-resposta');
+  btn.setAttribute('aria-expanded','false');
+  btn.addEventListener('click', () => {
+    const abre = !item.classList.contains('aberto');
+    document.querySelectorAll('.faq-item.aberto').forEach(o => {
+      o.classList.remove('aberto');
+      o.querySelector('.faq-resposta').style.maxHeight = null;
+      o.querySelector('.faq-pergunta').setAttribute('aria-expanded','false');
+    });
+    if (abre){
+      item.classList.add('aberto');
+      resp.style.maxHeight = resp.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+</script>
+</body>
+</html>
