@@ -106,10 +106,10 @@ p { text-wrap: pretty; }
 
 .hero-stage { --mouse-x: 0; --mouse-y: 0; position: relative; z-index: 2; min-height: 510px; transform-style: preserve-3d; }
 .orbit { position: absolute; border: 1px solid color-mix(in oklch, var(--violet) 16%, transparent); border-radius: 50%; }
-.orbit--one { width: 490px; height: 490px; top: 10px; left: 30px; }
-.orbit--two { width: 340px; height: 340px; top: 85px; left: 105px; }
-.hero-x { position: absolute; z-index: 12; width: 126px; height: 126px; object-fit: contain; top: 192px; left: 212px; padding: 22px; background: radial-gradient(circle at 35% 30%, #eee6ff, #c6a4ff 78%); border: 1px solid color-mix(in oklch, var(--violet) 38%, transparent); border-radius: 50%; box-shadow: 0 20px 55px color-mix(in oklch, var(--violet) 34%, transparent), 0 0 0 12px color-mix(in oklch, var(--violet) 9%, transparent); }
-.hero-card-orbit { position: absolute; inset: 0; transform-origin: 50% 50%; animation: heroOrbitSwing 9s var(--ease) infinite alternate; }
+.orbit--one { width: 490px; height: 490px; top: 10px; left: 50%; translate: -50% 0; }
+.orbit--two { width: 340px; height: 340px; top: 85px; left: 50%; translate: -50% 0; }
+.hero-x { position: absolute; z-index: 12; width: 126px; height: 126px; object-fit: contain; top: 192px; left: 50%; translate: -50% 0; padding: 22px; background: radial-gradient(circle at 35% 30%, #eee6ff, #c6a4ff 78%); border: 1px solid color-mix(in oklch, var(--violet) 38%, transparent); border-radius: 50%; box-shadow: 0 20px 55px color-mix(in oklch, var(--violet) 34%, transparent), 0 0 0 12px color-mix(in oklch, var(--violet) 9%, transparent); }
+.hero-card-orbit { position: absolute; top: 0; left: 50%; width: 560px; height: 520px; translate: -50% 0; transform-origin: 50% 50%; animation: heroOrbitSwing 28s ease-in-out infinite alternate; }
 .hero-connections { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .hero-connections line { stroke: color-mix(in oklch, var(--violet) 23%, transparent); stroke-width: 1; stroke-dasharray: 4 7; animation: heroConnectionFlow 5s linear infinite; }
 .conversation, .signal-card {
@@ -128,23 +128,23 @@ p { text-wrap: pretty; }
 .signal-card strong { display: block; font: 680 14px/1.35 var(--font-display); }
 .signal-card span { display: flex; align-items: center; gap: 7px; margin-top: 14px; color: var(--muted); font-size: 9px; }
 .signal-card i { width: 7px; height: 7px; background: var(--success); border-radius: 50%; box-shadow: 0 0 0 4px color-mix(in oklch, var(--success) 15%, transparent); }
-.hero-event { position: absolute; z-index: 3; width: 202px; height: 64px; padding: 9px 10px; display: grid; grid-template-columns: 32px 1fr 20px; gap: 8px; align-items: center; color: var(--navy-deep); background: color-mix(in oklch, white 96%, transparent); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 44px color-mix(in oklch, var(--navy) 11%, transparent); backdrop-filter: blur(12px); animation: heroCardStayLevel 9s var(--ease) infinite alternate; }
+.hero-event { position: absolute; z-index: 3; width: 202px; height: 64px; padding: 9px 10px; display: grid; grid-template-columns: 32px 1fr 20px; gap: 8px; align-items: center; color: var(--navy-deep); background: color-mix(in oklch, white 96%, transparent); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 44px color-mix(in oklch, var(--navy) 11%, transparent); backdrop-filter: blur(12px); animation: heroCardStayLevel 28s ease-in-out infinite alternate; }
 .hero-event__icon { width: 34px; height: 34px; display: grid; place-items: center; color: var(--violet); background: color-mix(in oklch, var(--violet) 10%, white); border-radius: 9px; font-size: 1rem; }
 .hero-event > span { min-width: 0; display: flex; flex-direction: column; }
 .hero-event small { color: var(--violet); font-size: .5rem; font-weight: 800; }
 .hero-event strong { overflow: hidden; font: 700 .6875rem/1.2 var(--font-display); text-overflow: ellipsis; white-space: nowrap; }
 .hero-event em { overflow: hidden; color: var(--muted); font-size: .5rem; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
 .hero-event > i { width: 20px; height: 20px; display: grid; place-items: center; color: white; background: var(--violet); border-radius: 50%; font-size: .65rem; font-style: normal; }
-.hero-event--one { top: -8px; left: 179px; }
-.hero-event--two { top: 74px; right: 18px; }
+.hero-event--one { top: 50px; left: 179px; }
+.hero-event--two { top: 102px; right: 53px; }
 .hero-event--three { top: 228px; right: 0; }
-.hero-event--four { right: 18px; bottom: 58px; }
-.hero-event--five { bottom: -8px; left: 179px; }
-.hero-event--six { bottom: 58px; left: 18px; }
+.hero-event--four { right: 53px; bottom: 102px; }
+.hero-event--five { bottom: 50px; left: 179px; }
+.hero-event--six { bottom: 102px; left: 53px; }
 .hero-event--seven { top: 228px; left: 0; }
-.hero-event--eight { top: 74px; left: 18px; }
-@keyframes heroOrbitSwing { from { rotate: -1.8deg; } to { rotate: 1.8deg; } }
-@keyframes heroCardStayLevel { from { rotate: 1.8deg; } to { rotate: -1.8deg; } }
+.hero-event--eight { top: 102px; left: 53px; }
+@keyframes heroOrbitSwing { from { rotate: 0deg; } to { rotate: 180deg; } }
+@keyframes heroCardStayLevel { from { rotate: 0deg; } to { rotate: -180deg; } }
 @keyframes heroConnectionFlow { to { stroke-dashoffset: -44; } }
 .scroll-cue { position: absolute; left: max(24px, calc((100vw - 1180px)/2)); bottom: 24px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
 .scroll-cue span { width: 28px; height: 1px; background: var(--violet); animation: cue 1.8s ease-in-out infinite; transform-origin: left; }
@@ -352,7 +352,7 @@ footer a:hover { color: var(--violet-bright); }
 @media (max-width: 680px) {
   :root { --container: calc(100vw - 32px); }
   .nav-shell { top: 10px; }.hero { min-height: auto; padding: 135px 18px 70px; }.hero h1 { font-size: clamp(2.65rem, 10.5vw, 3.7rem); }
-  .hero-actions { flex-direction: column; }.hero-actions .button { width: 100%; }.hero-stage { min-height: 420px; transform: scale(.88); transform-origin: top center; margin-bottom: -55px; }.orbit--one { left: 50%; transform: translateX(-50%); width: 430px; height: 430px; }.orbit--two { left: 50%; top: 70px; transform: translateX(-50%); width: 300px; height: 300px; }.hero-x { left: 50%; top: 170px; transform: translateX(-50%); }.conversation--two { right: -40px; }.signal-card { right: -35px; }.scroll-cue { display: none; }
+  .hero-actions { flex-direction: column; }.hero-actions .button { width: 100%; }.hero-stage { min-height: 420px; transform: scale(.88); transform-origin: top center; margin-bottom: -55px; }.orbit--one { width: 430px; height: 430px; }.orbit--two { top: 70px; width: 300px; height: 300px; }.hero-x { top: 170px; }.conversation--two { right: -40px; }.signal-card { right: -35px; }.scroll-cue { display: none; }
   .reality { min-height: 90vh; padding: 100px 20px; display: block; }.reality-intro { margin-bottom: 50px; }.reality-lines span { font-size: clamp(1.35rem, 6vw, 1.9rem); white-space: normal; }
   .transformation { height: auto; }.transformation-sticky { position: static; min-height: 0; padding: 100px 20px; }.transformation-copy { display: block; }.dashboard-frame { transform: none; }.frame-callout { display: none; }
   .platform-resources { padding: 100px 20px; gap: 55px; }
