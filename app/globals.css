@@ -193,9 +193,16 @@ p { text-wrap: pretty; }
 .ai-evolution h2 { margin: 0; color: var(--navy-deep); font-size: clamp(2.6rem, 4.5vw, 4.7rem); line-height: .98; }
 .ai-evolution h2 span { color: var(--violet); }
 .ai-evolution__timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.ai-evolution__timeline article { min-height: 210px; padding: 28px; display: flex; flex-direction: column; background: color-mix(in oklch, white 96%, var(--cloud)); border: 1px solid var(--line); border-radius: 18px; transition: border-color .3s ease, box-shadow .3s ease, transform .3s var(--ease); }
+.ai-evolution__timeline::before { content: ""; position: absolute; z-index: 0; top: 24px; left: 7%; right: 7%; height: 1px; background: color-mix(in oklch, var(--violet) 28%, var(--line)); }
+.ai-evolution__timeline article { position: relative; z-index: 1; min-height: 230px; margin-top: 48px; padding: 30px 28px 28px; display: flex; flex-direction: column; background: color-mix(in oklch, white 96%, var(--cloud)); border: 1px solid var(--line); border-radius: 18px; overflow: visible; transition: border-color .3s ease, box-shadow .3s ease, transform .3s var(--ease); }
+.ai-evolution__timeline article::before { position: absolute; top: -64px; left: 50%; width: 48px; height: 48px; display: grid; place-items: center; color: white; background: var(--navy-deep); border: 6px solid white; border-radius: 50%; box-shadow: 0 0 0 1px color-mix(in oklch, var(--violet) 28%, var(--line)); translate: -50% 0; font: 650 .6875rem "Lufga", var(--font-display), sans-serif; }
+.ai-evolution__timeline article:nth-child(1)::before { content: "01"; }
+.ai-evolution__timeline article:nth-child(2)::before { content: "02"; }
+.ai-evolution__timeline article:nth-child(3)::before { content: "03"; }
+.ai-evolution__timeline article:nth-child(4)::before { content: "04"; background: var(--violet); }
+.ai-evolution__timeline article::after { content: ""; position: absolute; top: 0; left: 28px; right: 28px; height: 3px; background: var(--violet); border-radius: 0 0 999px 999px; opacity: .72; }
 .ai-evolution__timeline article:hover { border-color: color-mix(in oklch, var(--violet) 35%, var(--line)); box-shadow: 0 22px 55px color-mix(in oklch, var(--navy) 9%, transparent); transform: translateY(-6px); }
-.ai-evolution__timeline article > span { color: var(--violet); font: 650 .8125rem "Lufga", var(--font-display), sans-serif; }
+.ai-evolution__timeline article > span { width: max-content; padding: 6px 9px; color: var(--violet); background: color-mix(in oklch, var(--violet) 7%, white); border-radius: 999px; font: 650 .75rem "Lufga", var(--font-display), sans-serif; }
 .ai-evolution__timeline h3 { margin: 20px 0 12px; color: var(--navy-deep); font-size: 1.28rem; line-height: 1.1; }
 .ai-evolution__timeline p { margin: 0; color: var(--muted); font-size: .875rem; line-height: 1.65; }
 .ai-evolution__cta { position: relative; margin-top: 20px; padding: 42px 30px; display: flex; align-items: center; justify-content: space-between; gap: 32px; color: white; background: #090a10; border: 1px solid var(--violet); border-radius: 18px; box-shadow: 0 18px 50px color-mix(in oklch, var(--violet) 13%, transparent); }
@@ -381,7 +388,9 @@ footer a:hover { color: var(--violet-bright); }
   .ai-evolution__head { margin-bottom: 50px; }
   .ai-evolution h2 { font-size: clamp(2.45rem, 11vw, 3.5rem); }
   .ai-evolution__timeline { grid-template-columns: 1fr; }
-  .ai-evolution__timeline article { min-height: 0; }
+  .ai-evolution__timeline::before { top: 0; bottom: 0; left: 23px; right: auto; width: 1px; height: auto; }
+  .ai-evolution__timeline article { min-height: 0; margin: 0 0 16px 52px; }
+  .ai-evolution__timeline article::before { top: 24px; left: -53px; width: 40px; height: 40px; border-width: 5px; translate: 0 0; }
   .ai-evolution__cta { padding: 30px 24px; align-items: stretch; flex-direction: column; }
   .ai-evolution__cta .button { width: 100%; }
   .product-tour { padding-top: 100px; }.tour-intro { margin-bottom: 70px; }.tour-track { height: auto; }.tour-sticky { position: static; height: auto; padding: 90px 20px; }.tour-copy { min-height: 360px; }.tour-screen { aspect-ratio: 1.75; }.tour-screen img { object-fit: cover; }

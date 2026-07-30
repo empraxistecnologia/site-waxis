@@ -316,31 +316,31 @@ export default function Home() {
 
         <section className="ai-evolution" aria-labelledby="ai-evolution-title">
           <div className="ai-evolution__head">
-            <span className="ai-evolution__badge"><i aria-hidden="true">◎</i> Evolução contínua</span>
+            <span className="ai-evolution__badge"><i aria-hidden="true">◎</i> Contexto que se acumula</span>
             <h2 id="ai-evolution-title">
-              A <span>inteligência comercial</span> que fica melhor quanto mais trabalha.
+              A <span>inteligência comercial</span> que fica mais valiosa a cada conversa.
             </h2>
           </div>
           <div className="ai-evolution__timeline">
             <article>
               <span>Mês 1</span>
-              <h3>Aprende sua operação</h3>
-              <p>Conecta canais, históricos e etapas para entender como sua equipe atende e vende.</p>
+              <h3>Entende o processo</h3>
+              <p>Organiza canais, históricos, etapas e responsáveis para enxergar como sua equipe atende e vende.</p>
             </article>
             <article>
               <span>Mês 3</span>
-              <h3>Identifica o que converte</h3>
+              <h3>Reconhece o que converte</h3>
               <p>Reconhece padrões nas conversas, objeções recorrentes e argumentos que fazem o negócio avançar.</p>
             </article>
             <article>
               <span>Mês 4</span>
-              <h3>Alerta riscos de perda</h3>
+              <h3>Age antes da perda</h3>
               <p>Sinaliza contatos parados, SLA em risco e oportunidades que podem esfriar antes do próximo passo.</p>
             </article>
             <article>
               <span>Mês 6</span>
-              <h3>Orienta as prioridades</h3>
-              <p>Usa o contexto acumulado para mostrar à equipe onde agir primeiro e o que exige atenção.</p>
+              <h3>Orienta a próxima decisão</h3>
+              <p>Transforma o contexto acumulado em prioridades claras para a equipe agir no momento certo.</p>
             </article>
           </div>
           <div className="ai-evolution__cta">
