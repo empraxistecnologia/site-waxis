@@ -31,17 +31,47 @@ const worker = {
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
-      return handleImageOptimization(request, {
+      const imageResponse = await handleImageOptimization(request, {
         fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
         transformImage: async (body, { width, format, quality }) => {
           const result = await env.IMAGES.input(body).transform(width > 0 ? { width } : {}).output({ format, quality });
           return result.response();
         },
       }, allowedWidths);
+      return withSecurityHeaders(imageResponse);
     }
 
-    return handler.fetch(request, env, ctx);
+    const response = await handler.fetch(request, env, ctx);
+    return withSecurityHeaders(response);
   },
 };
 
 export default worker;
+
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://app.waxis.com.br https://www.googletagmanager.com https://connect.facebook.net",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https://app.waxis.com.br https://www.facebook.com https://www.google-analytics.com https://*.googleusercontent.com",
+  "font-src 'self' data:",
+  "connect-src 'self' https://app.waxis.com.br wss://app.waxis.com.br https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net",
+  "frame-src https://cal.com https://*.cal.com https://calendly.com https://*.calendly.com https://calendar.google.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+function withSecurityHeaders(response: Response) {
+  const secured = new Response(response.body, response);
+  secured.headers.set("Content-Security-Policy", contentSecurityPolicy);
+  secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  secured.headers.set("X-Content-Type-Options", "nosniff");
+  secured.headers.set("X-Frame-Options", "DENY");
+  secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()");
+  secured.headers.set("Strict-Transport-Security", "max-age=31536000");
+  secured.headers.set("Cross-Origin-Opener-Policy", "same-origin");
+  secured.headers.set("X-Permitted-Cross-Domain-Policies", "none");
+  return secured;
+}

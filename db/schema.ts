@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const siteSettings = sqliteTable("site_settings", {
   key: text("key").primaryKey(),
@@ -35,3 +35,21 @@ export const analyticsEvents = sqliteTable("analytics_events", {
   index("analytics_event_type_idx").on(table.eventType),
   index("analytics_session_idx").on(table.sessionId),
 ]);
+
+export const securityRateLimits = sqliteTable("security_rate_limits", {
+  key: text("key").notNull(),
+  windowStart: integer("window_start").notNull(),
+  count: integer("count").notNull().default(0),
+}, (table) => [primaryKey({ columns: [table.key, table.windowStart] })]);
+
+export const securityAuditLog = sqliteTable("security_audit_log", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  actor: text("actor").notNull(),
+  action: text("action").notNull(),
+  entity: text("entity").notNull(),
+  entityId: text("entity_id").notNull(),
+  beforeHash: text("before_hash"),
+  afterHash: text("after_hash"),
+  ipHash: text("ip_hash"),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+}, (table) => [index("security_audit_created_idx").on(table.createdAt)]);

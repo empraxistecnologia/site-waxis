@@ -63,6 +63,9 @@ export async function ensureDatabase() {
     db.prepare("CREATE INDEX IF NOT EXISTS analytics_created_at_idx ON analytics_events(created_at)"),
     db.prepare("CREATE INDEX IF NOT EXISTS analytics_event_type_idx ON analytics_events(event_type)"),
     db.prepare("CREATE INDEX IF NOT EXISTS analytics_session_idx ON analytics_events(session_id)"),
+    db.prepare("CREATE TABLE IF NOT EXISTS security_rate_limits (key TEXT NOT NULL, window_start INTEGER NOT NULL, count INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (key, window_start))"),
+    db.prepare("CREATE TABLE IF NOT EXISTS security_audit_log (id INTEGER PRIMARY KEY AUTOINCREMENT, actor TEXT NOT NULL, action TEXT NOT NULL, entity TEXT NOT NULL, entity_id TEXT NOT NULL, before_hash TEXT, after_hash TEXT, ip_hash TEXT, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)"),
+    db.prepare("CREATE INDEX IF NOT EXISTS security_audit_created_idx ON security_audit_log(created_at)"),
   ]);
   return db;
 }

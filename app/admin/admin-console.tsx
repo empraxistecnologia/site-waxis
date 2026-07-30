@@ -85,7 +85,7 @@ export function AdminConsole({ user, signOutPath }: { user: ChatGPTUser; signOut
 
   const saveConfig = async () => {
     setSaving(true);
-    const response = await fetch("/api/admin/settings", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(config) });
+    const response = await fetch("/api/admin/settings", { method: "PUT", headers: { "Content-Type": "application/json", "X-Waxis-Admin-Action": "1" }, body: JSON.stringify(config) });
     setSaving(false);
     setNotice(response.ok ? "Configurações publicadas." : "Não foi possível salvar.");
   };
@@ -107,7 +107,7 @@ export function AdminConsole({ user, signOutPath }: { user: ChatGPTUser; signOut
   const saveDocument = async (status: "draft" | "published") => {
     setSaving(true);
     const response = await fetch("/api/admin/documents", {
-      method: "PUT", headers: { "Content-Type": "application/json" },
+      method: "PUT", headers: { "Content-Type": "application/json", "X-Waxis-Admin-Action": "1" },
       body: JSON.stringify({ ...currentDocument, status }),
     });
     setSaving(false);
