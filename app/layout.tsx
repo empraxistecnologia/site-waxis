@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Urbanist } from "next/font/google";
 import { headers } from "next/headers";
+import Script from "next/script";
 import "./globals.css";
 
 const display = Urbanist({ variable: "--font-display", subsets: ["latin"], display: "swap" });
@@ -33,5 +34,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body className={`${display.variable} ${body.variable}`}>{children}</body></html>;
+  return (
+    <html lang="pt-BR">
+      <body className={`${display.variable} ${body.variable}`}>
+        {children}
+        <Script
+          src="https://app.waxis.com.br/webchat-widget.js"
+          data-token="6a53b9818019bf834086ef612871347e"
+          strategy="afterInteractive"
+        />
+      </body>
+    </html>
+  );
 }
