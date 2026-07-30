@@ -565,9 +565,9 @@ export default async function Home() {
         <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link><button type="button" className="footer-cookie-link" data-cookie-settings>Gerenciar cookies</button></div>
         <div className="footer-bottom">
           <span className="footer-company">
-            © 2026 <strong>Waxis</strong>. Uma marca do Grupo{" "}
+            © 2026 <strong>Waxis</strong>. Uma marca do{" "}
             <a href="https://empraxis.com.br" target="_blank" rel="noopener noreferrer">
-              <strong>Empraxis</strong>
+              <strong>Grupo Empraxis</strong>
             </a>
             . Todos os direitos reservados.
             <br />
