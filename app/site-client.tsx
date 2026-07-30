@@ -17,7 +17,7 @@ export function Experience() {
     const tour = document.querySelector<HTMLElement>("[data-tour]");
     const copies = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-copy]"));
     const images = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-image]"));
-    const dots = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-dot]"));
+    const tourCurrent = document.querySelector<HTMLElement>("[data-tour-current]");
     const particleCleanups: Array<() => void> = [];
 
     if (!reduce) {
@@ -312,10 +312,10 @@ export function Experience() {
         const range = Math.max(1, tour.offsetHeight - innerHeight);
         const p = Math.min(0.999, Math.max(0, -rect.top / range));
         const active = Math.min(copies.length - 1, Math.floor(p * copies.length));
-        [...copies, ...images, ...dots].forEach((el) => el.classList.remove("is-active"));
+        [...copies, ...images].forEach((el) => el.classList.remove("is-active"));
         copies[active]?.classList.add("is-active");
         images[active]?.classList.add("is-active");
-        dots[active]?.classList.add("is-active");
+        if (tourCurrent) tourCurrent.textContent = String(active + 1).padStart(2, "0");
       }
       ticking = false;
     };

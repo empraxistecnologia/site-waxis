@@ -346,8 +346,8 @@ export default function Home() {
                     <Image unoptimized key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-image src={chapter.image} alt={chapter.alt} width={chapter.width} height={chapter.height} />
                   ))}
                 </div>
-                <div className="tour-dots" aria-label="Progresso das telas da plataforma">
-                  {productChapters.map((chapter, index) => <i key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-dot />)}
+                <div className="tour-counter" aria-label="Progresso das telas da plataforma">
+                  <strong data-tour-current>01</strong><span>de 13 telas</span>
                 </div>
               </div>
             </div>
