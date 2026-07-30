@@ -124,8 +124,10 @@ p { text-wrap: pretty; }
 .frame-callout--lead { bottom: 8%; left: -6%; transform: translateX(calc((1 - var(--scene-progress)) * -40px)); }
 
 .control { padding: 150px max(24px, calc((100vw - 1180px)/2)); background: var(--cloud); }
-.control-head { display: grid; grid-template-columns: .55fr 1.45fr; gap: 40px; margin-bottom: 90px; }
+.control-head { display: grid; grid-template-columns: .3fr 1.7fr; gap: 40px; margin-bottom: 90px; }
 .control-head h2, .tour-intro h2, .implementation-copy h2, .faq h2 { margin: 0; font-size: clamp(2.45rem, 4.2vw, 4.35rem); line-height: 1; color: var(--navy-deep); }
+.control-head h2 { font-size: clamp(2.35rem, 3.75vw, 3.9rem); }
+.control-head h2 span { display: block; white-space: nowrap; }
 .control-list { border-top: 1px solid var(--line); }
 .control-list article { display: grid; grid-template-columns: 90px .7fr 1.1fr; gap: 30px; align-items: start; padding: 35px 0; border-bottom: 1px solid var(--line); }
 .control-list article > span { color: var(--violet); font-size: 11px; font-weight: 800; }
@@ -258,6 +260,7 @@ footer a:hover { color: var(--violet-bright); }
   .nav-shell nav, .nav-actions { display: none; }.menu-button { display: block; }
   .menu-open .nav-shell { height: auto; padding-bottom: 22px; flex-wrap: wrap; }.menu-open .nav-shell nav { order: 3; width: 100%; display: flex; flex-direction: column; gap: 18px; padding-top: 22px; }
   .hero { grid-template-columns: 1fr; padding-top: 150px; }.hero-stage { min-height: 500px; max-width: 620px; width: 100%; margin: auto; }
+  .control-head { grid-template-columns: .15fr 1.85fr; gap: 24px; }.control-head h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
   .transformation-sticky, .tour-sticky { grid-template-columns: 1fr; gap: 35px; }.transformation-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }.transformation-copy h2 { grid-column: 1 / -1; }.progress-rail { display: none; }.dashboard-frame { max-width: 750px; }
   .tour-copy { min-height: 260px; }.tour-screen { max-height: 46vh; }
   .platform-resources { grid-template-columns: 1fr; gap: 65px; }.resources-heading { position: relative !important; top: auto; }.resources-link { grid-column: 1; }
@@ -274,6 +277,7 @@ footer a:hover { color: var(--violet-bright); }
   .platform-resources { padding: 100px 20px; gap: 55px; }
   .resources-list article { grid-template-columns: 1fr; gap: 9px; padding: 25px 0; }.resources-list article::after { display: none; }.resources-list article:hover { transform: none; }.resources-list p { margin-right: 0; font-size: .9375rem; }
   .control, .ecosystem, .implementation, .faq { padding: 100px 20px; }.control-head, .tour-intro, .implementation-copy { display: block; }.control-head h2, .tour-intro h2 { margin-top: 25px; }.control-list article { grid-template-columns: 45px 1fr; }.control-list p { grid-column: 2; }
+  .control-head h2 span { white-space: normal; }
   .product-tour { padding-top: 100px; }.tour-intro { margin-bottom: 70px; }.tour-track { height: auto; }.tour-sticky { position: static; height: auto; padding: 90px 20px; }.tour-copy { min-height: 360px; }.tour-screen { aspect-ratio: 16/11; }.tour-screen img { object-fit: contain; }
   .integration-network { height: auto; margin: 55px auto 35px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
   .network-lines, .network-core-rings { display: none; }

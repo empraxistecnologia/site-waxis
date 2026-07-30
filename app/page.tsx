@@ -187,7 +187,7 @@ export default function Home() {
         <section className="control">
           <div className="control-head">
             <p className="section-label">Controle que atravessa a empresa</p>
-            <h2>O cliente troca de atendente.<br />A história não começa de novo.</h2>
+            <h2><span>O cliente troca de atendente.</span><span>A história não começa de novo.</span></h2>
           </div>
           <div className="control-list">
             <article><span>01</span><h3>Histórico contínuo</h3><p>Conversas, dados e decisões acompanham o cliente — não o aparelho ou o funcionário.</p></article>
