@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { SiMeta } from "react-icons/si";
 import { CookieBanner, Experience } from "./site-client";
 
@@ -503,6 +504,12 @@ export default function Home() {
             <span>Gestão inteligente de atendimento.</span>
             <span>Conversas em movimento, oportunidades sob controle.</span>
           </p>
+          <div className="footer-socials" aria-label="Redes sociais da Waxis">
+            <span aria-label="Facebook" title="Facebook"><FaFacebookF aria-hidden="true" /></span>
+            <span aria-label="LinkedIn" title="LinkedIn"><FaLinkedinIn aria-hidden="true" /></span>
+            <span aria-label="Instagram" title="Instagram"><FaInstagram aria-hidden="true" /></span>
+            <span aria-label="X" title="X"><FaXTwitter aria-hidden="true" /></span>
+          </div>
         </div>
         <div><strong>Plataforma</strong><a href="#plataforma">Inteligência comercial</a><a href="#plataforma">CRM e funil</a><a href="#implantacao">Implantação</a></div>
         <div><strong>Empresa</strong><a href="#demonstracao">Demonstração</a><a href="#teste">Teste grátis</a><a href="mailto:empraxisassessoria@gmail.com">Contato</a></div>
