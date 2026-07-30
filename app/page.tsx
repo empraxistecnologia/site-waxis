@@ -344,7 +344,10 @@ export default function Home() {
             </article>
           </div>
           <div className="ai-evolution__cta">
-            <strong>Comece hoje. Daqui a 6 meses você vai desejar ter começado agora.</strong>
+            <strong>
+              Comece hoje. Daqui a 6 meses<br />
+              você vai desejar ter começado agora.
+            </strong>
             <a className="button" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">
               Iniciar teste grátis
             </a>
