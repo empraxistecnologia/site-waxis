@@ -43,6 +43,22 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           data-token="6a53b9818019bf834086ef612871347e"
           strategy="afterInteractive"
         />
+        <Script id="waxis-webchat-bubble-icon" strategy="afterInteractive">
+          {`
+            (() => {
+              const bubbleIcon = '<svg data-waxis-bubble-icon="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg>';
+              const applyBubbleIcon = () => {
+                const button = document.getElementById('webchat-bubble');
+                if (button && !button.querySelector('[data-waxis-bubble-icon]')) {
+                  button.innerHTML = bubbleIcon;
+                }
+              };
+              const observer = new MutationObserver(applyBubbleIcon);
+              observer.observe(document.body, { childList: true, subtree: true });
+              applyBubbleIcon();
+            })();
+          `}
+        </Script>
       </body>
     </html>
   );
