@@ -314,6 +314,43 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="ai-evolution" aria-labelledby="ai-evolution-title">
+          <div className="ai-evolution__head">
+            <span className="ai-evolution__badge"><i aria-hidden="true">◎</i> Evolução contínua</span>
+            <h2 id="ai-evolution-title">
+              A <span>inteligência comercial</span> que fica melhor quanto mais trabalha.
+            </h2>
+          </div>
+          <div className="ai-evolution__timeline">
+            <article>
+              <span>Mês 1</span>
+              <h3>Aprende sua operação</h3>
+              <p>Conecta canais, históricos e etapas para entender como sua equipe atende e vende.</p>
+            </article>
+            <article>
+              <span>Mês 3</span>
+              <h3>Identifica o que converte</h3>
+              <p>Reconhece padrões nas conversas, objeções recorrentes e argumentos que fazem o negócio avançar.</p>
+            </article>
+            <article>
+              <span>Mês 4</span>
+              <h3>Alerta riscos de perda</h3>
+              <p>Sinaliza contatos parados, SLA em risco e oportunidades que podem esfriar antes do próximo passo.</p>
+            </article>
+            <article>
+              <span>Mês 6</span>
+              <h3>Orienta as prioridades</h3>
+              <p>Usa o contexto acumulado para mostrar à equipe onde agir primeiro e o que exige atenção.</p>
+            </article>
+          </div>
+          <div className="ai-evolution__cta">
+            <strong>Comece hoje. Daqui a 6 meses você vai desejar ter começado agora.</strong>
+            <a className="button" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">
+              Iniciar teste grátis
+            </a>
+          </div>
+        </section>
+
         <section className="platform-resources" id="recursos">
           <canvas className="particle-field" data-particle-field data-theme="light" aria-hidden="true" />
           <div className="resources-heading">
