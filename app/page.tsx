@@ -1,5 +1,20 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
+import {
+  SiAnthropic,
+  SiElevenlabs,
+  SiFacebook,
+  SiGoogle,
+  SiInstagram,
+  SiMercadopago,
+  SiMeta,
+  SiShopify,
+  SiStripe,
+  SiTelegram,
+  SiWhatsapp,
+  SiWoocommerce,
+} from "react-icons/si";
+import { FaRobot } from "react-icons/fa6";
 import { CookieBanner, Experience } from "./site-client";
 
 const productChapters = [
@@ -8,6 +23,8 @@ const productChapters = [
     title: "A BrAIn encontra o que exige atenção.",
     body: "A inteligência comercial lê os sinais da operação, classifica oportunidades e ajuda sua equipe a priorizar quem está pronto para avançar.",
     image: "/assets/prints/03-brain-inteligencia-comercial.png",
+    width: 1904,
+    height: 902,
     alt: "Tela real da BrAIn com indicadores de inteligência comercial",
   },
   {
@@ -15,6 +32,8 @@ const productChapters = [
     title: "Cada oportunidade tem um próximo passo.",
     body: "O funil visual reúne histórico, responsável, valor e etapa. Follow-ups deixam de depender da memória de quem atendeu.",
     image: "/assets/prints/04-kanban-funil-comercial.png",
+    width: 1933,
+    height: 1024,
     alt: "Funil Kanban real da Waxis com oportunidades por etapa",
   },
   {
@@ -22,6 +41,8 @@ const productChapters = [
     title: "Sua operação também cria demanda.",
     body: "Encontre empresas por Google ou CNPJ, organize listas e leve novos contatos para o mesmo fluxo comercial que sua equipe já acompanha.",
     image: "/assets/prints/07-prospeccao.png",
+    width: 1920,
+    height: 911,
     alt: "Tela real de prospecção de empresas da Waxis",
   },
   {
@@ -29,6 +50,8 @@ const productChapters = [
     title: "Campanhas que continuam a conversa.",
     body: "WhatsApp, SMS, e-mail e voz trabalham a sua base com segmentação, contexto e acompanhamento dentro da mesma operação.",
     image: "/assets/prints/05-campanhas-multicanal.png",
+    width: 1920,
+    height: 911,
     alt: "Tela real de campanhas multicanal da Waxis",
   },
 ];
@@ -48,7 +71,7 @@ export default function Home() {
       <Experience />
       <header className="nav-shell">
         <Link href="/" className="brand" aria-label="Waxis — início">
-          <Image src="/assets/logos/logo-waxis.png" alt="Waxis" width={160} height={40} priority />
+          <Image unoptimized src="/assets/logos/logo-waxis.png" alt="Waxis" width={160} height={40} priority />
         </Link>
         <nav aria-label="Navegação principal">
           <a href="#transformacao">Por que Waxis</a>
@@ -61,6 +84,7 @@ export default function Home() {
           <a className="button button--small" href="#demonstracao">Agendar demonstração</a>
         </div>
         <button className="menu-button" data-menu-button aria-label="Abrir menu" aria-expanded="false">
+          <Image unoptimized src="/assets/logos/icon-x.png" alt="" width={28} height={28} />
           <span /><span />
         </button>
       </header>
@@ -70,7 +94,7 @@ export default function Home() {
           <div className="hero-copy">
             <p className="hero-kicker">Gestão inteligente de atendimento</p>
             <h1 id="hero-title">
-              Nenhuma conversa perdida.<br />
+              Nenhuma conversa perdida.{" "}
               <span>Nenhuma oportunidade esquecida.</span>
             </h1>
             <p className="hero-lede">
@@ -82,7 +106,7 @@ export default function Home() {
               <a className="button button--outline" href="#teste">Começar teste grátis</a>
             </div>
             <div className="trust-line" aria-label="Credenciais e benefícios">
-              <span className="meta-mark">M</span>
+              <span className="meta-mark"><SiMeta aria-hidden="true" /></span>
               <span><strong>Meta Tech Provider</strong><small>Tecnologia preparada para operações profissionais</small></span>
             </div>
           </div>
@@ -90,7 +114,7 @@ export default function Home() {
           <div className="hero-stage" data-hero-stage aria-label="Representação animada da operação Waxis">
             <div className="orbit orbit--one" />
             <div className="orbit orbit--two" />
-            <Image className="hero-x" src="/assets/logos/icon-x.png" alt="" width={260} height={260} priority />
+            <Image unoptimized className="hero-x" src="/assets/logos/icon-x.png" alt="" width={260} height={260} priority />
             <div className="conversation conversation--one">
               <span className="channel-dot whatsapp" /> Novo orçamento
               <small>Sem responsável · há 18 min</small>
@@ -112,13 +136,16 @@ export default function Home() {
           <a className="scroll-cue" href="#transformacao"><span />Role para organizar a operação</a>
         </section>
 
-        <section className="reality">
-          <p>Quando o volume cresce, a perda raramente faz barulho.</p>
+        <section className="reality" data-reality>
+          <div className="reality-intro">
+            <p>O problema não é o volume.</p>
+            <h2>É o que se perde<br />dentro dele.</h2>
+          </div>
           <div className="reality-lines">
-            <span>O cliente repete tudo.</span>
-            <span>O retorno fica para depois.</span>
-            <span>O histórico está em outro celular.</span>
-            <span>E a oportunidade esfria.</span>
+            <span data-reality-line>O cliente precisa repetir tudo.</span>
+            <span data-reality-line>O retorno importante fica para depois.</span>
+            <span data-reality-line>O histórico está preso em outro celular.</span>
+            <span data-reality-line>E uma oportunidade real esfria sem aviso.</span>
           </div>
         </section>
 
@@ -126,13 +153,13 @@ export default function Home() {
           <div className="transformation-sticky">
             <div className="transformation-copy">
               <p>Do caos ao controle</p>
-              <h2>Sua equipe atende.<br />A Waxis mantém<br />a operação em movimento.</h2>
+              <h2>Sua equipe atende. A Waxis mantém a operação em movimento.</h2>
               <p className="transformation-note">Conforme a operação se organiza, cada conversa ganha contexto, responsável e próximo passo.</p>
               <div className="progress-rail"><span data-transform-progress /></div>
             </div>
             <div className="dashboard-frame" data-dashboard-frame>
               <div className="frame-bar"><i /><i /><i /><span>Operação Waxis</span></div>
-              <Image src="/assets/prints/02-dashboard-inicio.png" alt="Dashboard real da Waxis com visão da operação" width={1600} height={900} />
+              <Image unoptimized src="/assets/prints/02-dashboard-inicio.png" alt="Dashboard real da Waxis com visão da operação" width={1920} height={911} />
               <div className="frame-callout frame-callout--sla"><small>SLA em risco</small><strong>3 conversas</strong></div>
               <div className="frame-callout frame-callout--lead"><small>Lead quente</small><strong>Próximo passo sugerido</strong></div>
             </div>
@@ -173,7 +200,7 @@ export default function Home() {
               </div>
               <div className="tour-screen">
                 {productChapters.map((chapter, index) => (
-                  <Image key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-image src={chapter.image} alt={chapter.alt} width={1600} height={900} />
+                  <Image unoptimized key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-image src={chapter.image} alt={chapter.alt} width={chapter.width} height={chapter.height} />
                 ))}
               </div>
             </div>
@@ -185,13 +212,31 @@ export default function Home() {
             <p className="section-label">Uma plataforma, menos remendos</p>
             <h2>Atendimento é só o começo.</h2>
           </div>
-          <div className="ecosystem-flow">
-            <span>WhatsApp</span><span>Instagram</span><span>Facebook</span><span>Webchat</span>
-            <strong><Image src="/assets/logos/icon-x.png" alt="" width={82} height={82} />Waxis</strong>
-            <span>CRM</span><span>Automações</span><span>Campanhas</span><span>Integrações</span>
+          <div className="integration-orbit" aria-label="Ecossistema de integrações conectado à Waxis">
+            <div className="orbit-ring orbit-ring--outer" />
+            <div className="orbit-ring orbit-ring--inner" />
+            <div className="integration-hub">
+              <Image unoptimized src="/assets/logos/icon-x.png" alt="Waxis" width={112} height={112} />
+              <strong>Waxis</strong>
+              <small>Uma operação conectada</small>
+            </div>
+            <div className="integration-node"><SiWhatsapp /><span>WhatsApp</span></div>
+            <div className="integration-node"><SiInstagram /><span>Instagram</span></div>
+            <div className="integration-node"><SiMeta /><span>Meta</span></div>
+            <div className="integration-node"><SiFacebook /><span>Facebook</span></div>
+            <div className="integration-node"><SiGoogle /><span>Google</span></div>
+            <div className="integration-node"><SiMercadopago /><span>Mercado Pago</span></div>
+            <div className="integration-node integration-node--word"><b>∞</b><span>InfinitePay</span></div>
+            <div className="integration-node"><SiStripe /><span>Stripe</span></div>
+            <div className="integration-node"><FaRobot /><span>OpenAI</span></div>
+            <div className="integration-node"><SiAnthropic /><span>Claude</span></div>
+            <div className="integration-node"><SiElevenlabs /><span>ElevenLabs</span></div>
+            <div className="integration-node"><SiShopify /><span>Shopify</span></div>
+            <div className="integration-node"><SiWoocommerce /><span>WooCommerce</span></div>
+            <div className="integration-node"><SiTelegram /><span>Telegram</span></div>
           </div>
           <div className="ecosystem-proof">
-            <Image src="/assets/prints/08-ecossistema-de-apps.png" alt="Ecossistema real de aplicativos Waxis" width={1600} height={900} />
+            <Image unoptimized src="/assets/prints/08-ecossistema-de-apps.png" alt="Ecossistema real de aplicativos Waxis" width={1920} height={947} />
           </div>
         </section>
 
@@ -218,7 +263,7 @@ export default function Home() {
         </section>
 
         <section className="meta-section">
-          <div className="meta-emblem">M</div>
+          <div className="meta-emblem"><SiMeta aria-hidden="true" /></div>
           <div>
             <p className="section-label">Meta Tech Provider</p>
             <h2>Uma operação profissional pede uma conexão profissional.</h2>
@@ -236,7 +281,7 @@ export default function Home() {
         </section>
 
         <section className="final-cta" id="demonstracao">
-          <Image src="/assets/logos/icon-x.png" alt="" width={520} height={520} />
+          <Image unoptimized src="/assets/logos/icon-x.png" alt="" width={520} height={520} />
           <p className="section-label">Sua operação já está conversando</p>
           <h2>Agora ela precisa<br />se mover como uma só.</h2>
           <p>Conheça a Waxis aplicada ao volume, à equipe e aos processos da sua empresa.</p>
@@ -249,7 +294,7 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand">
-          <Image src="/assets/logos/logo-waxis-branco.png" alt="Waxis" width={160} height={40} />
+          <Image unoptimized src="/assets/logos/logo-waxis-branco.png" alt="Waxis" width={160} height={40} />
           <p>Gestão inteligente de atendimento.<br />Conversas em movimento, oportunidades sob controle.</p>
         </div>
         <div><strong>Plataforma</strong><a href="#plataforma">Inteligência comercial</a><a href="#plataforma">CRM e funil</a><a href="#implantacao">Implantação</a></div>
@@ -270,3 +315,5 @@ export default function Home() {
     </>
   );
 }
+
+

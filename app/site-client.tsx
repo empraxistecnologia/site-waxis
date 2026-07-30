@@ -10,6 +10,8 @@ export function Experience() {
     const menu = document.querySelector<HTMLElement>("[data-menu-button]");
     const stage = document.querySelector<HTMLElement>("[data-hero-stage]");
     const transformation = document.querySelector<HTMLElement>(".transformation");
+    const reality = document.querySelector<HTMLElement>("[data-reality]");
+    const realityLines = Array.from(document.querySelectorAll<HTMLElement>("[data-reality-line]"));
     const progress = document.querySelector<HTMLElement>("[data-transform-progress]");
     const frame = document.querySelector<HTMLElement>("[data-dashboard-frame]");
     const tour = document.querySelector<HTMLElement>("[data-tour]");
@@ -36,6 +38,12 @@ export function Experience() {
     let ticking = false;
     const render = () => {
       nav?.classList.toggle("is-scrolled", window.scrollY > 24);
+      if (reality && realityLines.length) {
+        const rect = reality.getBoundingClientRect();
+        const p = Math.min(0.999, Math.max(0, (innerHeight * 0.72 - rect.top) / Math.max(1, rect.height * 0.72)));
+        const active = Math.min(realityLines.length - 1, Math.floor(p * realityLines.length));
+        realityLines.forEach((line, index) => line.classList.toggle("is-active", index <= active));
+      }
       if (transformation && progress && frame) {
         const rect = transformation.getBoundingClientRect();
         const range = Math.max(1, transformation.offsetHeight - innerHeight);

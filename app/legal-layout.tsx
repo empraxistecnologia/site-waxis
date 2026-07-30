@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -7,7 +7,7 @@ export function LegalLayout({ title, eyebrow, children }: { title: string; eyebr
     <main className="legal-page">
       <header className="nav-shell legal-nav">
         <Link href="/" className="brand" aria-label="Voltar para a home">
-          <Image src="/assets/logos/logo-waxis.png" alt="Waxis" width={160} height={40} />
+          <Image unoptimized src="/assets/logos/logo-waxis.png" alt="Waxis" width={160} height={40} />
         </Link>
         <Link className="button button--small" href="/">Voltar para o site</Link>
       </header>
@@ -21,3 +21,5 @@ export function LegalLayout({ title, eyebrow, children }: { title: string; eyebr
     </main>
   );
 }
+
+
