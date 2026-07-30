@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: "Nenhuma conversa perdida. Nenhuma oportunidade esquecida.",
       type: "website",
       locale: "pt_BR",
-      images: [{ url: `${origin}/og.png`, width: 1734, height: 907, alt: "Waxis — Nenhuma conversa perdida. Nenhuma oportunidade esquecida." }],
+      images: [{ url: `${origin}/og.png`, width: 1200, height: 630, alt: "Waxis — Gestão Inteligente de Atendimento." }],
     },
     twitter: {
       card: "summary_large_image",

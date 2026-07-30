@@ -48,7 +48,7 @@ export default function Home() {
       <Experience />
       <header className="nav-shell">
         <Link href="/" className="brand" aria-label="Waxis — início">
-          <Image src="/assets/logos/logo-waxis.png" alt="Waxis" width={148} height={44} priority />
+          <Image src="/assets/logos/logo-waxis.png" alt="Waxis" width={160} height={40} priority />
         </Link>
         <nav aria-label="Navegação principal">
           <a href="#transformacao">Por que Waxis</a>
@@ -249,7 +249,7 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand">
-          <Image src="/assets/logos/logo-waxis-branco.png" alt="Waxis" width={162} height={48} />
+          <Image src="/assets/logos/logo-waxis-branco.png" alt="Waxis" width={160} height={40} />
           <p>Gestão inteligente de atendimento.<br />Conversas em movimento, oportunidades sob controle.</p>
         </div>
         <div><strong>Plataforma</strong><a href="#plataforma">Inteligência comercial</a><a href="#plataforma">CRM e funil</a><a href="#implantacao">Implantação</a></div>
