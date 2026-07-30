@@ -565,13 +565,13 @@ export default async function Home() {
         <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link><button type="button" className="footer-cookie-link" data-cookie-settings>Gerenciar cookies</button></div>
         <div className="footer-bottom">
           <span className="footer-company">
-            © 2026 <strong>Waxis</strong> é uma empresa do Grupo{" "}
+            © 2026 <strong>Waxis</strong>. Uma marca do Grupo{" "}
             <a href="https://empraxis.com.br" target="_blank" rel="noopener noreferrer">
               <strong>Empraxis</strong>
             </a>
-            .
+            . Todos os direitos reservados.
             <br />
-            Todos os direitos reservados.
+            Empraxis Marketing e Assessoria LTDA — CNPJ: 35.730.673/0001-81
           </span>
           <span className="footer-copyright">
             Conteúdo protegido pela{" "}
