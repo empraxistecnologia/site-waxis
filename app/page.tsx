@@ -564,13 +564,21 @@ export default async function Home() {
         <div><strong>Empresa</strong><a data-cal-trigger href={demonstrationHref}>Demonstração</a><a href={config.testUrl} target="_blank" rel="noopener noreferrer">Teste grátis</a><a href={`mailto:${config.contactEmail}`}>Contato</a></div>
         <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link><button type="button" className="footer-cookie-link" data-cookie-settings>Gerenciar cookies</button></div>
         <div className="footer-bottom">
-          <span>© 2026 Empraxis Marketing e Assessoria. Todos os direitos reservados.</span>
-          <span>
+          <span className="footer-company">
+            © 2026 <strong>Waxis</strong> é uma empresa do Grupo{" "}
+            <a href="https://empraxis.com.br" target="_blank" rel="noopener noreferrer">
+              <strong>Empraxis Marketing e Assessoria</strong>
+            </a>
+            . Todos os direitos reservados.
+          </span>
+          <span className="footer-copyright">
             Conteúdo protegido pela{" "}
             <a href="https://www.planalto.gov.br/ccivil_03/leis/l9610.htm#art29" target="_blank" rel="noopener noreferrer">
               Lei nº 9.610/1998
             </a>
-            . É proibida a reprodução total ou parcial sem autorização prévia e expressa, ressalvados os usos permitidos em lei.
+            . É proibida a reprodução total ou
+            <br className="footer-copyright__break" />
+            parcial sem autorização prévia e expressa, ressalvados os usos permitidos em lei.
           </span>
         </div>
       </footer>
