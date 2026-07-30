@@ -1,20 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import {
-  SiAnthropic,
-  SiElevenlabs,
-  SiFacebook,
-  SiGoogle,
-  SiInstagram,
-  SiMercadopago,
-  SiMeta,
-  SiShopify,
-  SiStripe,
-  SiTelegram,
-  SiWhatsapp,
-  SiWoocommerce,
-} from "react-icons/si";
-import { FaRobot } from "react-icons/fa6";
+import type { CSSProperties } from "react";
+import { SiMeta } from "react-icons/si";
 import { CookieBanner, Experience } from "./site-client";
 
 const productChapters = [
@@ -54,6 +41,36 @@ const productChapters = [
     height: 911,
     alt: "Tela real de campanhas multicanal da Waxis",
   },
+];
+
+const ecosystemNodes = [
+  { name: "Webhooks", x: 24, y: 10, color: "#8b35ff" },
+  { name: "API REST", x: 56, y: 8, color: "#3157ff" },
+  { name: "Telegram", x: 35, y: 20, color: "#32b7f0" },
+  { name: "E-mail", x: 63, y: 23, color: "#aeb7d9" },
+  { name: "ERP", x: 81, y: 20, color: "#7e8db8" },
+  { name: "Mercado Pago", x: 9, y: 27, color: "#1fb9e8" },
+  { name: "Facebook", x: 19, y: 34, color: "#3286ff" },
+  { name: "Meta AI", x: 34, y: 38, color: "#2273ff" },
+  { name: "OpenAI", x: 60, y: 39, color: "#18ba92" },
+  { name: "Google", x: 77, y: 39, color: "#65a2ff" },
+  { name: "Pixel Meta", x: 91, y: 48, color: "#4389ff" },
+  { name: "Stripe", x: 5, y: 55, color: "#6e5cff" },
+  { name: "Instagram", x: 16, y: 54, color: "#ef3b87" },
+  { name: "DeepSeek", x: 28, y: 58, color: "#4c77ff" },
+  { name: "Claude", x: 67, y: 59, color: "#dd8a5f" },
+  { name: "Google Calendar", x: 82, y: 62, color: "#48b85a" },
+  { name: "WhatsApp", x: 17, y: 74, color: "#2bda72" },
+  { name: "Asaas", x: 7, y: 81, color: "#1769ff" },
+  { name: "Grok", x: 36, y: 76, color: "#f1f3f8" },
+  { name: "Gemini", x: 57, y: 77, color: "#70a9ff" },
+  { name: "Google Analytics", x: 86, y: 75, color: "#f1a234" },
+  { name: "Google Meet", x: 29, y: 89, color: "#2bbca1" },
+  { name: "Gmail", x: 73, y: 83, color: "#f05245" },
+  { name: "Google Drive", x: 53, y: 92, color: "#ffd21c" },
+  { name: "N8N", x: 75, y: 96, color: "#ef4e81" },
+  { name: "Zapier", x: 23, y: 98, color: "#ff5b18" },
+  { name: "Make", x: 49, y: 104, color: "#a442e8" },
 ];
 
 const faq = [
@@ -207,36 +224,48 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="ecosystem">
-          <div>
-            <p className="section-label">Uma plataforma, menos remendos</p>
-            <h2>Atendimento é só o começo.</h2>
+        <section className="ecosystem" id="ecossistema">
+          <div className="ecosystem-heading">
+            <p>Uma plataforma, menos remendos</p>
+            <h2>O Ecossistema Waxis.</h2>
+            <span>
+              Não é uma lista de integrações. É um sistema nervoso: inteligência artificial,
+              canais, agenda, cobrança e automação trocando informações em tempo real, com a
+              Waxis orquestrando cada troca.
+            </span>
           </div>
-          <div className="integration-orbit" aria-label="Ecossistema de integrações conectado à Waxis">
-            <div className="orbit-ring orbit-ring--outer" />
-            <div className="orbit-ring orbit-ring--inner" />
+          <div className="integration-network" aria-label="Ecossistema de integrações conectado à Waxis">
+            <svg className="network-lines" viewBox="0 0 1000 720" preserveAspectRatio="none" aria-hidden="true">
+              {ecosystemNodes.map((node) => (
+                <line key={node.name} x1="500" y1="360" x2={node.x * 10} y2={(node.y / 112) * 720} />
+              ))}
+            </svg>
+            <div className="network-core-rings" aria-hidden="true"><i /><i /><i /></div>
             <div className="integration-hub">
-              <Image unoptimized src="/assets/logos/icon-x.png" alt="Waxis" width={112} height={112} />
-              <strong>Waxis</strong>
-              <small>Uma operação conectada</small>
+              <Image unoptimized src="/assets/logos/logo-waxis-branco.png" alt="Waxis" width={160} height={40} />
+              <small>Orquestra toda a operação</small>
             </div>
-            <div className="integration-node"><SiWhatsapp /><span>WhatsApp</span></div>
-            <div className="integration-node"><SiInstagram /><span>Instagram</span></div>
-            <div className="integration-node"><SiMeta /><span>Meta</span></div>
-            <div className="integration-node"><SiFacebook /><span>Facebook</span></div>
-            <div className="integration-node"><SiGoogle /><span>Google</span></div>
-            <div className="integration-node"><SiMercadopago /><span>Mercado Pago</span></div>
-            <div className="integration-node integration-node--word"><b>∞</b><span>InfinitePay</span></div>
-            <div className="integration-node"><SiStripe /><span>Stripe</span></div>
-            <div className="integration-node"><FaRobot /><span>OpenAI</span></div>
-            <div className="integration-node"><SiAnthropic /><span>Claude</span></div>
-            <div className="integration-node"><SiElevenlabs /><span>ElevenLabs</span></div>
-            <div className="integration-node"><SiShopify /><span>Shopify</span></div>
-            <div className="integration-node"><SiWoocommerce /><span>WooCommerce</span></div>
-            <div className="integration-node"><SiTelegram /><span>Telegram</span></div>
+            {ecosystemNodes.map((node, index) => (
+              <div
+                className="integration-node"
+                key={node.name}
+                style={{
+                  left: `${node.x}%`,
+                  top: `${node.y / 1.12}%`,
+                  "--node-color": node.color,
+                  "--node-delay": `${index * -0.17}s`,
+                } as CSSProperties}
+              >
+                <i />
+                <span>{node.name}</span>
+              </div>
+            ))}
           </div>
-          <div className="ecosystem-proof">
-            <Image unoptimized src="/assets/prints/08-ecossistema-de-apps.png" alt="Ecossistema real de aplicativos Waxis" width={1920} height={947} />
+          <div className="ecosystem-roles" aria-label="Camadas do ecossistema">
+            <span><i />Canais e atendimento</span>
+            <span><i />Inteligência artificial</span>
+            <span><i />Automação e APIs</span>
+            <span><i />Cobrança e dados</span>
           </div>
         </section>
 
