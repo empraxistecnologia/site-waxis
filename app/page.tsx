@@ -175,6 +175,7 @@ export default function Home() {
         <nav aria-label="Navegação principal">
           <a href="#transformacao">Por que Waxis</a>
           <a href="#plataforma">Plataforma</a>
+          <a href="#ecossistema">Recursos</a>
           <a href="#implantacao">Implantação</a>
           <a href="#faq">Dúvidas</a>
         </nav>
