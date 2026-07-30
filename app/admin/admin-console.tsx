@@ -25,7 +25,7 @@ type Analytics = {
 type LegalDocument = { slug: string; title: string; content: string; status: string; updatedAt?: string; publishedAt?: string };
 
 const emptyConfig: SiteConfig = {
-  testUrl: "", calLink: "", contactEmail: "", whatsapp: "", facebookUrl: "", instagramUrl: "", linkedinUrl: "", xUrl: "",
+  testUrl: "", bookingProvider: "calcom", calLink: "", calendlyLink: "", googleCalendarLink: "", contactEmail: "", whatsapp: "", facebookUrl: "", instagramUrl: "", linkedinUrl: "", xUrl: "",
   gaMeasurementId: "", gtmId: "", metaPixelId: "", googleVerification: "", metaVerification: "",
   siteTitle: "", siteDescription: "", allowAiSearch: true, allowAiTraining: false,
 };
@@ -190,7 +190,7 @@ function Dashboard({ analytics, days, setDays, loading, refresh }: {
         <Metric icon={<LuGauge />} label="Visualizações" value={totals.visits} note={`${days} dias`} tone="violet" />
         <Metric icon={<LuUsers />} label="Sessões" value={totals.sessions} note={`${change >= 0 ? "+" : ""}${change}% vs. período anterior`} tone="blue" />
         <Metric icon={<LuMousePointerClick />} label="Cliques em CTA" value={totals.conversions} note={totals.visits ? `${((totals.conversions / totals.visits) * 100).toFixed(1)}% das visualizações` : "Aguardando movimento"} tone="orange" />
-        <Metric icon={<LuCalendarDays />} label="Agendamentos" value={totals.bookings} note="Confirmados pelo Cal.com" tone="green" />
+        <Metric icon={<LuCalendarDays />} label="Agendamentos" value={totals.bookings} note="Confirmados pela agenda conectada" tone="green" />
       </div>
       <div className="dashboard-layout">
         <article className="analytics-chart">
@@ -244,7 +244,6 @@ function LinksForm({ config, setConfig }: { config: SiteConfig; setConfig: (conf
   return <div className="settings-stack">
     <SectionCard icon={<LuMousePointerClick />} title="Ações principais" description="Destinos usados nos botões de conversão do site.">
       <Field label="Link do teste grátis"><input type="url" value={config.testUrl} onChange={(event) => update("testUrl", event.target.value)} /></Field>
-      <Field label="Agenda do Cal.com" hint="Use somente usuário/evento. Ex.: waxis/demonstracao"><input value={config.calLink} onChange={(event) => update("calLink", event.target.value)} placeholder="waxis/demonstracao" /></Field>
       <Field label="E-mail comercial"><input type="email" value={config.contactEmail} onChange={(event) => update("contactEmail", event.target.value)} /></Field>
       <Field label="WhatsApp comercial"><input value={config.whatsapp} onChange={(event) => update("whatsapp", event.target.value)} placeholder="5565999999999" /></Field>
     </SectionCard>
@@ -259,6 +258,31 @@ function LinksForm({ config, setConfig }: { config: SiteConfig; setConfig: (conf
 function IntegrationsForm({ config, setConfig }: { config: SiteConfig; setConfig: (config: SiteConfig) => void }) {
   const update = (key: keyof SiteConfig, value: string) => setConfig({ ...config, [key]: value });
   return <div className="settings-stack">
+    <SectionCard icon={<LuCalendarDays />} title="Agenda de demonstrações" description="Escolha a agenda ativa e conecte o endereço público de agendamento.">
+      <div className="booking-provider" role="radiogroup" aria-label="Agenda ativa">
+        {[
+          ["calcom", "Cal.com", "Agenda flexível e incorporada"],
+          ["calendly", "Calendly", "Página de evento do Calendly"],
+          ["google", "Google Agenda", "Página de horários disponíveis"],
+        ].map(([value, title, description]) => (
+          <button
+            key={value}
+            type="button"
+            role="radio"
+            aria-checked={config.bookingProvider === value}
+            className={config.bookingProvider === value ? "is-active" : ""}
+            onClick={() => update("bookingProvider", value)}
+          >
+            <i><LuCalendarDays /></i><span><strong>{title}</strong><small>{description}</small></span>
+            <b>{config.bookingProvider === value ? <LuCheck /> : null}</b>
+          </button>
+        ))}
+      </div>
+      {config.bookingProvider === "calcom" && <Field label="Link do Cal.com" hint="Cole o link completo ou usuário/evento."><input value={config.calLink} onChange={(event) => update("calLink", event.target.value)} placeholder="https://cal.com/waxis/demonstracao" /></Field>}
+      {config.bookingProvider === "calendly" && <Field label="Link do Calendly" hint="Cole o link público do evento."><input type="url" value={config.calendlyLink} onChange={(event) => update("calendlyLink", event.target.value)} placeholder="https://calendly.com/waxis/demonstracao" /></Field>}
+      {config.bookingProvider === "google" && <Field label="Link do Google Agenda" hint="Cole a página de agendamento criada no Google Agenda."><input type="url" value={config.googleCalendarLink} onChange={(event) => update("googleCalendarLink", event.target.value)} placeholder="https://calendar.google.com/calendar/appointments/schedules/..." /></Field>}
+      <div className="integration-note"><LuShieldCheck /><p>Somente a agenda selecionada será exibida nos botões “Agendar demonstração” do site.</p></div>
+    </SectionCard>
     <SectionCard icon={<LuChartColumn />} title="Google" description="Análise de audiência e gerenciamento de tags.">
       <Field label="Google Analytics 4" hint="Ex.: G-XXXXXXXXXX"><input value={config.gaMeasurementId} onChange={(event) => update("gaMeasurementId", event.target.value)} placeholder="G-" /></Field>
       <Field label="Google Tag Manager" hint="Ex.: GTM-XXXXXXX"><input value={config.gtmId} onChange={(event) => update("gtmId", event.target.value)} placeholder="GTM-" /></Field>

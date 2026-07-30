@@ -5,6 +5,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/
 import { SiMeta } from "react-icons/si";
 import { CookieBanner, Experience } from "./site-client";
 import { getSiteConfig } from "./lib/site-data";
+import { getBookingUrl } from "./lib/booking";
 
 const productChapters = [
   {
@@ -167,9 +168,8 @@ const faq = [
 
 export default async function Home() {
   const config = await getSiteConfig();
-  const demonstrationHref = config.calLink
-    ? `https://cal.com/${config.calLink.replace(/^https?:\/\/cal\.com\//, "")}`
-    : `mailto:${config.contactEmail}?subject=Quero%20uma%20demonstração%20da%20Waxis`;
+  const demonstrationHref = getBookingUrl(config)
+    || `mailto:${config.contactEmail}?subject=Quero%20uma%20demonstração%20da%20Waxis`;
   return (
     <>
       <Experience />

@@ -2,7 +2,10 @@ import { env } from "cloudflare:workers";
 
 export type SiteConfig = {
   testUrl: string;
+  bookingProvider: "calcom" | "calendly" | "google";
   calLink: string;
+  calendlyLink: string;
+  googleCalendarLink: string;
   contactEmail: string;
   whatsapp: string;
   facebookUrl: string;
@@ -22,7 +25,10 @@ export type SiteConfig = {
 
 export const defaultSiteConfig: SiteConfig = {
   testUrl: "https://app.waxis.com.br/register",
+  bookingProvider: "calcom",
   calLink: "",
+  calendlyLink: "",
+  googleCalendarLink: "",
   contactEmail: "empraxisassessoria@gmail.com",
   whatsapp: "",
   facebookUrl: "",

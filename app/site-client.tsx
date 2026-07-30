@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { SiteConfig } from "./lib/site-data";
+import { getBookingUrl } from "./lib/booking";
 
 export function Experience() {
   useEffect(() => {
@@ -422,6 +423,7 @@ export function PublicRuntime({ config }: { config: SiteConfig }) {
   const [bookingOpen, setBookingOpen] = useState(false);
   const initialized = useRef(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const bookingUrl = getBookingUrl(config);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -491,16 +493,18 @@ export function PublicRuntime({ config }: { config: SiteConfig }) {
       const target = (event.target as HTMLElement).closest<HTMLElement>("[data-track]");
       if (!target) return;
       send("cta_click", target.dataset.track ?? target.textContent?.trim() ?? "");
-      if (target.hasAttribute("data-cal-trigger") && config.calLink) {
+      if (target.hasAttribute("data-cal-trigger") && bookingUrl) {
         event.preventDefault();
         setBookingOpen(true);
         send("booking_opened", "Agendar demonstração");
       }
     };
     const onMessage = (event: MessageEvent) => {
-      if (!String(event.origin).includes("cal.com")) return;
-      if (JSON.stringify(event.data ?? {}).includes("bookingSuccessful")) {
-        send("booking_completed", "Agendamento Cal.com");
+      const origin = String(event.origin);
+      if (!origin.includes("cal.com") && !origin.includes("calendly.com") && !origin.includes("google.com")) return;
+      const payload = JSON.stringify(event.data ?? {});
+      if (payload.includes("bookingSuccessful") || payload.includes("calendly.event_scheduled")) {
+        send("booking_completed", `Agendamento ${config.bookingProvider}`);
         setBookingOpen(false);
       }
     };
@@ -513,14 +517,19 @@ export function PublicRuntime({ config }: { config: SiteConfig }) {
       removeEventListener("message", onMessage);
       document.removeEventListener("click", onClick);
     };
-  }, [config]);
+  }, [config, bookingUrl]);
 
-  if (!config.calLink) return null;
-  const calUrl = `https://cal.com/${config.calLink.replace(/^https?:\/\/cal\.com\//, "").replace(/^\/+/, "")}?embed=true`;
+  if (!bookingUrl) return null;
+  const separator = bookingUrl.includes("?") ? "&" : "?";
+  const embedUrl = config.bookingProvider === "calcom"
+    ? `${bookingUrl}${separator}embed=true`
+    : config.bookingProvider === "calendly"
+      ? `${bookingUrl}${separator}hide_gdpr_banner=1&background_color=ffffff`
+      : bookingUrl;
   return (
     <dialog ref={dialogRef} className="cal-dialog" onClose={() => setBookingOpen(false)}>
       <div className="cal-dialog__bar"><strong>Agende uma demonstração</strong><button type="button" onClick={() => setBookingOpen(false)} aria-label="Fechar agenda">×</button></div>
-      <iframe src={calUrl} title="Agenda de demonstração Waxis" allow="payment" />
+      <iframe src={embedUrl} title="Agenda de demonstração Waxis" allow="payment" />
     </dialog>
   );
 }
