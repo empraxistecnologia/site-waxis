@@ -80,6 +80,9 @@ p { text-wrap: pretty; }
 .orbit--one { width: 490px; height: 490px; top: 10px; left: 30px; transform: translate(calc(var(--mouse-x) * -9px), calc(var(--mouse-y) * -9px)); }
 .orbit--two { width: 340px; height: 340px; top: 85px; left: 105px; transform: translate(calc(var(--mouse-x) * -17px), calc(var(--mouse-y) * -17px)); }
 .hero-x { position: absolute; width: 142px; height: 142px; object-fit: contain; top: 185px; left: 205px; filter: drop-shadow(0 25px 40px color-mix(in oklch, var(--violet) 25%, transparent)); transform: translate(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 10px)); }
+.hero-card-orbit { position: absolute; inset: 0; transform-origin: 50% 50%; animation: heroOrbitSwing 9s var(--ease) infinite alternate; }
+.hero-connections { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.hero-connections line { stroke: color-mix(in oklch, var(--violet) 23%, transparent); stroke-width: 1; stroke-dasharray: 4 7; animation: heroConnectionFlow 5s linear infinite; }
 .conversation, .signal-card {
   position: absolute; padding: 15px 17px; background: white; border: 1px solid var(--line); border-radius: 12px;
   box-shadow: 0 18px 48px color-mix(in oklch, var(--navy) 10%, transparent); font-size: 12px; font-weight: 750;
@@ -96,6 +99,19 @@ p { text-wrap: pretty; }
 .signal-card strong { display: block; font: 680 14px/1.35 var(--font-display); }
 .signal-card span { display: flex; align-items: center; gap: 7px; margin-top: 14px; color: var(--muted); font-size: 9px; }
 .signal-card i { width: 7px; height: 7px; background: var(--success); border-radius: 50%; box-shadow: 0 0 0 4px color-mix(in oklch, var(--success) 15%, transparent); }
+.hero-event { position: absolute; z-index: 3; width: 214px; min-height: 66px; padding: 10px 11px; display: grid; grid-template-columns: 34px 1fr 20px; gap: 9px; align-items: center; color: var(--navy-deep); background: color-mix(in oklch, white 94%, transparent); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 44px color-mix(in oklch, var(--navy) 11%, transparent); backdrop-filter: blur(12px); }
+.hero-event__icon { width: 34px; height: 34px; display: grid; place-items: center; color: var(--violet); background: color-mix(in oklch, var(--violet) 10%, white); border-radius: 9px; font-size: 1rem; }
+.hero-event > span { min-width: 0; display: flex; flex-direction: column; }
+.hero-event small { color: var(--violet); font-size: .5rem; font-weight: 800; }
+.hero-event strong { overflow: hidden; font: 700 .6875rem/1.2 var(--font-display); text-overflow: ellipsis; white-space: nowrap; }
+.hero-event em { overflow: hidden; color: var(--muted); font-size: .5rem; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
+.hero-event > i { width: 20px; height: 20px; display: grid; place-items: center; color: white; background: var(--violet); border-radius: 50%; font-size: .65rem; font-style: normal; }
+.hero-event--one { top: -20px; left: 172px; transform: translate(calc(var(--mouse-x) * -8px), calc(var(--mouse-y) * -14px)); }
+.hero-event--two { top: 226px; right: -68px; transform: translate(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * -4px)); }
+.hero-event--three { bottom: -22px; left: 174px; transform: translate(calc(var(--mouse-x) * 7px), calc(var(--mouse-y) * 15px)); }
+.hero-event--four { top: 226px; left: -74px; transform: translate(calc(var(--mouse-x) * -15px), calc(var(--mouse-y) * 5px)); }
+@keyframes heroOrbitSwing { from { rotate: -1.8deg; } to { rotate: 1.8deg; } }
+@keyframes heroConnectionFlow { to { stroke-dashoffset: -44; } }
 .scroll-cue { position: absolute; left: max(24px, calc((100vw - 1180px)/2)); bottom: 24px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
 .scroll-cue span { width: 28px; height: 1px; background: var(--violet); animation: cue 1.8s ease-in-out infinite; transform-origin: left; }
 @keyframes cue { 0%,100% { transform: scaleX(.35); } 50% { transform: scaleX(1); } }

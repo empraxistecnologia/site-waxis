@@ -214,22 +214,54 @@ export default function Home() {
             <div className="orbit orbit--one" />
             <div className="orbit orbit--two" />
             <Image unoptimized className="hero-x" src="/assets/logos/icon-x.png" alt="" width={260} height={260} priority />
-            <div className="conversation conversation--one">
-              <span className="channel-dot whatsapp" /> Novo orçamento
-              <small>Sem responsável · há 18 min</small>
-            </div>
-            <div className="conversation conversation--two">
-              <span className="channel-dot instagram" /> Cliente retornou
-              <small>Histórico localizado</small>
-            </div>
-            <div className="conversation conversation--three">
-              <span className="channel-dot web" /> Lead qualificado
-              <small>Prioridade alta · 87%</small>
-            </div>
-            <div className="signal-card">
-              <p>Waxis identificou</p>
-              <strong>12 oportunidades precisam de atenção</strong>
-              <span><i /> Operação monitorada em tempo real</span>
+            <div className="hero-card-orbit">
+              <svg className="hero-connections" viewBox="0 0 560 520" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="280" y1="260" x2="70" y2="82" />
+                <line x1="280" y1="260" x2="495" y2="148" />
+                <line x1="280" y1="260" x2="85" y2="438" />
+                <line x1="280" y1="260" x2="475" y2="440" />
+                <line x1="280" y1="260" x2="280" y2="34" />
+                <line x1="280" y1="260" x2="535" y2="270" />
+                <line x1="280" y1="260" x2="280" y2="500" />
+                <line x1="280" y1="260" x2="25" y2="270" />
+              </svg>
+              <div className="conversation conversation--one">
+                <span className="channel-dot whatsapp" /> Novo orçamento
+                <small>Sem responsável · há 18 min</small>
+              </div>
+              <div className="conversation conversation--two">
+                <span className="channel-dot instagram" /> Cliente retornou
+                <small>Histórico localizado</small>
+              </div>
+              <div className="conversation conversation--three">
+                <span className="channel-dot web" /> Lead qualificado
+                <small>Prioridade alta · 87%</small>
+              </div>
+              <div className="signal-card">
+                <p>Waxis identificou</p>
+                <strong>12 oportunidades precisam de atenção</strong>
+                <span><i /> Operação monitorada em tempo real</span>
+              </div>
+              <div className="hero-event hero-event--one">
+                <b className="hero-event__icon">⌁</b>
+                <span><small>09:02</small><strong>Atendimento concluído</strong><em>Demonstração realizada</em></span>
+                <i>✓</i>
+              </div>
+              <div className="hero-event hero-event--two">
+                <b className="hero-event__icon">✉</b>
+                <span><small>09:03</small><strong>Follow-up gerado</strong><em>Resumo enviado no WhatsApp</em></span>
+                <i>✓</i>
+              </div>
+              <div className="hero-event hero-event--three">
+                <b className="hero-event__icon">▤</b>
+                <span><small>09:03</small><strong>CRM atualizado</strong><em>Proposta → Fechamento</em></span>
+                <i>✓</i>
+              </div>
+              <div className="hero-event hero-event--four">
+                <b className="hero-event__icon">□</b>
+                <span><small>09:04</small><strong>Reunião agendada</strong><em>Assinatura confirmada</em></span>
+                <i>✓</i>
+              </div>
             </div>
           </div>
           <a className="scroll-cue" href="#transformacao"><span />Role para organizar a operação</a>
