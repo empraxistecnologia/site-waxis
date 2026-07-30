@@ -1,5 +1,34 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Lufga";
+  src: url("/assets/fonts/Lufga-Regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lufga";
+  src: url("/assets/fonts/Lufga-Medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lufga";
+  src: url("/assets/fonts/Lufga-SemiBold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lufga";
+  src: url("/assets/fonts/Lufga-ExtraBold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
 :root {
   --navy: oklch(0.29 0.19 274);
   --navy-deep: oklch(0.18 0.12 278);
@@ -31,7 +60,7 @@ p { text-wrap: pretty; }
   position: fixed; z-index: 50; top: 18px; left: 50%; transform: translateX(-50%);
   width: min(1240px, calc(100vw - 32px)); height: 66px; padding: 0 12px 0 22px;
   display: flex; align-items: center; justify-content: space-between;
-  font-family: var(--font-display), sans-serif;
+  font-family: "Lufga", var(--font-display), sans-serif;
   background: color-mix(in oklch, white 82%, transparent); border: 1px solid color-mix(in oklch, var(--navy) 9%, transparent);
   border-radius: 14px; backdrop-filter: blur(18px); transition: box-shadow .4s var(--ease), top .4s var(--ease);
 }
@@ -262,7 +291,7 @@ p { text-wrap: pretty; }
 .final-cta > div { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 .button--light { color: var(--violet); background: white; border-color: white; }.button--ghost { background: transparent; border-color: color-mix(in oklch, white 50%, transparent); }
 
-footer { padding: 90px max(24px, calc((100vw - 1180px)/2)) 30px; display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 50px; color: white; background: var(--navy-deep); font-family: var(--font-display), sans-serif; }
+footer { padding: 90px max(24px, calc((100vw - 1180px)/2)) 30px; display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 50px; color: white; background: var(--navy-deep); font-family: "Lufga", var(--font-display), sans-serif; }
 .footer-brand { align-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .footer-brand img { display: block; width: 145px; height: auto; }
 .footer-brand p { display: flex; flex-direction: column; gap: 2px; margin: 0; color: color-mix(in oklch, white 62%, transparent); font-size: .875rem; font-weight: 400; line-height: 1.45; letter-spacing: -.01em; }
