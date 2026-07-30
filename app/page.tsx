@@ -180,7 +180,7 @@ export default function Home() {
           <a href="#faq">Dúvidas</a>
         </nav>
         <div className="nav-actions">
-          <a className="text-link" href="https://app.waxis.com.br/register">Teste grátis</a>
+          <a className="text-link" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Teste grátis</a>
           <a className="button button--small" href="#demonstracao">Agendar demonstração</a>
         </div>
         <button className="menu-button" data-menu-button aria-label="Abrir menu" aria-expanded="false">
@@ -204,7 +204,7 @@ export default function Home() {
             </p>
             <div className="hero-actions">
               <a className="button" href="#demonstracao">Agendar demonstração</a>
-              <a className="button button--outline" href="https://app.waxis.com.br/register">Começar teste grátis</a>
+              <a className="button button--outline" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Começar teste grátis</a>
             </div>
             <div className="trust-line" aria-label="Credenciais e benefícios">
               <span className="meta-mark"><SiMeta aria-hidden="true" /></span>
@@ -460,7 +460,7 @@ export default function Home() {
             <h3>Sua equipe configura.</h3>
             <p>Acesso à Waxis para criar canais, funis, usuários, automações e agentes no ritmo do seu time.</p>
             <ul><li>Configuração autônoma</li><li>Base de orientação</li><li>Suporte especializado</li><li>Evolução por módulos</li></ul>
-            <a href="https://app.waxis.com.br/register">Começar teste grátis <b>→</b></a>
+            <a href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Começar teste grátis <b>→</b></a>
           </div>
           <div className="offer offer--guided">
             <span>Implantação Waxis</span>
@@ -496,7 +496,7 @@ export default function Home() {
           <p>Conheça a Waxis aplicada ao volume, à equipe e aos processos da sua empresa.</p>
           <div>
             <a className="button button--light" href="mailto:empraxisassessoria@gmail.com?subject=Quero%20uma%20demonstração%20da%20Waxis">Agendar demonstração</a>
-            <a className="button button--ghost" href="https://app.waxis.com.br/register">Começar teste grátis</a>
+            <a className="button button--ghost" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Começar teste grátis</a>
           </div>
         </section>
       </main>
@@ -516,7 +516,7 @@ export default function Home() {
           </div>
         </div>
         <div><strong>Plataforma</strong><a href="#plataforma">Inteligência comercial</a><a href="#plataforma">CRM e funil</a><a href="#implantacao">Implantação</a></div>
-        <div><strong>Empresa</strong><a href="#demonstracao">Demonstração</a><a href="https://app.waxis.com.br/register">Teste grátis</a><a href="mailto:empraxisassessoria@gmail.com">Contato</a></div>
+        <div><strong>Empresa</strong><a href="#demonstracao">Demonstração</a><a href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Teste grátis</a><a href="mailto:empraxisassessoria@gmail.com">Contato</a></div>
         <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link><button type="button" className="footer-cookie-link" data-cookie-settings>Gerenciar cookies</button></div>
         <div className="footer-bottom">
           <span>© 2026 Empraxis Marketing e Assessoria. Todos os direitos reservados.</span>
