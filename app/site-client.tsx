@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import type { SiteConfig } from "./lib/site-data";
 
 export function Experience() {
   useEffect(() => {
@@ -372,6 +373,8 @@ export function CookieBanner() {
     if (savedConsent) {
       document.documentElement.dataset.cookieConsent = savedConsent;
     } else {
+      // Initial visibility mirrors the persisted browser preference.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true);
     }
 
@@ -405,5 +408,119 @@ export function CookieBanner() {
         </div>
       </aside>
     </div>
+  );
+}
+
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+export function PublicRuntime({ config }: { config: SiteConfig }) {
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const initialized = useRef(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (bookingOpen && !dialog.open) dialog.showModal();
+    if (!bookingOpen && dialog.open) dialog.close();
+  }, [bookingOpen]);
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/admin")) return;
+    const ensureSession = () => {
+      let id = sessionStorage.getItem("waxis-analytics-session");
+      if (!id) {
+        id = crypto.randomUUID();
+        sessionStorage.setItem("waxis-analytics-session", id);
+      }
+      return id;
+    };
+    const send = (eventType: string, label = "") => {
+      if (localStorage.getItem("waxis-cookie-consent") !== "all") return;
+      const params = new URLSearchParams(location.search);
+      const width = innerWidth;
+      navigator.sendBeacon("/api/track", new Blob([JSON.stringify({
+        eventType, label, sessionId: ensureSession(), path: location.pathname,
+        referrer: document.referrer, source: params.get("utm_source") ?? "",
+        medium: params.get("utm_medium") ?? "", campaign: params.get("utm_campaign") ?? "",
+        device: width < 680 ? "mobile" : width < 1024 ? "tablet" : "desktop",
+      })], { type: "application/json" }));
+    };
+    const addScript = (id: string, src: string) => {
+      if (document.getElementById(id)) return;
+      const script = document.createElement("script");
+      script.id = id;
+      script.async = true;
+      script.src = src;
+      document.head.appendChild(script);
+    };
+    const initializeExternalAnalytics = () => {
+      if (initialized.current || localStorage.getItem("waxis-cookie-consent") !== "all") return;
+      initialized.current = true;
+      if (config.gaMeasurementId) {
+        window.dataLayer = window.dataLayer || [];
+        const gtag = (...args: unknown[]) => window.dataLayer?.push(args);
+        gtag("js", new Date());
+        gtag("config", config.gaMeasurementId, { anonymize_ip: true });
+        addScript("waxis-ga4", `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(config.gaMeasurementId)}`);
+      }
+      if (config.gtmId) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+        addScript("waxis-gtm", `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(config.gtmId)}`);
+      }
+      if (config.metaPixelId) {
+        const queuedFbq = (...args: unknown[]) => {
+          const holder = queuedFbq as unknown as { queue?: unknown[] };
+          holder.queue = holder.queue || [];
+          holder.queue.push(args);
+        };
+        window.fbq = window.fbq || queuedFbq;
+        window.fbq("init", config.metaPixelId);
+        window.fbq("track", "PageView");
+        addScript("waxis-meta-pixel", "https://connect.facebook.net/en_US/fbevents.js");
+      }
+      send("page_view");
+    };
+    const onClick = (event: MouseEvent) => {
+      const target = (event.target as HTMLElement).closest<HTMLElement>("[data-track]");
+      if (!target) return;
+      send("cta_click", target.dataset.track ?? target.textContent?.trim() ?? "");
+      if (target.hasAttribute("data-cal-trigger") && config.calLink) {
+        event.preventDefault();
+        setBookingOpen(true);
+        send("booking_opened", "Agendar demonstração");
+      }
+    };
+    const onMessage = (event: MessageEvent) => {
+      if (!String(event.origin).includes("cal.com")) return;
+      if (JSON.stringify(event.data ?? {}).includes("bookingSuccessful")) {
+        send("booking_completed", "Agendamento Cal.com");
+        setBookingOpen(false);
+      }
+    };
+    initializeExternalAnalytics();
+    addEventListener("waxis:cookie-consent", initializeExternalAnalytics);
+    addEventListener("message", onMessage);
+    document.addEventListener("click", onClick);
+    return () => {
+      removeEventListener("waxis:cookie-consent", initializeExternalAnalytics);
+      removeEventListener("message", onMessage);
+      document.removeEventListener("click", onClick);
+    };
+  }, [config]);
+
+  if (!config.calLink) return null;
+  const calUrl = `https://cal.com/${config.calLink.replace(/^https?:\/\/cal\.com\//, "").replace(/^\/+/, "")}?embed=true`;
+  return (
+    <dialog ref={dialogRef} className="cal-dialog" onClose={() => setBookingOpen(false)}>
+      <div className="cal-dialog__bar"><strong>Agende uma demonstração</strong><button type="button" onClick={() => setBookingOpen(false)} aria-label="Fechar agenda">×</button></div>
+      <iframe src={calUrl} title="Agenda de demonstração Waxis" allow="payment" />
+    </dialog>
   );
 }

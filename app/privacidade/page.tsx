@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "../legal-layout";
+import { LegalDocument } from "../legal-document";
+import { getPublishedDocument } from "../lib/site-data";
 
 export const metadata: Metadata = { title: "Política de Privacidade — Waxis", description: "Como a Waxis trata e protege dados pessoais." };
 
-export default function Privacy() {
+export default async function Privacy() {
+  const document = await getPublishedDocument("privacidade");
+  if (document) return <LegalLayout eyebrow="Privacidade e proteção de dados" title={document.title}><LegalDocument content={document.content} /></LegalLayout>;
   return <LegalLayout eyebrow="Privacidade e proteção de dados" title="Política de Privacidade">
     <section><h2>1. Objetivo</h2><p>Esta Política explica como a Waxis coleta, utiliza, compartilha, armazena e protege dados pessoais relacionados ao site, às demonstrações comerciais, ao suporte e ao uso da plataforma.</p></section>
     <section><h2>2. Quem controla os dados</h2><p>Nos dados coletados diretamente em nosso site e relacionamento comercial, a Waxis atua como controladora. No tratamento de conversas, contatos e informações inseridas por clientes na plataforma, a Waxis poderá atuar como operadora, seguindo as instruções do cliente contratante.</p></section>

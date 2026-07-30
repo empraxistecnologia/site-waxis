@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "../legal-layout";
+import { LegalDocument } from "../legal-document";
+import { getPublishedDocument } from "../lib/site-data";
 
 export const metadata: Metadata = { title: "Termos de Uso — Waxis", description: "Condições gerais para acesso ao site e à plataforma Waxis." };
 
-export default function Terms() {
+export default async function Terms() {
+  const document = await getPublishedDocument("termos");
+  if (document) return <LegalLayout eyebrow="Regras de utilização" title={document.title}><LegalDocument content={document.content} /></LegalLayout>;
   return <LegalLayout eyebrow="Condições de utilização" title="Termos de Uso">
     <section><h2>1. Aceitação</h2><p>Ao acessar o site, solicitar demonstração, iniciar teste ou utilizar a plataforma Waxis, o usuário declara ter lido e concordado com estes Termos, com a Política de Privacidade e com as condições específicas da contratação.</p></section>
     <section><h2>2. Elegibilidade e cadastro</h2><p>O serviço é destinado principalmente a pessoas jurídicas e profissionais autorizados. As informações cadastrais devem ser verdadeiras, completas e mantidas atualizadas. Credenciais são pessoais e devem ser protegidas pelo usuário.</p></section>

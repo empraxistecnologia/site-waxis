@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "../legal-layout";
+import { LegalDocument } from "../legal-document";
+import { getPublishedDocument } from "../lib/site-data";
 
 export const metadata: Metadata = { title: "Política de Cookies — Waxis", description: "Informações sobre cookies e preferências de navegação no site Waxis." };
 
-export default function Cookies() {
+export default async function Cookies() {
+  const document = await getPublishedDocument("cookies");
+  if (document) return <LegalLayout eyebrow="Preferências e transparência" title={document.title}><LegalDocument content={document.content} /></LegalLayout>;
   return <LegalLayout eyebrow="Preferências de navegação" title="Política de Cookies">
     <section><h2>1. O que são cookies</h2><p>Cookies são pequenos arquivos armazenados no dispositivo para permitir funções do site, lembrar preferências, proteger sessões e, mediante autorização, medir o uso das páginas.</p></section>
     <section><h2>2. Categorias utilizadas</h2><h3>Cookies essenciais</h3><p>São necessários para segurança, navegação, funcionamento do consentimento e recursos solicitados. Não podem ser desativados pelo painel do site.</p><h3>Cookies de análise</h3><p>Ajudam a entender páginas visitadas, origem de tráfego e desempenho. Só serão ativados após consentimento quando exigido.</p><h3>Cookies de marketing</h3><p>Podem medir campanhas ou permitir personalização em plataformas externas. Só serão usados com autorização e após a efetiva instalação dessas ferramentas.</p></section>

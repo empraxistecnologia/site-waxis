@@ -326,9 +326,15 @@ footer { padding: 90px max(24px, calc((100vw - 1180px)/2)) 30px; display: grid; 
 .footer-brand img { display: block; width: 145px; height: auto; }
 .footer-brand p { display: flex; flex-direction: column; gap: 2px; margin: 0; color: color-mix(in oklch, white 62%, transparent); font-size: .875rem; font-weight: 400; line-height: 1.45; letter-spacing: -.01em; }
 .footer-socials { display: flex; align-items: center; gap: 10px; margin-top: 18px; }
-.footer-socials span { width: 38px; height: 38px; display: grid; place-items: center; color: white; background: color-mix(in oklch, white 7%, transparent); border: 1px solid color-mix(in oklch, white 18%, transparent); border-radius: 50%; transition: color .25s ease, background .25s ease, border-color .25s ease, transform .25s var(--ease); }
-.footer-socials span:hover { color: var(--navy-deep); background: white; border-color: white; transform: translateY(-3px); }
+.footer-socials a { width: 38px; height: 38px; display: grid; place-items: center; color: white; background: color-mix(in oklch, white 7%, transparent); border: 1px solid color-mix(in oklch, white 18%, transparent); border-radius: 50%; transition: color .25s ease, background .25s ease, border-color .25s ease, transform .25s var(--ease); }
+.footer-socials a:hover { color: var(--navy-deep); background: white; border-color: white; transform: translateY(-3px); }
 .footer-socials svg { width: 15px; height: 15px; }
+
+.cal-dialog { width: min(1040px, calc(100vw - 32px)); height: min(760px, calc(100vh - 32px)); padding: 0; border: 1px solid rgb(109 40 217 / 30%); border-radius: 24px; background: #fff; box-shadow: 0 32px 100px rgb(16 3 58 / 28%); overflow: hidden; }
+.cal-dialog::backdrop { background: rgb(13 3 50 / 72%); backdrop-filter: blur(10px); }
+.cal-dialog__bar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px 0 24px; color: var(--navy-deep); border-bottom: 1px solid #e8e2f8; font-family: var(--font-display); }
+.cal-dialog__bar button { width: 38px; height: 38px; border: 0; border-radius: 12px; background: #f1edff; color: var(--purple); font-size: 24px; cursor: pointer; }
+.cal-dialog iframe { width: 100%; height: calc(100% - 64px); border: 0; background: white; }
 footer > div:not(.footer-brand):not(.footer-bottom) { display: flex; flex-direction: column; gap: 12px; font-size: .8125rem; font-weight: 450; letter-spacing: -.005em; }
 footer strong { margin-bottom: 8px; color: color-mix(in oklch, white 45%, transparent); font-weight: 650; text-transform: uppercase; letter-spacing: .1em; }
 footer a:hover { color: var(--violet-bright); }

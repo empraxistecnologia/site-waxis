@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "../legal-layout";
+import { LegalDocument } from "../legal-document";
+import { getPublishedDocument } from "../lib/site-data";
 
 export const metadata: Metadata = { title: "Contrato de Adesão — Waxis", description: "Condições contratuais gerais da plataforma e dos serviços Waxis." };
 
-export default function Contract() {
+export default async function Contract() {
+  const document = await getPublishedDocument("contrato-de-adesao");
+  if (document) return <LegalLayout eyebrow="Condições comerciais" title={document.title}><LegalDocument content={document.content} /></LegalLayout>;
   return <LegalLayout eyebrow="Condições comerciais gerais" title="Contrato de Adesão">
     <section><h2>1. Partes e objeto</h2><p>Este instrumento regula a licença de uso da plataforma Waxis e, quando contratados, os serviços de diagnóstico, implantação, configuração, automação, treinamento e acompanhamento descritos na proposta comercial.</p></section>
     <section><h2>2. Formação do contrato</h2><p>A contratação se aperfeiçoa com a aceitação da proposta, criação da conta, pagamento ou uso após o período de teste. Proposta comercial, ordem de serviço e anexos específicos integram este Contrato e prevalecem quanto a escopo, preço e prazo.</p></section>

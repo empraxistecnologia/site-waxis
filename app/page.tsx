@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { SiMeta } from "react-icons/si";
 import { CookieBanner, Experience } from "./site-client";
+import { getSiteConfig } from "./lib/site-data";
 
 const productChapters = [
   {
@@ -164,7 +165,11 @@ const faq = [
   ["Consigo testar antes de contratar?", "Sim. Você pode iniciar um teste ou agendar uma demonstração orientada à realidade da sua operação."],
 ];
 
-export default function Home() {
+export default async function Home() {
+  const config = await getSiteConfig();
+  const demonstrationHref = config.calLink
+    ? `https://cal.com/${config.calLink.replace(/^https?:\/\/cal\.com\//, "")}`
+    : `mailto:${config.contactEmail}?subject=Quero%20uma%20demonstração%20da%20Waxis`;
   return (
     <>
       <Experience />
@@ -180,8 +185,8 @@ export default function Home() {
           <a href="#faq">Dúvidas</a>
         </nav>
         <div className="nav-actions">
-          <a className="text-link" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Teste grátis</a>
-          <a className="button button--small" href="#demonstracao">Agendar demonstração</a>
+          <a className="text-link" data-track="Teste grátis — menu" href={config.testUrl} target="_blank" rel="noopener noreferrer">Teste grátis</a>
+          <a className="button button--small" data-track="Demonstração — menu" data-cal-trigger href={demonstrationHref}>Agendar demonstração</a>
         </div>
         <button className="menu-button" data-menu-button aria-label="Abrir menu" aria-expanded="false">
           <Image unoptimized src="/assets/logos/icon-x.png" alt="" width={28} height={28} />
@@ -203,8 +208,8 @@ export default function Home() {
               do primeiro contato ao fechamento.
             </p>
             <div className="hero-actions">
-              <a className="button" href="#demonstracao">Agendar demonstração</a>
-              <a className="button button--outline" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Começar teste grátis</a>
+              <a className="button" data-track="Demonstração — hero" data-cal-trigger href={demonstrationHref}>Agendar demonstração</a>
+              <a className="button button--outline" data-track="Teste grátis — hero" href={config.testUrl} target="_blank" rel="noopener noreferrer">Começar teste grátis</a>
             </div>
             <div className="trust-line" aria-label="Credenciais e benefícios">
               <span className="meta-mark"><SiMeta aria-hidden="true" /></span>
@@ -348,7 +353,7 @@ export default function Home() {
               Comece hoje. Daqui a 6 meses<br />
               você vai desejar ter começado agora.
             </strong>
-            <a className="button" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">
+            <a className="button" data-track="Teste grátis — evolução" href={config.testUrl} target="_blank" rel="noopener noreferrer">
               Iniciar teste grátis
             </a>
           </div>
@@ -500,14 +505,14 @@ export default function Home() {
             <h3>Sua equipe configura.</h3>
             <p>Acesso à Waxis para criar canais, funis, usuários, automações e agentes no ritmo do seu time.</p>
             <ul><li>Configuração autônoma</li><li>Base de orientação</li><li>Suporte especializado</li><li>Evolução por módulos</li></ul>
-            <a href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Começar teste grátis <b>→</b></a>
+            <a data-track="Teste grátis — implantação" href={config.testUrl} target="_blank" rel="noopener noreferrer">Começar teste grátis <b>→</b></a>
           </div>
           <div className="offer offer--guided">
             <span>Implantação Waxis</span>
             <h3>A gente deixa tudo em movimento.</h3>
             <p>Mapeamos a operação, configuramos a plataforma e preparamos a equipe para trabalhar com processo desde o primeiro dia.</p>
             <ul><li>Diagnóstico da operação</li><li>Funis e roteamento por setor</li><li>Automações e agentes de IA</li><li>Treinamento e acompanhamento</li></ul>
-            <a href="#demonstracao">Planejar minha implantação <b>→</b></a>
+            <a data-track="Implantação guiada" data-cal-trigger href={demonstrationHref}>Planejar minha implantação <b>→</b></a>
           </div>
         </section>
 
@@ -535,8 +540,8 @@ export default function Home() {
           <h2>Agora ela precisa<br />se mover como uma só.</h2>
           <p>Conheça a Waxis aplicada ao volume, à equipe e aos processos da sua empresa.</p>
           <div>
-            <a className="button button--light" href="mailto:empraxisassessoria@gmail.com?subject=Quero%20uma%20demonstração%20da%20Waxis">Agendar demonstração</a>
-            <a className="button button--ghost" href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Começar teste grátis</a>
+            <a className="button button--light" data-track="Demonstração — final" data-cal-trigger href={demonstrationHref}>Agendar demonstração</a>
+            <a className="button button--ghost" data-track="Teste grátis — final" href={config.testUrl} target="_blank" rel="noopener noreferrer">Começar teste grátis</a>
           </div>
         </section>
       </main>
@@ -549,14 +554,14 @@ export default function Home() {
             <span>Conversas em movimento, oportunidades sob controle.</span>
           </p>
           <div className="footer-socials" aria-label="Redes sociais da Waxis">
-            <span aria-label="Facebook" title="Facebook"><FaFacebookF aria-hidden="true" /></span>
-            <span aria-label="LinkedIn" title="LinkedIn"><FaLinkedinIn aria-hidden="true" /></span>
-            <span aria-label="Instagram" title="Instagram"><FaInstagram aria-hidden="true" /></span>
-            <span aria-label="X" title="X"><FaXTwitter aria-hidden="true" /></span>
+            {config.facebookUrl && <a href={config.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><FaFacebookF aria-hidden="true" /></a>}
+            {config.linkedinUrl && <a href={config.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><FaLinkedinIn aria-hidden="true" /></a>}
+            {config.instagramUrl && <a href={config.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><FaInstagram aria-hidden="true" /></a>}
+            {config.xUrl && <a href={config.xUrl} target="_blank" rel="noopener noreferrer" aria-label="X" title="X"><FaXTwitter aria-hidden="true" /></a>}
           </div>
         </div>
         <div><strong>Plataforma</strong><a href="#plataforma">Inteligência comercial</a><a href="#plataforma">CRM e funil</a><a href="#implantacao">Implantação</a></div>
-        <div><strong>Empresa</strong><a href="#demonstracao">Demonstração</a><a href="https://app.waxis.com.br/register" target="_blank" rel="noopener noreferrer">Teste grátis</a><a href="mailto:empraxisassessoria@gmail.com">Contato</a></div>
+        <div><strong>Empresa</strong><a data-cal-trigger href={demonstrationHref}>Demonstração</a><a href={config.testUrl} target="_blank" rel="noopener noreferrer">Teste grátis</a><a href={`mailto:${config.contactEmail}`}>Contato</a></div>
         <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link><button type="button" className="footer-cookie-link" data-cookie-settings>Gerenciar cookies</button></div>
         <div className="footer-bottom">
           <span>© 2026 Empraxis Marketing e Assessoria. Todos os direitos reservados.</span>
