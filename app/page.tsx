@@ -255,7 +255,16 @@ export default function Home() {
         <div><strong>Plataforma</strong><a href="#plataforma">Inteligência comercial</a><a href="#plataforma">CRM e funil</a><a href="#implantacao">Implantação</a></div>
         <div><strong>Empresa</strong><a href="#demonstracao">Demonstração</a><a href="#teste">Teste grátis</a><a href="mailto:empraxisassessoria@gmail.com">Contato</a></div>
         <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link></div>
-        <div className="footer-bottom"><span>© 2026 Waxis. Todos os direitos reservados.</span><span>Meta Tech Provider</span></div>
+        <div className="footer-bottom">
+          <span>© 2026 Empraxis Marketing e Assessoria. Todos os direitos reservados.</span>
+          <span>
+            Conteúdo protegido pela{" "}
+            <a href="https://www.planalto.gov.br/ccivil_03/leis/l9610.htm#art29" target="_blank" rel="noopener noreferrer">
+              Lei nº 9.610/1998
+            </a>
+            . É proibida a reprodução total ou parcial sem autorização prévia e expressa, ressalvados os usos permitidos em lei.
+          </span>
+        </div>
       </footer>
       <CookieBanner />
     </>

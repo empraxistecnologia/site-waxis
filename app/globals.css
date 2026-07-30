@@ -196,6 +196,9 @@ footer > div:not(.footer-brand):not(.footer-bottom) { display: flex; flex-direct
 footer strong { margin-bottom: 8px; color: color-mix(in oklch, white 45%, transparent); text-transform: uppercase; letter-spacing: .1em; }
 footer a:hover { color: var(--violet-bright); }
 .footer-bottom { grid-column: 1 / -1; margin-top: 40px; padding-top: 24px; display: flex; justify-content: space-between; border-top: 1px solid color-mix(in oklch, white 12%, transparent); color: color-mix(in oklch, white 45%, transparent); font-size: 10px; }
+.footer-bottom span:first-child { flex-shrink: 0; }
+.footer-bottom span:last-child { max-width: 660px; text-align: right; line-height: 1.6; }
+.footer-bottom a { color: color-mix(in oklch, white 72%, transparent); text-decoration: underline; text-underline-offset: 2px; }
 
 .cookie-banner { position: fixed; z-index: 70; left: 20px; right: 20px; bottom: 18px; max-width: 860px; margin: auto; padding: 18px; display: flex; justify-content: space-between; align-items: center; gap: 22px; color: white; background: var(--navy-deep); border: 1px solid color-mix(in oklch, white 15%, transparent); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
 .cookie-banner strong { font: 700 15px var(--font-display); }.cookie-banner p { margin: 5px 0 0; color: color-mix(in oklch, white 65%, transparent); font-size: 10px; line-height: 1.5; }.cookie-banner p a { text-decoration: underline; }
@@ -233,7 +236,7 @@ footer a:hover { color: var(--violet-bright); }
   .implementation { grid-template-columns: 1fr; }.implementation-copy { grid-column: auto; margin-bottom: 45px; }.offer { min-height: 540px; padding: 30px; }.offer h3 { margin-top: 50px; }
   .meta-section { padding: 80px 20px; display: block; }.meta-emblem { margin-bottom: 28px; }.meta-section > p { margin-top: 28px; }
   .final-cta { min-height: 680px; }.final-cta > div { flex-direction: column; width: 100%; max-width: 360px; }.final-cta .button { width: 100%; }
-  footer { grid-template-columns: 1fr 1fr; padding: 70px 20px 28px; }.footer-brand { grid-column: 1 / -1; }.footer-bottom { flex-direction: column; gap: 8px; }
+  footer { grid-template-columns: 1fr 1fr; padding: 70px 20px 28px; }.footer-brand { grid-column: 1 / -1; }.footer-bottom { flex-direction: column; gap: 12px; }.footer-bottom span:last-child { max-width: none; text-align: left; }
   .cookie-banner { flex-direction: column; align-items: flex-start; }.cookie-banner > div:last-child { width: 100%; justify-content: flex-end; }
 }
 
