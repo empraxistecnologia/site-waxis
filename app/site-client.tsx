@@ -17,7 +17,8 @@ export function Experience() {
     const tour = document.querySelector<HTMLElement>("[data-tour]");
     const copies = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-copy]"));
     const images = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-image]"));
-    const tourCurrent = document.querySelector<HTMLElement>("[data-tour-current]");
+    const tourPrevious = document.querySelector<HTMLButtonElement>("[data-tour-previous]");
+    const tourNext = document.querySelector<HTMLButtonElement>("[data-tour-next]");
     const particleCleanups: Array<() => void> = [];
 
     if (!reduce) {
@@ -292,6 +293,33 @@ export function Experience() {
     stage?.addEventListener("mousemove", onMouse);
 
     let ticking = false;
+    const setActiveTourScreen = (active: number) => {
+      [...copies, ...images].forEach((el) => el.classList.remove("is-active"));
+      copies[active]?.classList.add("is-active");
+      images[active]?.classList.add("is-active");
+    };
+
+    const moveTour = (direction: number) => {
+      if (!tour || !copies.length) return;
+      const current = Math.max(0, copies.findIndex((copy) => copy.classList.contains("is-active")));
+      const target = (current + direction + copies.length) % copies.length;
+      const sticky = tour.querySelector<HTMLElement>(".tour-sticky");
+      const range = Math.max(0, tour.offsetHeight - innerHeight);
+
+      if (sticky && getComputedStyle(sticky).position === "sticky" && range > 0) {
+        const tourTop = scrollY + tour.getBoundingClientRect().top;
+        const targetProgress = (target + 0.5) / copies.length;
+        scrollTo({ top: tourTop + targetProgress * range, behavior: "smooth" });
+      } else {
+        setActiveTourScreen(target);
+      }
+    };
+
+    const showPreviousTourScreen = () => moveTour(-1);
+    const showNextTourScreen = () => moveTour(1);
+    tourPrevious?.addEventListener("click", showPreviousTourScreen);
+    tourNext?.addEventListener("click", showNextTourScreen);
+
     const render = () => {
       nav?.classList.toggle("is-scrolled", window.scrollY > 24);
       if (reality && realityLines.length) {
@@ -312,10 +340,7 @@ export function Experience() {
         const range = Math.max(1, tour.offsetHeight - innerHeight);
         const p = Math.min(0.999, Math.max(0, -rect.top / range));
         const active = Math.min(copies.length - 1, Math.floor(p * copies.length));
-        [...copies, ...images].forEach((el) => el.classList.remove("is-active"));
-        copies[active]?.classList.add("is-active");
-        images[active]?.classList.add("is-active");
-        if (tourCurrent) tourCurrent.textContent = String(active + 1).padStart(2, "0");
+        setActiveTourScreen(active);
       }
       ticking = false;
     };
@@ -331,6 +356,8 @@ export function Experience() {
       menu?.removeEventListener("click", onMenu);
       stage?.removeEventListener("mousemove", onMouse);
       removeEventListener("scroll", onScroll);
+      tourPrevious?.removeEventListener("click", showPreviousTourScreen);
+      tourNext?.removeEventListener("click", showNextTourScreen);
       particleCleanups.forEach((cleanup) => cleanup());
       ecosystemCleanup();
     };

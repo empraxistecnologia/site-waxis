@@ -346,9 +346,12 @@ export default function Home() {
                     <Image unoptimized key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-image src={chapter.image} alt={chapter.alt} width={chapter.width} height={chapter.height} />
                   ))}
                 </div>
-                <div className="tour-counter" aria-label="Progresso das telas da plataforma">
-                  <strong data-tour-current>01</strong><span>de 13 telas</span>
-                </div>
+                <button className="tour-arrow tour-arrow--previous" type="button" data-tour-previous aria-label="Ver tela anterior">
+                  <span aria-hidden="true">←</span>
+                </button>
+                <button className="tour-arrow tour-arrow--next" type="button" data-tour-next aria-label="Ver próxima tela">
+                  <span aria-hidden="true">→</span>
+                </button>
               </div>
             </div>
           </div>
