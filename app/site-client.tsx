@@ -340,16 +340,43 @@ export function Experience() {
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
-  useEffect(() => setVisible(localStorage.getItem("waxis-cookie-consent") === null), []);
+  useEffect(() => {
+    const savedConsent = localStorage.getItem("waxis-cookie-consent");
+    if (savedConsent) {
+      document.documentElement.dataset.cookieConsent = savedConsent;
+    } else {
+      setVisible(true);
+    }
+
+    const openPreferences = () => setVisible(true);
+    const preferenceButtons = document.querySelectorAll<HTMLElement>("[data-cookie-settings]");
+    preferenceButtons.forEach((button) => button.addEventListener("click", openPreferences));
+
+    return () => {
+      preferenceButtons.forEach((button) => button.removeEventListener("click", openPreferences));
+    };
+  }, []);
+
   const choose = (value: "essential" | "all") => {
     localStorage.setItem("waxis-cookie-consent", value);
+    document.documentElement.dataset.cookieConsent = value;
+    window.dispatchEvent(new CustomEvent("waxis:cookie-consent", { detail: value }));
     setVisible(false);
   };
   if (!visible) return null;
   return (
-    <aside className="cookie-banner" aria-label="Preferências de cookies">
-      <div><strong>Sua privacidade, sob controle.</strong><p>Usamos cookies essenciais para o site funcionar. Cookies de análise só serão ativados com sua autorização. <Link href="/cookies">Saiba mais</Link>.</p></div>
-      <div><button onClick={() => choose("essential")}>Somente essenciais</button><button className="button button--small" onClick={() => choose("all")}>Aceitar todos</button></div>
-    </aside>
+    <div className="cookie-consent-layer" aria-live="polite">
+      <aside className="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+        <div className="cookie-banner__copy">
+          <span className="cookie-banner__eyebrow">Preferências de cookies</span>
+          <strong id="cookie-title">Sua privacidade, sob controle.</strong>
+          <p>Usamos cookies essenciais para o site funcionar. Cookies de análise e desempenho só serão ativados com sua autorização. <Link href="/cookies">Ver política de cookies</Link>.</p>
+        </div>
+        <div className="cookie-banner__actions">
+          <button className="cookie-button cookie-button--secondary" onClick={() => choose("essential")}>Somente essenciais</button>
+          <button className="cookie-button cookie-button--primary" onClick={() => choose("all")}>Aceitar todos</button>
+        </div>
+      </aside>
+    </div>
   );
 }

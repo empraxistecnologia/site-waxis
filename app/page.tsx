@@ -464,11 +464,14 @@ export default function Home() {
       <footer>
         <div className="footer-brand">
           <Image unoptimized src="/assets/logos/logo-waxis-branco.png" alt="Waxis" width={160} height={40} />
-          <p>Gestão inteligente de atendimento.<br />Conversas em movimento, oportunidades sob controle.</p>
+          <p>
+            <span>Gestão inteligente de atendimento.</span>
+            <span>Conversas em movimento, oportunidades sob controle.</span>
+          </p>
         </div>
         <div><strong>Plataforma</strong><a href="#plataforma">Inteligência comercial</a><a href="#plataforma">CRM e funil</a><a href="#implantacao">Implantação</a></div>
         <div><strong>Empresa</strong><a href="#demonstracao">Demonstração</a><a href="#teste">Teste grátis</a><a href="mailto:empraxisassessoria@gmail.com">Contato</a></div>
-        <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link></div>
+        <div><strong>Legal</strong><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de Uso</Link><Link href="/contrato-de-adesao">Contrato de Adesão</Link><Link href="/cookies">Política de Cookies</Link><button type="button" className="footer-cookie-link" data-cookie-settings>Gerenciar cookies</button></div>
         <div className="footer-bottom">
           <span>© 2026 Empraxis Marketing e Assessoria. Todos os direitos reservados.</span>
           <span>
