@@ -567,14 +567,16 @@ export default async function Home() {
           <span className="footer-company">
             © 2026 <strong>Waxis</strong> é uma empresa do Grupo{" "}
             <a href="https://empraxis.com.br" target="_blank" rel="noopener noreferrer">
-              <strong>Empraxis Marketing e Assessoria</strong>
+              <strong>Empraxis</strong>
             </a>
-            . Todos os direitos reservados.
+            .
+            <br />
+            Todos os direitos reservados.
           </span>
           <span className="footer-copyright">
             Conteúdo protegido pela{" "}
             <a href="https://www.planalto.gov.br/ccivil_03/leis/l9610.htm#art29" target="_blank" rel="noopener noreferrer">
-              Lei nº 9.610/1998
+              <strong>Lei nº 9.610/1998</strong>
             </a>
             . É proibida a reprodução total ou
             <br className="footer-copyright__break" />
