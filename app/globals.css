@@ -176,7 +176,9 @@ p { text-wrap: pretty; }
 .ecosystem h2 { margin: 0; font-size: clamp(2.75rem, 4.8vw, 4.8rem); line-height: .98; color: white; }
 .ecosystem-heading > span { display: block; max-width: 700px; margin: 24px auto 0; color: color-mix(in oklch, white 72%, transparent); font-size: 1rem; line-height: 1.65; }
 .integration-network { position: relative; height: 760px; max-width: 1080px; margin: 62px auto 30px; }
+.ecosystem-canvas { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .network-lines { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.integration-network.is-orbiting .network-lines { display: none; }
 .network-lines line { stroke: color-mix(in oklch, var(--violet-bright) 22%, transparent); stroke-width: 1.1; stroke-dasharray: 2 5; animation: networkFlow 4s linear infinite; }
 .network-core-rings { position: absolute; z-index: 1; left: 50%; top: 50%; width: 190px; height: 190px; transform: translate(-50%, -50%); }
 .network-core-rings i { position: absolute; inset: 0; border: 1px solid color-mix(in oklch, var(--violet-bright) 58%, transparent); border-radius: 50%; animation: corePulse 3.2s var(--ease) infinite; }
@@ -186,8 +188,12 @@ p { text-wrap: pretty; }
 .integration-hub img { width: 116px; height: auto; object-fit: contain; }
 .integration-hub small { margin-top: 10px; color: color-mix(in oklch, white 62%, transparent); font-size: .625rem; }
 .integration-node { --node-color: var(--violet-bright); --node-delay: 0s; position: absolute; z-index: 4; padding: 8px 12px; display: flex; align-items: center; gap: 7px; color: white; background: color-mix(in oklch, var(--navy-deep) 90%, white); border: 1px solid color-mix(in oklch, white 16%, transparent); border-radius: 999px; transform: translate(-50%, -50%); animation: nodeSignal 4.2s var(--ease) var(--node-delay) infinite; }
+.integration-network.is-orbiting .integration-node { left: 0 !important; top: 0 !important; animation: none; will-change: transform; }
+.integration-node.is-active { z-index: 6; color: white; border-color: var(--violet-bright); box-shadow: 0 0 22px color-mix(in oklch, var(--violet) 46%, transparent); }
 .integration-node i { width: 7px; height: 7px; flex: 0 0 auto; background: var(--node-color); border-radius: 50%; box-shadow: 0 0 10px var(--node-color); }
 .integration-node span { white-space: nowrap; color: color-mix(in oklch, white 82%, transparent); font-size: .6875rem; font-weight: 720; }
+.ecosystem-route { min-height: 25px; margin: 0 auto 26px; text-align: center; color: color-mix(in oklch, white 52%, transparent); font-size: .8125rem; transition: color .25s; }
+.ecosystem-route.is-active { color: var(--violet-bright); font-weight: 750; }
 .ecosystem-roles { max-width: 900px; margin: 30px auto 0; padding-top: 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 28px; border-top: 1px solid color-mix(in oklch, white 10%, transparent); }
 .ecosystem-roles span { display: flex; align-items: center; gap: 8px; color: color-mix(in oklch, white 58%, transparent); font-size: .75rem; }
 .ecosystem-roles i { width: 6px; height: 6px; background: var(--violet-bright); border-radius: 50%; }
@@ -280,10 +286,12 @@ footer a:hover { color: var(--violet-bright); }
   .control-head h2 span { white-space: normal; }
   .product-tour { padding-top: 100px; }.tour-intro { margin-bottom: 70px; }.tour-track { height: auto; }.tour-sticky { position: static; height: auto; padding: 90px 20px; }.tour-copy { min-height: 360px; }.tour-screen { aspect-ratio: 16/11; }.tour-screen img { object-fit: contain; }
   .integration-network { height: auto; margin: 55px auto 35px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
-  .network-lines, .network-core-rings { display: none; }
+  .ecosystem-canvas, .network-lines, .network-core-rings { display: none; }
   .integration-hub { position: relative; left: auto; top: auto; width: 170px; height: 170px; margin: 0 auto 30px; grid-column: 1 / -1; transform: none; }
   .integration-node { position: static; min-width: 0; transform: none; animation: none; border-radius: 9px; }
+  .integration-network.is-orbiting .integration-node { transform: none !important; }
   .integration-node span { overflow: hidden; text-overflow: ellipsis; }
+  .ecosystem-route { display: none; }
   .ecosystem-roles { justify-content: flex-start; }
   .implementation { grid-template-columns: 1fr; }.implementation-copy { grid-column: auto; margin-bottom: 45px; }.offer { min-height: 540px; padding: 30px; }.offer h3 { margin-top: 50px; }
   .meta-section { padding: 80px 20px; display: block; }.meta-emblem { margin-bottom: 28px; }.meta-section > p { margin-top: 28px; }

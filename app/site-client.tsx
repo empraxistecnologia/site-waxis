@@ -133,6 +133,148 @@ export function Experience() {
       });
     }
 
+    const ecosystem = document.querySelector<HTMLElement>(".integration-network");
+    const ecosystemCanvas = document.querySelector<HTMLCanvasElement>("[data-ecosystem-canvas]");
+    const ecosystemRoute = document.querySelector<HTMLElement>("[data-ecosystem-route]");
+    const ecosystemNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-eco-node]"));
+    let ecosystemCleanup = () => {};
+
+    if (ecosystem && ecosystemCanvas && ecosystemRoute && ecosystemNodes.length && innerWidth > 680) {
+      const context = ecosystemCanvas.getContext("2d");
+      if (context) {
+        const routeByCategory: Record<string, (name: string) => string> = {
+          ia: (name) => `Mensagem → ${name} → Classificação → CRM → Painel`,
+          canal: (name) => `${name} → IA → CRM → Funil → Automação`,
+          google: (name) => `CRM → ${name} → Sincronização → Cliente notificado`,
+          pagamento: (name) => `Proposta → ${name} → Cobrança → Financeiro`,
+          integracao: (name) => `Evento na Waxis → ${name} → Sistema externo → Retorno sincronizado`,
+          automacao: (name) => `Ação na Waxis → ${name} → Fluxo externo → Dado de volta ao painel`,
+        };
+        const nodes = ecosystemNodes.map((element) => ({
+          element,
+          name: element.dataset.name ?? "",
+          category: element.dataset.category ?? "integracao",
+          color: element.dataset.color ?? "#7600f5",
+          ring: Number(element.dataset.ring ?? 0),
+          baseAngle: 0,
+          x: 0,
+          y: 0,
+        }));
+        [0, 1, 2].forEach((ring) => {
+          const group = nodes.filter((node) => node.ring === ring);
+          group.forEach((node, index) => {
+            node.baseAngle = (index / group.length) * Math.PI * 2;
+          });
+        });
+
+        let width = 0;
+        let height = 0;
+        let centerX = 0;
+        let centerY = 0;
+        let radii = [0, 0, 0];
+        let active: (typeof nodes)[number] | null = null;
+        let animationFrame = 0;
+        let running = true;
+        const speed = [0.00016, -0.00011, 0.00008];
+
+        const measure = () => {
+          const ratio = Math.min(devicePixelRatio, 2);
+          width = ecosystem.clientWidth;
+          height = ecosystem.clientHeight;
+          ecosystemCanvas.width = width * ratio;
+          ecosystemCanvas.height = height * ratio;
+          ecosystemCanvas.style.width = `${width}px`;
+          ecosystemCanvas.style.height = `${height}px`;
+          context.setTransform(ratio, 0, 0, ratio, 0, 0);
+          const size = Math.min(width, height);
+          radii = [size * 0.2, size * 0.33, size * 0.445];
+          centerX = width / 2;
+          centerY = height / 2;
+        };
+
+        const setActive = (node: (typeof nodes)[number] | null) => {
+          active = node;
+          nodes.forEach((item) => item.element.classList.toggle("is-active", item === node));
+          if (node) {
+            ecosystemRoute.textContent = (routeByCategory[node.category] ?? routeByCategory.integracao)(node.name);
+            ecosystemRoute.classList.add("is-active");
+          } else {
+            ecosystemRoute.textContent = "Passe o mouse sobre um serviço para ver o caminho dos dados.";
+            ecosystemRoute.classList.remove("is-active");
+          }
+        };
+
+        const listeners: Array<() => void> = [];
+        nodes.forEach((node) => {
+          const enter = () => setActive(node);
+          const leave = () => setActive(null);
+          node.element.addEventListener("mouseenter", enter);
+          node.element.addEventListener("mouseleave", leave);
+          node.element.addEventListener("focus", enter);
+          node.element.addEventListener("blur", leave);
+          listeners.push(() => {
+            node.element.removeEventListener("mouseenter", enter);
+            node.element.removeEventListener("mouseleave", leave);
+            node.element.removeEventListener("focus", enter);
+            node.element.removeEventListener("blur", leave);
+          });
+        });
+
+        const draw = (time: number) => {
+          context.clearRect(0, 0, width, height);
+          nodes.forEach((node, index) => {
+            const angle = node.baseAngle + (reduce ? 0 : time * speed[node.ring]);
+            node.x = centerX + Math.cos(angle) * radii[node.ring];
+            node.y = centerY + Math.sin(angle) * radii[node.ring];
+            node.element.style.transform = `translate3d(${node.x}px,${node.y}px,0) translate(-50%,-50%)`;
+
+            const highlighted = node === active;
+            context.beginPath();
+            context.moveTo(centerX, centerY);
+            context.lineTo(node.x, node.y);
+            context.strokeStyle = highlighted ? "rgba(155,77,255,.85)" : "rgba(155,77,255,.12)";
+            context.lineWidth = highlighted ? 1.8 : 1;
+            context.stroke();
+
+            const phase = (time * 0.00018 + index * 0.37) % 1;
+            const pulseX = centerX + (node.x - centerX) * phase;
+            const pulseY = centerY + (node.y - centerY) * phase;
+            context.beginPath();
+            context.arc(pulseX, pulseY, highlighted ? 3 : 1.6, 0, Math.PI * 2);
+            context.fillStyle = highlighted ? "rgba(255,255,255,.95)" : "rgba(155,77,255,.58)";
+            context.fill();
+          });
+          if (running && !reduce) animationFrame = requestAnimationFrame(draw);
+        };
+
+        ecosystem.classList.add("is-orbiting");
+        measure();
+        draw(0);
+        const resizeObserver = new ResizeObserver(measure);
+        resizeObserver.observe(ecosystem);
+        const visibilityObserver = new IntersectionObserver(([entry]) => {
+          if (reduce) return;
+          const shouldRun = entry.isIntersecting;
+          if (shouldRun && !running) {
+            running = true;
+            animationFrame = requestAnimationFrame(draw);
+          } else if (!shouldRun && running) {
+            running = false;
+            cancelAnimationFrame(animationFrame);
+          }
+        }, { threshold: 0.1 });
+        visibilityObserver.observe(ecosystem);
+
+        ecosystemCleanup = () => {
+          running = false;
+          cancelAnimationFrame(animationFrame);
+          resizeObserver.disconnect();
+          visibilityObserver.disconnect();
+          listeners.forEach((remove) => remove());
+        };
+      }
+    }
+
     const onMenu = () => {
       const open = document.body.classList.toggle("menu-open");
       menu?.setAttribute("aria-expanded", String(open));
@@ -190,6 +332,7 @@ export function Experience() {
       stage?.removeEventListener("mousemove", onMouse);
       removeEventListener("scroll", onScroll);
       particleCleanups.forEach((cleanup) => cleanup());
+      ecosystemCleanup();
     };
   }, []);
   return null;
