@@ -135,14 +135,14 @@ p { text-wrap: pretty; }
 .hero-event strong { overflow: hidden; font: 700 .6875rem/1.2 var(--font-display); text-overflow: ellipsis; white-space: nowrap; }
 .hero-event em { overflow: hidden; color: var(--muted); font-size: .5rem; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
 .hero-event > i { width: 20px; height: 20px; display: grid; place-items: center; color: white; background: var(--violet); border-radius: 50%; font-size: .65rem; font-style: normal; }
-.hero-event--one { top: 50px; left: 179px; }
-.hero-event--two { top: 102px; right: 53px; }
-.hero-event--three { top: 228px; right: 0; }
-.hero-event--four { right: 53px; bottom: 102px; }
-.hero-event--five { bottom: 50px; left: 179px; }
-.hero-event--six { bottom: 102px; left: 53px; }
-.hero-event--seven { top: 228px; left: 0; }
-.hero-event--eight { top: 102px; left: 53px; }
+.hero-event--one { top: 2px; left: 179px; }
+.hero-event--two { top: 68px; right: 19px; }
+.hero-event--three { top: 228px; right: -47px; }
+.hero-event--four { right: 19px; bottom: 68px; }
+.hero-event--five { bottom: 2px; left: 179px; }
+.hero-event--six { bottom: 68px; left: 19px; }
+.hero-event--seven { top: 228px; left: -47px; }
+.hero-event--eight { top: 68px; left: 19px; }
 @keyframes heroOrbitSwing { from { rotate: 0deg; } to { rotate: 180deg; } }
 @keyframes heroCardStayLevel { from { rotate: 0deg; } to { rotate: -180deg; } }
 @keyframes heroConnectionFlow { to { stroke-dashoffset: -44; } }

@@ -218,14 +218,14 @@ export default function Home() {
             <Image unoptimized className="hero-x" src="/assets/logos/hero-core.png" alt="Símbolo Waxis" width={64} height={64} priority />
             <div className="hero-card-orbit">
               <svg className="hero-connections" viewBox="0 0 560 520" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="280" y1="260" x2="280" y2="82" />
-                <line x1="280" y1="260" x2="406" y2="134" />
-                <line x1="280" y1="260" x2="458" y2="260" />
-                <line x1="280" y1="260" x2="406" y2="386" />
-                <line x1="280" y1="260" x2="280" y2="438" />
-                <line x1="280" y1="260" x2="154" y2="386" />
-                <line x1="280" y1="260" x2="102" y2="260" />
-                <line x1="280" y1="260" x2="154" y2="134" />
+                <line x1="280" y1="260" x2="280" y2="34" />
+                <line x1="280" y1="260" x2="440" y2="100" />
+                <line x1="280" y1="260" x2="506" y2="260" />
+                <line x1="280" y1="260" x2="440" y2="420" />
+                <line x1="280" y1="260" x2="280" y2="486" />
+                <line x1="280" y1="260" x2="120" y2="420" />
+                <line x1="280" y1="260" x2="54" y2="260" />
+                <line x1="280" y1="260" x2="120" y2="100" />
               </svg>
               <div className="hero-event hero-event--one">
                 <b className="hero-event__icon">⌁</b>
