@@ -108,6 +108,7 @@ export default function Home() {
 
       <main>
         <section className="hero" aria-labelledby="hero-title">
+          <canvas className="particle-field" data-particle-field data-theme="light" aria-hidden="true" />
           <div className="hero-copy">
             <p className="hero-kicker">Gestão inteligente de atendimento</p>
             <h1 id="hero-title">
@@ -193,6 +194,51 @@ export default function Home() {
             <article><span>02</span><h3>Responsabilidade visível</h3><p>Cada contato tem dono, setor, etapa e prazo. O gestor enxerga o que parou antes que vire perda.</p></article>
             <article><span>03</span><h3>Follow-up que acontece</h3><p>Automações e tarefas mantêm a próxima ação ativa, mesmo nos dias de maior volume.</p></article>
           </div>
+        </section>
+
+        <section className="platform-resources" id="recursos">
+          <canvas className="particle-field" data-particle-field data-theme="light" aria-hidden="true" />
+          <div className="resources-heading">
+            <p>A plataforma</p>
+            <h2>Uma operação inteira trabalhando no mesmo lugar.</h2>
+            <span>
+              Seis recursos conectados para sua equipe atender melhor, manter o processo em
+              movimento e enxergar onde cada oportunidade precisa avançar.
+            </span>
+          </div>
+          <div className="resources-list">
+            <article>
+              <span>Atendimento</span>
+              <h3>Atendimento centralizado</h3>
+              <p>Reúna conversas, históricos e responsáveis em um ambiente organizado, mesmo com vários canais e setores.</p>
+            </article>
+            <article>
+              <span>Comercial</span>
+              <h3>CRM e funil de vendas</h3>
+              <p>Acompanhe leads e oportunidades em etapas personalizadas, do primeiro contato ao fechamento.</p>
+            </article>
+            <article>
+              <span>Processos</span>
+              <h3>Automações</h3>
+              <p>Crie regras para mensagens, movimentações, tarefas, etiquetas, alertas e ações da operação.</p>
+            </article>
+            <article>
+              <span>Inteligência</span>
+              <h3>Agentes de IA</h3>
+              <p>Qualifique contatos, responda com contexto, identifique prioridades e automatize tarefas repetitivas.</p>
+            </article>
+            <article>
+              <span>Equipe</span>
+              <h3>Gestão de atendimento</h3>
+              <p>Acompanhe responsáveis, filas, setores, produtividade, tempo de resposta e andamento das conversas.</p>
+            </article>
+            <article>
+              <span>Decisão</span>
+              <h3>Dados e indicadores</h3>
+              <p>Visualize o desempenho da operação em tempo real e tome decisões com informações centralizadas.</p>
+            </article>
+          </div>
+          <a className="resources-link" href="#plataforma">Ver a plataforma em ação <b>→</b></a>
         </section>
 
         <section className="product-tour" id="plataforma">

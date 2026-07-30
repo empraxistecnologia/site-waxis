@@ -18,6 +18,120 @@ export function Experience() {
     const copies = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-copy]"));
     const images = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-image]"));
     const dots = Array.from(document.querySelectorAll<HTMLElement>("[data-tour-dot]"));
+    const particleCleanups: Array<() => void> = [];
+
+    if (!reduce) {
+      document.querySelectorAll<HTMLCanvasElement>("[data-particle-field]").forEach((canvas) => {
+        const area = canvas.parentElement;
+        const context = canvas.getContext("2d");
+        if (!area || !context) return;
+
+        type Point = { x: number; y: number; vx: number; vy: number; size: number; accent: boolean };
+        let points: Point[] = [];
+        let width = 0;
+        let height = 0;
+        let frameId = 0;
+        const pointer = { x: -9999, y: -9999 };
+
+        const resize = () => {
+          const ratio = Math.min(devicePixelRatio, 2);
+          width = area.clientWidth;
+          height = area.clientHeight;
+          canvas.width = width * ratio;
+          canvas.height = height * ratio;
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+          context.setTransform(ratio, 0, 0, ratio, 0, 0);
+          const amount = innerWidth < 680 ? 28 : Math.min(76, Math.round(width / 18));
+          points = Array.from({ length: amount }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.18,
+            vy: (Math.random() - 0.5) * 0.18,
+            size: Math.random() * 1.1 + 0.8,
+            accent: Math.random() < 0.34,
+          }));
+        };
+
+        const onPointerMove = (event: PointerEvent) => {
+          const rect = canvas.getBoundingClientRect();
+          pointer.x = event.clientX - rect.left;
+          pointer.y = event.clientY - rect.top;
+        };
+        const onPointerLeave = () => {
+          pointer.x = -9999;
+          pointer.y = -9999;
+        };
+
+        const drawArrow = (point: Point) => {
+          const pointerDistance = Math.hypot(point.x - pointer.x, point.y - pointer.y);
+          const angle = pointerDistance < 210
+            ? Math.atan2(pointer.y - point.y, pointer.x - point.x)
+            : Math.atan2(point.vy, point.vx);
+          context.save();
+          context.translate(point.x, point.y);
+          context.rotate(angle);
+          context.beginPath();
+          context.moveTo(4.5, 0);
+          context.lineTo(-2.5, -2.4);
+          context.lineTo(-1, 0);
+          context.lineTo(-2.5, 2.4);
+          context.closePath();
+          context.fillStyle = point.accent ? "rgba(118,0,245,.58)" : "rgba(9,15,133,.28)";
+          context.fill();
+          context.restore();
+        };
+
+        const animate = () => {
+          context.clearRect(0, 0, width, height);
+          points.forEach((point) => {
+            point.x += point.vx;
+            point.y += point.vy;
+            if (point.x < 0 || point.x > width) point.vx *= -1;
+            if (point.y < 0 || point.y > height) point.vy *= -1;
+            drawArrow(point);
+          });
+          for (let index = 0; index < points.length; index += 1) {
+            const current = points[index];
+            for (let next = index + 1; next < points.length; next += 1) {
+              const other = points[next];
+              const distance = Math.hypot(current.x - other.x, current.y - other.y);
+              if (distance < 128) {
+                context.beginPath();
+                context.moveTo(current.x, current.y);
+                context.lineTo(other.x, other.y);
+                context.strokeStyle = `rgba(118,0,245,${(1 - distance / 128) * 0.12})`;
+                context.lineWidth = 0.7;
+                context.stroke();
+              }
+            }
+            const pointerDistance = Math.hypot(current.x - pointer.x, current.y - pointer.y);
+            if (pointerDistance < 210) {
+              context.beginPath();
+              context.moveTo(current.x, current.y);
+              context.lineTo(pointer.x, pointer.y);
+              context.strokeStyle = `rgba(118,0,245,${(1 - pointerDistance / 210) * 0.28})`;
+              context.lineWidth = 0.8;
+              context.stroke();
+            }
+          }
+          frameId = requestAnimationFrame(animate);
+        };
+
+        resize();
+        animate();
+        const observer = new ResizeObserver(resize);
+        observer.observe(area);
+        area.addEventListener("pointermove", onPointerMove);
+        area.addEventListener("pointerleave", onPointerLeave);
+        particleCleanups.push(() => {
+          cancelAnimationFrame(frameId);
+          observer.disconnect();
+          area.removeEventListener("pointermove", onPointerMove);
+          area.removeEventListener("pointerleave", onPointerLeave);
+        });
+      });
+    }
 
     const onMenu = () => {
       const open = document.body.classList.toggle("menu-open");
@@ -75,6 +189,7 @@ export function Experience() {
       menu?.removeEventListener("click", onMenu);
       stage?.removeEventListener("mousemove", onMouse);
       removeEventListener("scroll", onScroll);
+      particleCleanups.forEach((cleanup) => cleanup());
     };
   }, []);
   return null;
