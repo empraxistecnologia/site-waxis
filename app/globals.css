@@ -166,11 +166,11 @@ p { text-wrap: pretty; }
 .tour-dots { margin-top: 22px; display: flex; justify-content: center; gap: 6px; }
 .tour-dots i { width: 20px; height: 2px; background: color-mix(in oklch, white 20%, transparent); transform: scaleX(.7); transform-origin: left; transition: background .3s, transform .3s; }.tour-dots i.is-active { background: var(--violet-bright); transform: scaleX(1.4); }
 .tour-visual { position: relative; }
-.tour-screen { position: relative; aspect-ratio: 1.82; padding: 34px 7px 7px; background: color-mix(in oklch, var(--navy-deep) 82%, black); border-radius: 14px; box-shadow: 0 40px 100px rgba(0,0,0,.35); }
-.tour-screen::before { content: ""; position: absolute; z-index: -1; inset: -15%; background: radial-gradient(circle, color-mix(in oklch, var(--violet) 24%, transparent), transparent 62%); filter: blur(30px); }
-.tour-frame-bar { position: absolute; z-index: 4; inset: 0 0 auto; height: 34px; padding: 0 12px; display: flex; align-items: center; gap: 6px; color: color-mix(in oklch, white 60%, transparent); font-size: .5rem; }
+.tour-visual::before { content: ""; position: absolute; z-index: -1; inset: -14%; background: radial-gradient(circle, color-mix(in oklch, var(--violet) 24%, transparent), transparent 62%); filter: blur(30px); }
+.tour-screen { position: relative; aspect-ratio: 1.98; padding: 28px 6px 6px; overflow: hidden; background: #0b0438; border-radius: 14px; box-shadow: 0 40px 100px rgba(0,0,0,.35); }
+.tour-frame-bar { position: absolute; z-index: 4; inset: 0 0 auto; height: 28px; padding: 0 11px; display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,.62); background: #0b0438; border-bottom: 1px solid rgba(255,255,255,.08); font-size: .5rem; }
 .tour-frame-bar i { width: 6px; height: 6px; border-radius: 50%; background: color-mix(in oklch, white 38%, transparent); }.tour-frame-bar span { margin-left: 4px; }
-.tour-screen img { position: absolute; left: 7px; right: 7px; top: 34px; bottom: 7px; width: calc(100% - 14px); height: calc(100% - 41px); object-fit: cover; object-position: center; clip-path: inset(2px 0 0); background: white; border-radius: 7px; opacity: 0; transform: scale(.96); transition: opacity .6s var(--ease), transform .75s var(--ease); }
+.tour-screen img { position: absolute; left: 6px; right: 6px; top: 28px; bottom: 6px; width: calc(100% - 12px); height: calc(100% - 34px); object-fit: cover; object-position: center; clip-path: inset(4px 0 0); background: white; border-radius: 6px; opacity: 0; transform: scale(.97); transition: opacity .6s var(--ease), transform .75s var(--ease); }
 .tour-screen img.is-active { opacity: 1; transform: scale(1) rotate(0); }
 
 .ecosystem { padding: 130px max(24px, calc((100vw - 1180px)/2)) 90px; color: white; background: var(--navy-deep); overflow: hidden; }
