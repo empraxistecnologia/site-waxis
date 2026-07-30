@@ -41,6 +41,15 @@ const productChapters = [
     height: 911,
     alt: "Tela real de campanhas multicanal da Waxis",
   },
+  {
+    n: "05",
+    title: "Um ecossistema que cresce com a sua operação.",
+    body: "Agenda, cobranças, documentos, formulários, prospecção, projetos, avaliações, ligações e outros aplicativos ampliam a Waxis sem fragmentar o trabalho da equipe.",
+    image: "/assets/prints/08-ecossistema-de-apps.png",
+    width: 1920,
+    height: 947,
+    alt: "Tela real do ecossistema de aplicativos da Waxis",
+  },
 ];
 
 const ecosystemNodes = [
@@ -252,7 +261,7 @@ export default function Home() {
               <div className="tour-copy">
                 {productChapters.map((chapter, index) => (
                   <article key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-copy>
-                    <span>{chapter.n} / 04</span>
+                    <span>{chapter.n} / 05</span>
                     <h3>{chapter.title}</h3>
                     <p>{chapter.body}</p>
                   </article>
