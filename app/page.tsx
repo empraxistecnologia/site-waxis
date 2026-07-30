@@ -214,53 +214,56 @@ export default function Home() {
           <div className="hero-stage" data-hero-stage aria-label="Representação animada da operação Waxis">
             <div className="orbit orbit--one" />
             <div className="orbit orbit--two" />
-            <Image unoptimized className="hero-x" src="/assets/logos/icon-x.png" alt="" width={260} height={260} priority />
+            <Image unoptimized className="hero-x" src="/assets/logos/hero-core.png" alt="Símbolo Waxis" width={64} height={64} priority />
             <div className="hero-card-orbit">
               <svg className="hero-connections" viewBox="0 0 560 520" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="280" y1="260" x2="70" y2="82" />
-                <line x1="280" y1="260" x2="495" y2="148" />
-                <line x1="280" y1="260" x2="85" y2="438" />
-                <line x1="280" y1="260" x2="475" y2="440" />
-                <line x1="280" y1="260" x2="280" y2="34" />
-                <line x1="280" y1="260" x2="535" y2="270" />
-                <line x1="280" y1="260" x2="280" y2="500" />
-                <line x1="280" y1="260" x2="25" y2="270" />
+                <line x1="280" y1="260" x2="280" y2="25" />
+                <line x1="280" y1="260" x2="475" y2="105" />
+                <line x1="280" y1="260" x2="535" y2="260" />
+                <line x1="280" y1="260" x2="475" y2="415" />
+                <line x1="280" y1="260" x2="280" y2="495" />
+                <line x1="280" y1="260" x2="85" y2="415" />
+                <line x1="280" y1="260" x2="25" y2="260" />
+                <line x1="280" y1="260" x2="85" y2="105" />
               </svg>
-              <div className="conversation conversation--one">
-                <span className="channel-dot whatsapp" /> Novo orçamento
-                <small>Sem responsável · há 18 min</small>
-              </div>
-              <div className="conversation conversation--two">
-                <span className="channel-dot instagram" /> Cliente retornou
-                <small>Histórico localizado</small>
-              </div>
-              <div className="conversation conversation--three">
-                <span className="channel-dot web" /> Lead qualificado
-                <small>Prioridade alta · 87%</small>
-              </div>
-              <div className="signal-card">
-                <p>Waxis identificou</p>
-                <strong>12 oportunidades precisam de atenção</strong>
-                <span><i /> Operação monitorada em tempo real</span>
-              </div>
               <div className="hero-event hero-event--one">
                 <b className="hero-event__icon">⌁</b>
                 <span><small>09:02</small><strong>Atendimento concluído</strong><em>Demonstração realizada</em></span>
                 <i>✓</i>
               </div>
               <div className="hero-event hero-event--two">
+                <b className="hero-event__icon">↩</b>
+                <span><small>09:02</small><strong>Cliente retornou</strong><em>Histórico localizado</em></span>
+                <i>✓</i>
+              </div>
+              <div className="hero-event hero-event--three">
                 <b className="hero-event__icon">✉</b>
                 <span><small>09:03</small><strong>Follow-up gerado</strong><em>Resumo enviado no WhatsApp</em></span>
                 <i>✓</i>
               </div>
-              <div className="hero-event hero-event--three">
+              <div className="hero-event hero-event--four">
+                <b className="hero-event__icon">!</b>
+                <span><small>09:03</small><strong>Oportunidades em atenção</strong><em>12 sinais identificados</em></span>
+                <i>✓</i>
+              </div>
+              <div className="hero-event hero-event--five">
                 <b className="hero-event__icon">▤</b>
                 <span><small>09:03</small><strong>CRM atualizado</strong><em>Proposta → Fechamento</em></span>
                 <i>✓</i>
               </div>
-              <div className="hero-event hero-event--four">
+              <div className="hero-event hero-event--six">
+                <b className="hero-event__icon">◎</b>
+                <span><small>09:04</small><strong>Lead qualificado</strong><em>Prioridade alta · 87%</em></span>
+                <i>✓</i>
+              </div>
+              <div className="hero-event hero-event--seven">
                 <b className="hero-event__icon">□</b>
                 <span><small>09:04</small><strong>Reunião agendada</strong><em>Assinatura confirmada</em></span>
+                <i>✓</i>
+              </div>
+              <div className="hero-event hero-event--eight">
+                <b className="hero-event__icon">＋</b>
+                <span><small>09:05</small><strong>Novo orçamento</strong><em>Responsável atribuído</em></span>
                 <i>✓</i>
               </div>
             </div>
