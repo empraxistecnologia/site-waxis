@@ -95,6 +95,33 @@ const productChapters = [
     height: 901,
     alt: "Tela real da central de integrações da Waxis",
   },
+  {
+    n: "11",
+    title: "Configurações que acompanham o seu processo.",
+    body: "Organize conexões, setores, usuários, campos, etiquetas, origens, tarefas, respostas rápidas e regras internas conforme a operação da empresa.",
+    image: "/assets/prints/20-configuracoes.png",
+    width: 1916,
+    height: 910,
+    alt: "Tela real de configurações operacionais da Waxis",
+  },
+  {
+    n: "12",
+    title: "Prospecção para alimentar o comercial.",
+    body: "Encontre empresas pelo Google Meu Negócio ou por CNPJ e CNAE, importe contatos para o CRM e mantenha o histórico das buscas.",
+    image: "/assets/prints/21-prospeccao-atual.png",
+    width: 1910,
+    height: 903,
+    alt: "Tela real do módulo de prospecção da Waxis",
+  },
+  {
+    n: "13",
+    title: "Sua reputação no Google também entra na operação.",
+    body: "Sincronize locais, acompanhe avaliações, filtre notas e status e responda clientes do Google Meu Negócio sem perder o histórico.",
+    image: "/assets/prints/22-google-meu-negocio.png",
+    width: 1904,
+    height: 907,
+    alt: "Tela real de gestão de avaliações do Google Meu Negócio",
+  },
 ];
 
 const ecosystemNodes = [
@@ -306,7 +333,7 @@ export default function Home() {
               <div className="tour-copy">
                 {productChapters.map((chapter, index) => (
                   <article key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-copy>
-                    <span>{chapter.n} / 10</span>
+                    <span>{chapter.n} / 13</span>
                     <h3>{chapter.title}</h3>
                     <p>{chapter.body}</p>
                   </article>
