@@ -338,14 +338,17 @@ export default function Home() {
                     <p>{chapter.body}</p>
                   </article>
                 ))}
-                <div className="tour-dots">
+              </div>
+              <div className="tour-visual">
+                <div className="tour-screen">
+                  <div className="tour-frame-bar" aria-hidden="true"><i /><i /><i /><span>Operação Waxis</span></div>
+                  {productChapters.map((chapter, index) => (
+                    <Image unoptimized key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-image src={chapter.image} alt={chapter.alt} width={chapter.width} height={chapter.height} />
+                  ))}
+                </div>
+                <div className="tour-dots" aria-label="Progresso das telas da plataforma">
                   {productChapters.map((chapter, index) => <i key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-dot />)}
                 </div>
-              </div>
-              <div className="tour-screen">
-                {productChapters.map((chapter, index) => (
-                  <Image unoptimized key={chapter.n} className={index === 0 ? "is-active" : ""} data-tour-image src={chapter.image} alt={chapter.alt} width={chapter.width} height={chapter.height} />
-                ))}
               </div>
             </div>
           </div>
